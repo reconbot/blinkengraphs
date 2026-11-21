@@ -39,7 +39,7 @@ The shared spec that keeps every platform consistent. It contains no app code.
 | [`fixtures/scenarios/`](fixtures/scenarios/) | Synthetic histories for screenshots and previews |
 | [`docs/cross-platform.md`](docs/cross-platform.md) | Why each platform is native and they share a spec instead of code |
 
-Platform repos pin a tagged version of this spec and run its vectors in CI. A rule change is a PR here plus one PR per platform.
+Platform repos pin a tagged version of this spec and run its vectors in CI. Versions are cut by release-please from Conventional Commits: a breaking rule change is a major version. A rule change is a PR here plus one PR per platform.
 
 The vectors are generated from the Windows reference implementation: `cargo run -p vectors -- <path to this repo>` in blinkengraphs-win.
 
