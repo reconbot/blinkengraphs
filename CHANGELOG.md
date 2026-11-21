@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/reconbot/blinkengraphs/compare/v1.0.0...v1.1.0) (2026-11-21)
+
+
+### Features
+
+* graph aggregate rule with a deterministic per-minute histogram and vectors ([81bb89c](https://github.com/reconbot/blinkengraphs/commit/81bb89c9e9105162910f097582b8375486dc7463))
+
 ## 1.0.0 (2026-11-21)
 
 
