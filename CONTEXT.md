@@ -37,11 +37,11 @@ The first-hop router on the Followed Adapter's default route.
 _Avoid_: router, default gateway IP
 
 **Probe**:
-One kind of reachability measurement against one Target, over one protocol: ICMP echo, TCP handshake, or UDP DNS query. A Probe yields a round-trip time or a loss.
+One kind of reachability measurement against one Target, over one protocol: ICMP echo, TCP handshake to a port, UDP datagram to a port (a reply or port-unreachable counts as alive), or DNS query. A Probe yields a round-trip time or a loss.
 _Avoid_: ping (only ICMP is a ping), check, test
 
 **Probe Group**:
-A set of Probes that run together on one cadence the user chooses.
+A named table of Targets and what to measure on each: ICMP, a TCP port, a UDP port, DNS, Hop Trace. Latency, DNS and Hop Traces each run on their own interval. Every config starts with one group, "Default".
 _Avoid_: schedule, batch
 
 **Hop Trace**:
