@@ -7,3 +7,5 @@ Vocabulary `CONTEXT.md`, rules `rules/`, conformance data `vectors/`, design tok
 Use the `domain-modeling` skill when a term changes and `writing-for-agents` for any doc edit. Prose earns each sentence.
 
 Commits follow Conventional Commits. Commits, PRs and comments stay free of session links and personal or employer details; the repo is public.
+
+Never push to `main` once the repo has a release; land changes through a PR.
