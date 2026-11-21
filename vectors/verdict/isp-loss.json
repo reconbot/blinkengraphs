@@ -1,0 +1,115 @@
+{
+  "expected": [
+    {
+      "domain": "Isp",
+      "headline": "Gateway OK, 8.8.8.8 losing 23%: ISP problem",
+      "severity": "Crit"
+    }
+  ],
+  "input": {
+    "probes": [
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 16.3799991607666,
+          "jitter_ms": 14.069999694824219,
+          "loss": 0.23000000417232513,
+          "rtt_ms": 92.29000091552734
+        }
+      },
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "system-dns"
+        },
+        "stat": {
+          "baseline_ms": 21.579999923706055,
+          "jitter_ms": 14.069999694824219,
+          "loss": 0.23000000417232513,
+          "rtt_ms": 97.48999786376953
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 15.579999923706055,
+          "jitter_ms": 14.069999694824219,
+          "loss": 0.23000000417232513,
+          "rtt_ms": 91.48999786376953
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "8.8.8.8"
+        },
+        "stat": {
+          "baseline_ms": 18.079999923706055,
+          "jitter_ms": 14.069999694824219,
+          "loss": 0.23000000417232513,
+          "rtt_ms": 93.98999786376953
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "gateway"
+        },
+        "stat": {
+          "baseline_ms": 1.7699999809265137,
+          "jitter_ms": 1.1299999952316284,
+          "loss": 0.0,
+          "rtt_ms": 3.1500000953674316
+        }
+      },
+      {
+        "probe": {
+          "protocol": "tcp:443",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 16.780000686645508,
+          "jitter_ms": 14.069999694824219,
+          "loss": 0.23000000417232513,
+          "rtt_ms": 92.69000244140625
+        }
+      },
+      {
+        "probe": {
+          "protocol": "tcp:443",
+          "target": "8.8.8.8"
+        },
+        "stat": {
+          "baseline_ms": 18.68000030517578,
+          "jitter_ms": 14.069999694824219,
+          "loss": 0.23000000417232513,
+          "rtt_ms": 94.58999633789062
+        }
+      }
+    ],
+    "sample": {
+      "CpuKernel": 2.93,
+      "CpuQueue": 0.0,
+      "CpuTotal": 16.27,
+      "DiskActive": 3.0,
+      "DiskQueue": 0.12,
+      "DiskRead": 2399999.95,
+      "DiskResponse": 1.8,
+      "DiskWrite": 899999.98,
+      "MemCommit": 45.0,
+      "MemHardFaults": 20.0,
+      "MemPhysical": 40.5,
+      "NetDown": 1562.5,
+      "NetErrors": 0.0,
+      "NetUp": 98.84
+    },
+    "upload_peak_bps": 1521.0
+  },
+  "name": "isp-loss"
+}

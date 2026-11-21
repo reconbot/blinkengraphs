@@ -1,0 +1,45 @@
+{
+  "description": "Network Meters scale throughput as cbrt(value / max), clamped to 1, so small and large rates both stay visible.",
+  "points": [
+    {
+      "max": 12500000.0,
+      "normalized": 0.0,
+      "value": 0.0
+    },
+    {
+      "max": 12500000.0,
+      "normalized": 0.04308869317173958,
+      "value": 1000.0
+    },
+    {
+      "max": 12500000.0,
+      "normalized": 0.09283177554607391,
+      "value": 10000.0
+    },
+    {
+      "max": 12500000.0,
+      "normalized": 0.2154434621334076,
+      "value": 125000.0
+    },
+    {
+      "max": 12500000.0,
+      "normalized": 0.4308869242668152,
+      "value": 1000000.0
+    },
+    {
+      "max": 12500000.0,
+      "normalized": 0.8617738485336304,
+      "value": 8000000.0
+    },
+    {
+      "max": 12500000.0,
+      "normalized": 1.0,
+      "value": 12500000.0
+    },
+    {
+      "max": 12500000.0,
+      "normalized": 1.0,
+      "value": 25000000.0
+    }
+  ]
+}

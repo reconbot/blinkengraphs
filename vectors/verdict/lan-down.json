@@ -1,0 +1,88 @@
+{
+  "expected": [
+    {
+      "domain": "Lan",
+      "headline": "Gateway unreachable: Wi-Fi or LAN problem",
+      "severity": "Crit"
+    }
+  ],
+  "input": {
+    "probes": [
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "gateway"
+        },
+        "stat": {
+          "baseline_ms": 10.0,
+          "jitter_ms": null,
+          "loss": 1.0,
+          "rtt_ms": null
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 10.0,
+          "jitter_ms": null,
+          "loss": 1.0,
+          "rtt_ms": null
+        }
+      },
+      {
+        "probe": {
+          "protocol": "tcp:443",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 10.0,
+          "jitter_ms": null,
+          "loss": 1.0,
+          "rtt_ms": null
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "8.8.8.8"
+        },
+        "stat": {
+          "baseline_ms": 10.0,
+          "jitter_ms": null,
+          "loss": 1.0,
+          "rtt_ms": null
+        }
+      },
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 10.0,
+          "jitter_ms": null,
+          "loss": 1.0,
+          "rtt_ms": null
+        }
+      },
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "system-dns"
+        },
+        "stat": {
+          "baseline_ms": 10.0,
+          "jitter_ms": null,
+          "loss": 1.0,
+          "rtt_ms": null
+        }
+      }
+    ],
+    "sample": null,
+    "upload_peak_bps": 5000000.0
+  },
+  "name": "lan-down"
+}

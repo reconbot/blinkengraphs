@@ -1,0 +1,120 @@
+{
+  "expected": [
+    {
+      "domain": "LocalLoad",
+      "headline": "CPU pinned at 96%",
+      "severity": "Crit"
+    },
+    {
+      "domain": "LocalLoad",
+      "headline": "Paging heavily: 1400 hard faults/s",
+      "severity": "Warn"
+    }
+  ],
+  "input": {
+    "probes": [
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 13.489999771118164,
+          "jitter_ms": 2.109999895095825,
+          "loss": 0.0,
+          "rtt_ms": 16.1299991607666
+        }
+      },
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "system-dns"
+        },
+        "stat": {
+          "baseline_ms": 18.690000534057617,
+          "jitter_ms": 2.109999895095825,
+          "loss": 0.0,
+          "rtt_ms": 21.329999923706055
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 12.6899995803833,
+          "jitter_ms": 2.109999895095825,
+          "loss": 0.0,
+          "rtt_ms": 15.329999923706055
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "8.8.8.8"
+        },
+        "stat": {
+          "baseline_ms": 15.1899995803833,
+          "jitter_ms": 2.109999895095825,
+          "loss": 0.0,
+          "rtt_ms": 17.829999923706055
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "gateway"
+        },
+        "stat": {
+          "baseline_ms": 1.7200000286102295,
+          "jitter_ms": 1.1100000143051147,
+          "loss": 0.0,
+          "rtt_ms": 2.430000066757202
+        }
+      },
+      {
+        "probe": {
+          "protocol": "tcp:443",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 13.890000343322754,
+          "jitter_ms": 2.109999895095825,
+          "loss": 0.0,
+          "rtt_ms": 16.530000686645508
+        }
+      },
+      {
+        "probe": {
+          "protocol": "tcp:443",
+          "target": "8.8.8.8"
+        },
+        "stat": {
+          "baseline_ms": 15.789999961853027,
+          "jitter_ms": 2.109999895095825,
+          "loss": 0.0,
+          "rtt_ms": 18.43000030517578
+        }
+      }
+    ],
+    "sample": {
+      "CpuKernel": 17.32,
+      "CpuQueue": 5.0,
+      "CpuTotal": 96.22,
+      "DiskActive": 68.89,
+      "DiskQueue": 2.76,
+      "DiskRead": 55113353.73,
+      "DiskResponse": 41.34,
+      "DiskWrite": 20667507.65,
+      "MemCommit": 89.67,
+      "MemHardFaults": 1400.0,
+      "MemPhysical": 80.7,
+      "NetDown": 819.12,
+      "NetErrors": 0.0,
+      "NetUp": 1014.01
+    },
+    "upload_peak_bps": 1495.0
+  },
+  "name": "cpu-pinned"
+}

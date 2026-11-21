@@ -1,0 +1,88 @@
+{
+  "expected": [
+    {
+      "domain": "Dns",
+      "headline": "Your DNS server is slow (600 ms); 1.1.1.1 answers fine",
+      "severity": "Warn"
+    }
+  ],
+  "input": {
+    "probes": [
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "gateway"
+        },
+        "stat": {
+          "baseline_ms": 2.0,
+          "jitter_ms": null,
+          "loss": 0.0,
+          "rtt_ms": 2.0
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 12.0,
+          "jitter_ms": null,
+          "loss": 0.0,
+          "rtt_ms": 12.0
+        }
+      },
+      {
+        "probe": {
+          "protocol": "tcp:443",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 13.0,
+          "jitter_ms": null,
+          "loss": 0.0,
+          "rtt_ms": 13.0
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "8.8.8.8"
+        },
+        "stat": {
+          "baseline_ms": 14.0,
+          "jitter_ms": null,
+          "loss": 0.0,
+          "rtt_ms": 14.0
+        }
+      },
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 12.0,
+          "jitter_ms": null,
+          "loss": 0.0,
+          "rtt_ms": 12.0
+        }
+      },
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "system-dns"
+        },
+        "stat": {
+          "baseline_ms": 20.0,
+          "jitter_ms": null,
+          "loss": 0.0,
+          "rtt_ms": 600.0
+        }
+      }
+    ],
+    "sample": null,
+    "upload_peak_bps": 5000000.0
+  },
+  "name": "slow-dns"
+}

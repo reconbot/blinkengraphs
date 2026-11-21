@@ -1,0 +1,115 @@
+{
+  "expected": [
+    {
+      "domain": "SelfSaturation",
+      "headline": "Upload saturated (10.7 MB/s): 89 ms vs 12 ms normal",
+      "severity": "Warn"
+    }
+  ],
+  "input": {
+    "probes": [
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 12.800000190734863,
+          "jitter_ms": 15.210000038146973,
+          "loss": 0.0,
+          "rtt_ms": 90.19000244140625
+        }
+      },
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "system-dns"
+        },
+        "stat": {
+          "baseline_ms": 18.0,
+          "jitter_ms": 15.210000038146973,
+          "loss": 0.0,
+          "rtt_ms": 95.38999938964844
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 12.0,
+          "jitter_ms": 15.210000038146973,
+          "loss": 0.0,
+          "rtt_ms": 89.38999938964844
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "8.8.8.8"
+        },
+        "stat": {
+          "baseline_ms": 14.5,
+          "jitter_ms": 15.210000038146973,
+          "loss": 0.0,
+          "rtt_ms": 91.88999938964844
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "gateway"
+        },
+        "stat": {
+          "baseline_ms": 1.7200000286102295,
+          "jitter_ms": 1.1100000143051147,
+          "loss": 0.0,
+          "rtt_ms": 2.430000066757202
+        }
+      },
+      {
+        "probe": {
+          "protocol": "tcp:443",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 13.199999809265137,
+          "jitter_ms": 15.210000038146973,
+          "loss": 0.0,
+          "rtt_ms": 90.58999633789062
+        }
+      },
+      {
+        "probe": {
+          "protocol": "tcp:443",
+          "target": "8.8.8.8"
+        },
+        "stat": {
+          "baseline_ms": 15.100000381469727,
+          "jitter_ms": 15.210000038146973,
+          "loss": 0.0,
+          "rtt_ms": 92.48999786376953
+        }
+      }
+    ],
+    "sample": {
+      "CpuKernel": 3.84,
+      "CpuQueue": 1.0,
+      "CpuTotal": 21.31,
+      "DiskActive": 37.25,
+      "DiskQueue": 1.49,
+      "DiskRead": 29801225.66,
+      "DiskResponse": 22.35,
+      "DiskWrite": 11175459.62,
+      "MemCommit": 50.0,
+      "MemHardFaults": 20.0,
+      "MemPhysical": 45.0,
+      "NetDown": 183625.46,
+      "NetErrors": 0.0,
+      "NetUp": 10717187.1
+    },
+    "upload_peak_bps": 10717187.0
+  },
+  "name": "upload-saturation"
+}

@@ -1,0 +1,115 @@
+{
+  "expected": [
+    {
+      "domain": "Clear",
+      "headline": "All clear",
+      "severity": "Ok"
+    }
+  ],
+  "input": {
+    "probes": [
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 13.119999885559082,
+          "jitter_ms": 1.2000000476837158,
+          "loss": 0.0,
+          "rtt_ms": 14.710000038146973
+        }
+      },
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "system-dns"
+        },
+        "stat": {
+          "baseline_ms": 18.31999969482422,
+          "jitter_ms": 1.2000000476837158,
+          "loss": 0.0,
+          "rtt_ms": 19.90999984741211
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 12.319999694824219,
+          "jitter_ms": 1.2000000476837158,
+          "loss": 0.0,
+          "rtt_ms": 13.90999984741211
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "8.8.8.8"
+        },
+        "stat": {
+          "baseline_ms": 14.819999694824219,
+          "jitter_ms": 1.2000000476837158,
+          "loss": 0.0,
+          "rtt_ms": 16.40999984741211
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "gateway"
+        },
+        "stat": {
+          "baseline_ms": 1.7200000286102295,
+          "jitter_ms": 1.1100000143051147,
+          "loss": 0.0,
+          "rtt_ms": 2.430000066757202
+        }
+      },
+      {
+        "probe": {
+          "protocol": "tcp:443",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 13.520000457763672,
+          "jitter_ms": 1.2000000476837158,
+          "loss": 0.0,
+          "rtt_ms": 15.109999656677246
+        }
+      },
+      {
+        "probe": {
+          "protocol": "tcp:443",
+          "target": "8.8.8.8"
+        },
+        "stat": {
+          "baseline_ms": 15.420000076293945,
+          "jitter_ms": 1.2000000476837158,
+          "loss": 0.0,
+          "rtt_ms": 17.010000228881836
+        }
+      }
+    ],
+    "sample": {
+      "CpuKernel": 1.79,
+      "CpuQueue": 0.0,
+      "CpuTotal": 9.94,
+      "DiskActive": 2.0,
+      "DiskQueue": 0.08,
+      "DiskRead": 1599999.96,
+      "DiskResponse": 1.2,
+      "DiskWrite": 599999.99,
+      "MemCommit": 42.0,
+      "MemHardFaults": 20.0,
+      "MemPhysical": 37.8,
+      "NetDown": 77367.91,
+      "NetErrors": 0.0,
+      "NetUp": 10923.47
+    },
+    "upload_peak_bps": 12448.0
+  },
+  "name": "idle"
+}

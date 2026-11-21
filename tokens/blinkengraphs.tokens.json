@@ -1,0 +1,80 @@
+{
+  "color": {
+    "loss": {
+      "$type": "color",
+      "$value": "#ff3b3b"
+    },
+    "section": {
+      "cpu": {
+        "$type": "color",
+        "$value": "#4fc3f7"
+      },
+      "disk": {
+        "$type": "color",
+        "$value": "#b39ddb"
+      },
+      "latency": {
+        "$type": "color",
+        "$value": "#ffd54f"
+      },
+      "memory": {
+        "$type": "color",
+        "$value": "#9ccc65"
+      },
+      "network": {
+        "$type": "color",
+        "$value": "#7ab8ff"
+      },
+      "upload": {
+        "$type": "color",
+        "$value": "#ff9be1"
+      }
+    },
+    "severity": {
+      "crit": {
+        "$type": "color",
+        "$value": "#ff5a5a"
+      },
+      "ok": {
+        "$type": "color",
+        "$value": "#4ade80"
+      },
+      "warn": {
+        "$type": "color",
+        "$value": "#ffb340"
+      }
+    },
+    "surface": {
+      "background": {
+        "$type": "color",
+        "$value": "#12151c"
+      },
+      "card": {
+        "$type": "color",
+        "$value": "#1b202a"
+      },
+      "card-edge": {
+        "$type": "color",
+        "$value": "#2a313d"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#e6eaf0"
+      },
+      "text-weak": {
+        "$type": "color",
+        "$value": "#8b95a5"
+      }
+    }
+  },
+  "threshold": {
+    "meter-crit": {
+      "$type": "number",
+      "$value": 0.8500000238418579
+    },
+    "meter-warn": {
+      "$type": "number",
+      "$value": 0.6000000238418579
+    }
+  }
+}
