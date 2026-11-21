@@ -54,9 +54,9 @@ Precedent for test vectors shared across languages: the JSON Schema Test Suite, 
 
 ## Spec changes needed before a second platform
 
-1. **Platform-neutral Metrics in the spec.** Name the concept ("memory pressure", "disk busy"). Map each platform's counters to it in that platform's repo.
-2. **A `denied` Probe outcome**, distinct from loss. Local Network Privacy on macOS 15+ and iOS 14+ can block Gateway probes.
-3. **Verdict input as data:** the JSON shape the vectors use. It also becomes the contract each platform's engine fills.
+1. **Platform-neutral Metrics in the spec.** Name the concept ("memory pressure", "disk busy"). Map each platform's counters to it in that platform's repo. Open; macOS needs it, iOS doesn't (no local Metrics).
+2. ~~**A `denied` Probe outcome**, distinct from loss.~~ Done: [`rules/probe-stats.md`](../rules/probe-stats.md).
+3. ~~**Verdict input as data.**~~ Done: the vectors' `input`, built from [`rules/probe-stats.md`](../rules/probe-stats.md).
 
 ## Cost of this path
 

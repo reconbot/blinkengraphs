@@ -4,11 +4,7 @@ The Verdict is an ordered list of Findings, most severe first, and is never empt
 
 ## Input
 
-- **Probe stats** over the last 30 s, per Probe:
-  - `loss` (0–1)
-  - `rtt_ms`: median of replies
-  - `baseline_ms`: 10th-percentile RTT over recent history
-  - `jitter_ms`
+- **Probe stats**, per Probe, as defined in [`probe-stats.md`](probe-stats.md): `loss` (0–1), `rtt_ms`, `baseline_ms`, `jitter_ms`. Denied Probes are absent.
 - **The last Sample**, optional, holding the Metric values.
 - **`upload_peak_bps`**: the highest upload rate seen recently. It stands in for the link capacity, which is unknown.
 
@@ -26,9 +22,9 @@ A Gateway or Internet Probe only counts once it has a baseline or has recorded l
 |---|---|---|
 | 1 | Gateway loss ≥ 50% and every Internet Probe loss ≥ 50% | Crit `Lan` "Gateway unreachable: Wi-Fi or LAN problem". Stop evaluating network rules. |
 | 2 | Gateway loss ≥ 5% | Warn `Lan` "Local network unstable: gateway losing {loss}" |
-| 3 | Best Internet loss ≥ 50% | Crit `Isp` "Gateway OK, internet unreachable: ISP or WAN problem" |
+| 3 | Best Internet loss ≥ 50% | Crit `Isp` "Gateway OK, internet unreachable: ISP or WAN problem". With no Gateway Probe: "Internet unreachable, gateway not measured: ISP or WAN problem" |
 | 4 | Every ICMP Internet Probe loss ≥ 50% and some TCP Internet Probe loss < 5% | Warn `IcmpFiltering` "ICMP blocked; TCP gets through: something filters ping" |
-| 5 | The worst Internet Probe has loss ≥ 5%, and every Internet Probe has loss ≥ 5% | `Isp` "Gateway OK, {target} losing {loss}: ISP problem". Crit when loss ≥ 20%, otherwise Warn. |
+| 5 | The worst Internet Probe has loss ≥ 5%, and every Internet Probe has loss ≥ 5% | `Isp` "Gateway OK, {target} losing {loss}: ISP problem", without "Gateway OK, " when there is no Gateway Probe. Crit when loss ≥ 20%, otherwise Warn. |
 | 6 | The worst Internet Probe has loss ≥ 5%, and another one has loss < 5% | Warn `Remote` "{bad} losing {loss}, {good} fine: problem is on their side" |
 | 7 | Otherwise: some Internet RTT > 3 × its baseline and more than 30 ms above it, while upload > 1 MB/s and ≥ 80% of `upload_peak_bps` | Warn `SelfSaturation` "Upload saturated ({upload}/s): {rtt} ms vs {baseline} ms normal" |
 

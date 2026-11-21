@@ -41,7 +41,7 @@ The first-hop router on the Followed Adapter's default route.
 _Avoid_: router, default gateway IP
 
 **Probe**:
-One kind of reachability measurement against one Target, over one protocol: ICMP echo, TCP handshake to a port, UDP datagram to a port (a reply or port-unreachable counts as alive), or DNS query. A Probe yields a round-trip time or a loss.
+One kind of reachability measurement against one Target, over one protocol: ICMP echo, TCP handshake to a port, UDP datagram to a port (a reply or port-unreachable counts as alive), or DNS query. A Probe yields a round-trip time, a loss, or `denied` when the OS refuses to send it (iOS and macOS Local Network Privacy). Denied is not a loss.
 _Avoid_: ping (only ICMP is a ping), check, test
 
 **Probe Group**:

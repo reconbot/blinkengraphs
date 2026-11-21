@@ -1,0 +1,13 @@
+{
+  "description": "No results",
+  "expected": {
+    "baseline_ms": null,
+    "jitter_ms": null,
+    "loss": 0.0,
+    "rtt_ms": null
+  },
+  "name": "empty",
+  "ram_s": 900,
+  "results": [],
+  "window_s": 30
+}

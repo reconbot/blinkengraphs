@@ -1,0 +1,115 @@
+{
+  "description": "The Latency Meter's full height is max(4 × baseline, 100 ms); a missing baseline counts as 20 ms. A reply draws min(rtt / scale, 1); a loss fills the column in the loss color.",
+  "points": [
+    {
+      "baseline_ms": null,
+      "normalized": [
+        {
+          "rtt_ms": 10.0,
+          "value": 0.1
+        },
+        {
+          "rtt_ms": 60.0,
+          "value": 0.6
+        },
+        {
+          "rtt_ms": 150.0,
+          "value": 1.0
+        },
+        {
+          "rtt_ms": 1000.0,
+          "value": 1.0
+        }
+      ],
+      "scale_ms": 100.0
+    },
+    {
+      "baseline_ms": 5.0,
+      "normalized": [
+        {
+          "rtt_ms": 10.0,
+          "value": 0.1
+        },
+        {
+          "rtt_ms": 60.0,
+          "value": 0.6
+        },
+        {
+          "rtt_ms": 150.0,
+          "value": 1.0
+        },
+        {
+          "rtt_ms": 1000.0,
+          "value": 1.0
+        }
+      ],
+      "scale_ms": 100.0
+    },
+    {
+      "baseline_ms": 25.0,
+      "normalized": [
+        {
+          "rtt_ms": 10.0,
+          "value": 0.1
+        },
+        {
+          "rtt_ms": 60.0,
+          "value": 0.6
+        },
+        {
+          "rtt_ms": 150.0,
+          "value": 1.0
+        },
+        {
+          "rtt_ms": 1000.0,
+          "value": 1.0
+        }
+      ],
+      "scale_ms": 100.0
+    },
+    {
+      "baseline_ms": 40.0,
+      "normalized": [
+        {
+          "rtt_ms": 10.0,
+          "value": 0.06
+        },
+        {
+          "rtt_ms": 60.0,
+          "value": 0.38
+        },
+        {
+          "rtt_ms": 150.0,
+          "value": 0.94
+        },
+        {
+          "rtt_ms": 1000.0,
+          "value": 1.0
+        }
+      ],
+      "scale_ms": 160.0
+    },
+    {
+      "baseline_ms": 120.0,
+      "normalized": [
+        {
+          "rtt_ms": 10.0,
+          "value": 0.02
+        },
+        {
+          "rtt_ms": 60.0,
+          "value": 0.13
+        },
+        {
+          "rtt_ms": 150.0,
+          "value": 0.31
+        },
+        {
+          "rtt_ms": 1000.0,
+          "value": 1.0
+        }
+      ],
+      "scale_ms": 480.0
+    }
+  ]
+}
