@@ -37,6 +37,7 @@ The shared spec that keeps every platform consistent. It contains no app code.
 | [`vectors/meters/`](vectors/meters/) | Meter normalization vectors (network cube root, latency scale) |
 | [`tokens/`](tokens/) | Colors and thresholds in [W3C design-token](https://www.designtokens.org/) format |
 | [`fixtures/scenarios/`](fixtures/scenarios/) | Synthetic histories for screenshots and previews |
+| [`docs/sync.md`](docs/sync.md) | How a change flows through all four repos |
 | [`docs/cross-platform.md`](docs/cross-platform.md) | Why each platform is native and they share a spec instead of code |
 
 Platform repos pin a tagged version of this spec and run its vectors in CI. Versions are cut by release-please from Conventional Commits: a breaking rule change is a major version. A rule change is a PR here plus one PR per platform.
