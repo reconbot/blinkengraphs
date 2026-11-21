@@ -30,10 +30,12 @@ The shared spec that keeps every platform consistent. It contains no app code.
 | [`rules/verdict.md`](rules/verdict.md) | The Verdict rules |
 | [`rules/probe-stats.md`](rules/probe-stats.md) | Loss, RTT, baseline and jitter from raw Probe results |
 | [`rules/hop-trace.md`](rules/hop-trace.md) | Hop Trace sweeping and the hop table |
+| [`rules/graph-aggregate.md`](rules/graph-aggregate.md) | Per-minute histogram and p50/p95/p99/avg/max per graph bucket |
 | [`defaults.json`](defaults.json) | Default Probe Group, intervals, timeouts and history lengths |
 | [`vectors/verdict/`](vectors/verdict/) | Test vectors: inputs and the Findings each platform must produce |
 | [`vectors/probe-stats/`](vectors/probe-stats/) | Raw results → Probe stats |
 | [`vectors/hop-trace/`](vectors/hop-trace/) | Hop results → hop table |
+| [`vectors/sketch/`](vectors/sketch/) | Histogram index, encoding and merged aggregates |
 | [`vectors/meters/`](vectors/meters/) | Meter normalization vectors (network cube root, latency scale) |
 | [`tokens/`](tokens/) | Colors and thresholds in [W3C design-token](https://www.designtokens.org/) format |
 | [`fixtures/scenarios/`](fixtures/scenarios/) | Synthetic histories for screenshots and previews |

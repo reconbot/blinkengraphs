@@ -1,0 +1,43 @@
+{
+  "aggregates": {
+    "avg": {
+      "bits": "4173850ad120a2cf",
+      "value": 20467885.070467766
+    },
+    "max": {
+      "bits": "41ea13b860000000",
+      "value": 3500000000.0
+    },
+    "p50": {
+      "bits": "403abf66e0e5aea7",
+      "value": 26.747663551401867
+    },
+    "p95": {
+      "bits": "405b3f69b02593f7",
+      "value": 108.9908256880734
+    },
+    "p99": {
+      "bits": "405bbf6c657a3bf7",
+      "value": 110.990990990991
+    }
+  },
+  "description": "Merging the minutes of the minutes vector in ascending order, and the aggregates a graph bucket shows. Merging sketches in any order gives the same sk.",
+  "loss": 0.07,
+  "merged": {
+    "lost": 13,
+    "max": {
+      "bits": "41ea13b860000000",
+      "value": 3500000000.0
+    },
+    "min": {
+      "bits": "0000000000000000",
+      "value": 0.0
+    },
+    "n": 171,
+    "sk": "01800201af01020102020302020202020301030003010100020002000500060002000200040003000300060005000200010004000300030006000500020002000301030002000201020003000300052d04000700090003000800080006000900029c0601",
+    "sum": {
+      "bits": "41ea13bc73619980",
+      "value": 3500008347.049988
+    }
+  }
+}
