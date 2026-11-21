@@ -1,0 +1,54 @@
+{
+  "description": "No replies: no RTT, no baseline",
+  "expected": {
+    "baseline_ms": null,
+    "jitter_ms": null,
+    "loss": 1.0,
+    "rtt_ms": null
+  },
+  "name": "all-lost",
+  "ram_s": 900,
+  "results": [
+    {
+      "at": 1799999991,
+      "rtt_ms": null
+    },
+    {
+      "at": 1799999992,
+      "rtt_ms": null
+    },
+    {
+      "at": 1799999993,
+      "rtt_ms": null
+    },
+    {
+      "at": 1799999994,
+      "rtt_ms": null
+    },
+    {
+      "at": 1799999995,
+      "rtt_ms": null
+    },
+    {
+      "at": 1799999996,
+      "rtt_ms": null
+    },
+    {
+      "at": 1799999997,
+      "rtt_ms": null
+    },
+    {
+      "at": 1799999998,
+      "rtt_ms": null
+    },
+    {
+      "at": 1799999999,
+      "rtt_ms": null
+    },
+    {
+      "at": 1800000000,
+      "rtt_ms": null
+    }
+  ],
+  "window_s": 30
+}

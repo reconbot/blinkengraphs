@@ -1,0 +1,63 @@
+{
+  "description": "When the target answers at a lower TTL, rows beyond it are dropped",
+  "expected": [
+    {
+      "addr": "192.168.1.1",
+      "avg_ms": 1.0,
+      "best_ms": 1.0,
+      "last_ms": 1.0,
+      "loss": 0.0,
+      "sent": 2,
+      "ttl": 1,
+      "worst_ms": 1.0
+    },
+    {
+      "addr": "1.1.1.1",
+      "avg_ms": 7.0,
+      "best_ms": 5.0,
+      "last_ms": 9.0,
+      "loss": 0.0,
+      "sent": 2,
+      "ttl": 2,
+      "worst_ms": 9.0
+    }
+  ],
+  "hop_window": 60,
+  "name": "path-shortens",
+  "ticks": [
+    [
+      {
+        "addr": "192.168.1.1",
+        "reached": false,
+        "rtt_ms": 1.0,
+        "ttl": 1
+      },
+      {
+        "addr": "10.0.0.1",
+        "reached": false,
+        "rtt_ms": 5.0,
+        "ttl": 2
+      },
+      {
+        "addr": "1.1.1.1",
+        "reached": true,
+        "rtt_ms": 12.0,
+        "ttl": 3
+      }
+    ],
+    [
+      {
+        "addr": "192.168.1.1",
+        "reached": false,
+        "rtt_ms": 1.0,
+        "ttl": 1
+      },
+      {
+        "addr": "1.1.1.1",
+        "reached": true,
+        "rtt_ms": 9.0,
+        "ttl": 2
+      }
+    ]
+  ]
+}

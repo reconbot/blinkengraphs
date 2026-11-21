@@ -28,8 +28,13 @@ The shared spec that keeps every platform consistent. It contains no app code.
 |---|---|
 | [`CONTEXT.md`](CONTEXT.md) | Vocabulary: Section, Metric, Probe, Verdict, Finding, Fault Domain… |
 | [`rules/verdict.md`](rules/verdict.md) | The Verdict rules |
+| [`rules/probe-stats.md`](rules/probe-stats.md) | Loss, RTT, baseline and jitter from raw Probe results |
+| [`rules/hop-trace.md`](rules/hop-trace.md) | Hop Trace sweeping and the hop table |
+| [`defaults.json`](defaults.json) | Default Probe Group, intervals, timeouts and history lengths |
 | [`vectors/verdict/`](vectors/verdict/) | Test vectors: inputs and the Findings each platform must produce |
-| [`vectors/meters/`](vectors/meters/) | Meter normalization vectors |
+| [`vectors/probe-stats/`](vectors/probe-stats/) | Raw results → Probe stats |
+| [`vectors/hop-trace/`](vectors/hop-trace/) | Hop results → hop table |
+| [`vectors/meters/`](vectors/meters/) | Meter normalization vectors (network cube root, latency scale) |
 | [`tokens/`](tokens/) | Colors and thresholds in [W3C design-token](https://www.designtokens.org/) format |
 | [`fixtures/scenarios/`](fixtures/scenarios/) | Synthetic histories for screenshots and previews |
 | [`docs/cross-platform.md`](docs/cross-platform.md) | Why each platform is native and they share a spec instead of code |

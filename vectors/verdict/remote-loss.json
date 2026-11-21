@@ -52,7 +52,7 @@
         "stat": {
           "baseline_ms": 14.0,
           "jitter_ms": null,
-          "loss": 0.4000000059604645,
+          "loss": 0.4,
           "rtt_ms": 30.0
         }
       },

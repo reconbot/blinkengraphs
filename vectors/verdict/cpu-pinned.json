@@ -19,10 +19,10 @@
           "target": "1.1.1.1"
         },
         "stat": {
-          "baseline_ms": 13.489999771118164,
-          "jitter_ms": 2.109999895095825,
+          "baseline_ms": 13.49,
+          "jitter_ms": 2.11,
           "loss": 0.0,
-          "rtt_ms": 16.1299991607666
+          "rtt_ms": 16.13
         }
       },
       {
@@ -31,10 +31,10 @@
           "target": "system-dns"
         },
         "stat": {
-          "baseline_ms": 18.690000534057617,
-          "jitter_ms": 2.109999895095825,
+          "baseline_ms": 18.69,
+          "jitter_ms": 2.11,
           "loss": 0.0,
-          "rtt_ms": 21.329999923706055
+          "rtt_ms": 21.33
         }
       },
       {
@@ -43,10 +43,10 @@
           "target": "1.1.1.1"
         },
         "stat": {
-          "baseline_ms": 12.6899995803833,
-          "jitter_ms": 2.109999895095825,
+          "baseline_ms": 12.69,
+          "jitter_ms": 2.11,
           "loss": 0.0,
-          "rtt_ms": 15.329999923706055
+          "rtt_ms": 15.33
         }
       },
       {
@@ -55,10 +55,10 @@
           "target": "8.8.8.8"
         },
         "stat": {
-          "baseline_ms": 15.1899995803833,
-          "jitter_ms": 2.109999895095825,
+          "baseline_ms": 15.19,
+          "jitter_ms": 2.11,
           "loss": 0.0,
-          "rtt_ms": 17.829999923706055
+          "rtt_ms": 17.83
         }
       },
       {
@@ -67,10 +67,10 @@
           "target": "gateway"
         },
         "stat": {
-          "baseline_ms": 1.7200000286102295,
-          "jitter_ms": 1.1100000143051147,
+          "baseline_ms": 1.72,
+          "jitter_ms": 1.11,
           "loss": 0.0,
-          "rtt_ms": 2.430000066757202
+          "rtt_ms": 2.43
         }
       },
       {
@@ -79,10 +79,10 @@
           "target": "1.1.1.1"
         },
         "stat": {
-          "baseline_ms": 13.890000343322754,
-          "jitter_ms": 2.109999895095825,
+          "baseline_ms": 13.89,
+          "jitter_ms": 2.11,
           "loss": 0.0,
-          "rtt_ms": 16.530000686645508
+          "rtt_ms": 16.53
         }
       },
       {
@@ -91,10 +91,10 @@
           "target": "8.8.8.8"
         },
         "stat": {
-          "baseline_ms": 15.789999961853027,
-          "jitter_ms": 2.109999895095825,
+          "baseline_ms": 15.79,
+          "jitter_ms": 2.11,
           "loss": 0.0,
-          "rtt_ms": 18.43000030517578
+          "rtt_ms": 18.43
         }
       }
     ],
