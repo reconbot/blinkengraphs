@@ -1,0 +1,128 @@
+{
+  "cases": [
+    {
+      "index": null,
+      "rep": null,
+      "value": {
+        "bits": "0000000000000000",
+        "value": 0.0
+      }
+    },
+    {
+      "index": null,
+      "rep": null,
+      "value": {
+        "bits": "bff0000000000000",
+        "value": -1.0
+      }
+    },
+    {
+      "index": null,
+      "rep": null,
+      "value": {
+        "bits": "3f4fffffffffffff",
+        "value": 0.0009765624999999999
+      }
+    },
+    {
+      "index": 0,
+      "rep": {
+        "bits": "3f503f03f03f03f0",
+        "value": 0.0009915865384615384
+      },
+      "value": {
+        "bits": "3f50000000000000",
+        "value": 0.0009765625
+      }
+    },
+    {
+      "index": 319,
+      "rep": {
+        "bits": "3fefbf7efdfbf7f0",
+        "value": 0.9921259842519685
+      },
+      "value": {
+        "bits": "3fefffffffffffff",
+        "value": 0.9999999999999999
+      }
+    },
+    {
+      "index": 320,
+      "rep": {
+        "bits": "3ff03f03f03f03f0",
+        "value": 1.0153846153846153
+      },
+      "value": {
+        "bits": "3ff0000000000000",
+        "value": 1.0
+      }
+    },
+    {
+      "index": 320,
+      "rep": {
+        "bits": "3ff03f03f03f03f0",
+        "value": 1.0153846153846153
+      },
+      "value": {
+        "bits": "3ff07fffffffffff",
+        "value": 1.0312499999999998
+      }
+    },
+    {
+      "index": 321,
+      "rep": {
+        "bits": "3ff0bf0b7672a07a",
+        "value": 1.046641791044776
+      },
+      "value": {
+        "bits": "3ff0800000000000",
+        "value": 1.03125
+      }
+    },
+    {
+      "index": 433,
+      "rep": {
+        "bits": "4028bf5a814afd6a",
+        "value": 12.373737373737374
+      },
+      "value": {
+        "bits": "402899999999999a",
+        "value": 12.3
+      }
+    },
+    {
+      "index": 1381,
+      "rep": {
+        "bits": "4202bf258bf258bf",
+        "value": 10064540030.293333
+      },
+      "value": {
+        "bits": "4202a05f20000000",
+        "value": 10000000000.0
+      }
+    },
+    {
+      "index": 1599,
+      "rep": {
+        "bits": "426fbf7efdfbf7f0",
+        "value": 1090854055903.748
+      },
+      "value": {
+        "bits": "4270000000000000",
+        "value": 1099511627776.0
+      }
+    },
+    {
+      "index": 1599,
+      "rep": {
+        "bits": "426fbf7efdfbf7f0",
+        "value": 1090854055903.748
+      },
+      "value": {
+        "bits": "46293e5939a08cea",
+        "value": 1e+30
+      }
+    }
+  ],
+  "description": "Bucket index (null = zero bucket) and representative value for chosen inputs. f64 values carry their exact bits."
+}
