@@ -109,5 +109,5 @@ A one-minute summary (min, mean, max, loss) of a Metric or Probe.
 _Avoid_: aggregate, bucket
 
 **Elevated Extras**:
-Measurements that only work when blinkengraphs runs as Administrator: bytes per process on the network, and UDP Hop Traces.
+Measurements that need privileges the app itself never has. Today only bytes per process on the network, supplied by an optional companion service. UDP Hop Traces were dropped to avoid raw sockets.
 _Avoid_: admin mode, pro features
