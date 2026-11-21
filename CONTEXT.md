@@ -11,8 +11,12 @@ One of the five things blinkengraphs watches: CPU, Memory, Network, Disk, Latenc
 _Avoid_: category, widget, module
 
 **Metric**:
-One named series of numbers within a Section, such as CPU total, commit charge, or download throughput. The user switches each Metric on or off for each Surface.
+One named series of numbers within a Section, such as CPU total, commit charge, or download throughput.
 _Avoid_: counter, stat, sensor
+
+**Readout**:
+Something a Section can show: one of its Metrics, or for Latency the Probe's latency or loss. The user picks the Readouts each Surface and the Panel show, per Section. A Section with none is hidden there.
+_Avoid_: field, item
 
 **Sample**:
 The values of every enabled Metric at one instant.
@@ -77,8 +81,8 @@ The always-visible small graph of one Section's enabled Metrics.
 _Avoid_: icon (that's one Surface), sparkline, gauge
 
 **Surface**:
-Where Meters appear: Tray Icons or the Taskbar Strip.
-_Avoid_: display, view
+Where Meters appear: Tray Icons or the Taskbar Strip. Labeled "Taskbar display" in Settings. The Taskbar Strip is the default.
+_Avoid_: view
 
 **Tray Icons**:
 The Surface where each Meter is its own notification-area icon.
@@ -89,8 +93,8 @@ The Surface where all Meters sit side by side, docked inside the taskbar. When i
 _Avoid_: deskband, toolbar, overlay
 
 **Menu Icon**:
-The single Tray Icon kept while the Taskbar Strip is attached; it carries the right-click menu and shows the Latency Meter.
-_Avoid_: app icon
+The single Tray Icon kept while the Taskbar Strip is attached. It carries the right-click menu and opens the Panel. It shows the app icon (default), the app icon colored by the Verdict, or one Section's Meter.
+_Avoid_: tray button
 
 **Panel**:
 The detail window that opens from any Meter or the hotkey. It shows the Verdict, history graphs, Hop Traces, and the Process Snapshot.
