@@ -2,7 +2,10 @@
 
 Live CPU, memory, disk, network and latency graphs where you can always see them, and a plain-language answer to two questions: **why is my computer slow?** and **why isn't my network responding?** Inspired by iStat Menus, MenuMeters, gping and mtr.
 
-![Panel during ISP packet loss](https://raw.githubusercontent.com/reconbot/blinkengraphs-win/ci-screenshots/main/panel-isp-loss-overview.png)
+<p>
+  <img src="https://raw.githubusercontent.com/reconbot/blinkengraphs-win/ci-screenshots/main/panel-isp-loss-overview.png" height="420" alt="Windows Panel during ISP packet loss">
+  <img src="https://raw.githubusercontent.com/reconbot/blinkengraphs-ios/ci-screenshots/main/isp-loss-dark-top.png" height="420" alt="iOS during the same ISP packet loss">
+</p>
 
 ## Download
 
@@ -10,14 +13,26 @@ Live CPU, memory, disk, network and latency graphs where you can always see them
 |---|---|---|
 | **Windows 11** (x64, ARM64) | v1.0 | [Latest release](https://github.com/reconbot/blinkengraphs-win/releases/latest) · [source](https://github.com/reconbot/blinkengraphs-win) |
 | **macOS** (menu bar) | planned | [blinkengraphs-mac](https://github.com/reconbot/blinkengraphs-mac) |
-| **iOS** (network diagnosis) | planned | [blinkengraphs-ios](https://github.com/reconbot/blinkengraphs-ios) |
+| **iOS** (network diagnosis) | v1.0, build from source and sideload | [Latest release](https://github.com/reconbot/blinkengraphs-ios/releases/latest) · [source](https://github.com/reconbot/blinkengraphs-ios) |
+
+## The apps
+
+Each platform is native and implements this spec; none shares code with another ([`docs/cross-platform.md`](docs/cross-platform.md)).
+
+| Windows 11 | iOS |
+|---|---|
+| Meters in the taskbar or tray, and a Panel with the Verdict, history graphs, Hop Traces and the processes behind CPU, memory, disk and network load. | Network diagnosis while the app is open: the Verdict, latency and loss over 1m to 7d, Target cards, a Hop Trace and the Public Address. No CPU or memory: iOS doesn't expose them. |
+| <img src="https://raw.githubusercontent.com/reconbot/blinkengraphs-win/ci-screenshots/main/panel-isp-loss-network.png" width="380" alt="Windows Panel, network view"> | <img src="https://raw.githubusercontent.com/reconbot/blinkengraphs-ios/ci-screenshots/main/range-24h-isp-loss-dark.png" width="220" alt="iOS, 24 hours of latency"> <img src="https://raw.githubusercontent.com/reconbot/blinkengraphs-ios/ci-screenshots/main/wifi-light-bottom.png" width="220" alt="iOS Hop Trace, light"> |
+
+Screenshots are rendered by each app's CI from demo data.
 
 ## What it shows
 
 - **Meters:** small always-visible graphs, as tray icons or a strip in the taskbar.
   ![Taskbar Strip](https://raw.githubusercontent.com/reconbot/blinkengraphs-win/ci-screenshots/main/strip-upload-saturation.png)
-- **Verdict:** names the fault: your LAN or Wi-Fi, your ISP, DNS, ping filtering, a remote host, your own upload filling the link, or local CPU, memory or disk load.
+- **Verdict:** names the fault: your LAN or Wi-Fi, your ISP, IPv4 or IPv6 broken, DNS, ping filtering, a remote host, a VPN, a captive portal, your own upload filling the link, or local CPU, memory or disk load.
 - **Probes:** ICMP, TCP and DNS latency to the gateway, Cloudflare and Quad9 over IPv4 and IPv6, graphed like gping, plus an mtr-style hop trace.
+- **Public Address:** your IPv4 and IPv6 as the internet sees them, from two independent lookups.
 - **Footprint:** a feature in its own right. The Windows version uses under 1% of one core, about 16 MB of RAM and a 6.5 MB exe.
 
 ## This repository
