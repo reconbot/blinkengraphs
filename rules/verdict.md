@@ -7,6 +7,7 @@ The Verdict is an ordered list of Findings, most severe first, and is never empt
 - **Probe stats**, per Probe, as defined in [`probe-stats.md`](probe-stats.md): `loss` (0–1), `rtt_ms`, `baseline_ms`, `jitter_ms`. Denied Probes are absent.
 - **The last Sample**, optional, holding the Metric values.
 - **`upload_peak_bps`**: the highest upload rate seen recently. It stands in for the link capacity, which is unknown.
+- **`path_up`**, optional, default `true`: whether the OS reports any usable network path. It is `false` in airplane mode, with every radio off, or with the cable out.
 
 ## Probe classes
 
@@ -15,6 +16,10 @@ The Verdict is an ordered list of Findings, most severe first, and is never empt
 - **DNS:** Probes with protocol `dns`.
 
 A Gateway or Internet Probe only counts once it has a baseline or has recorded loss.
+
+## Offline
+
+When `path_up` is `false`, the only network Finding is Crit `Offline` "No network connection". No network rule and no DNS rule runs; the Local rules still do.
 
 ## Network rules, in order
 

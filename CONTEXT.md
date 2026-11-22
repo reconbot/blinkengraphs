@@ -87,7 +87,7 @@ The current Findings, most severe first; the top one is the headline, such as "G
 _Avoid_: diagnosis, alert, insight
 
 **Fault Domain**:
-Where the trouble is: Local Load, LAN, Captive Portal (a sign-in page holding back the internet), ISP, DNS, Remote, ICMP Filtering, or Self-Saturation (your own traffic filling the link).
+Where the trouble is: Local Load, LAN, Captive Portal (a sign-in page holding back the internet), ISP, DNS, Remote, ICMP Filtering, Self-Saturation (your own traffic filling the link), or Offline (no network path at all).
 _Avoid_: root cause, failure type
 
 **Process Snapshot**:
