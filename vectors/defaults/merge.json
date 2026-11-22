@@ -1,0 +1,88 @@
+{
+  "cases": [
+    {
+      "base": {
+        "history": {
+          "ram_minutes": 15,
+          "rollup_days": 7
+        },
+        "system_interval_ms": 1000
+      },
+      "expected": {
+        "history": {
+          "ram_minutes": 15,
+          "rollup_days": 30
+        },
+        "system_interval_ms": 1000
+      },
+      "name": "objects merge key by key",
+      "override": {
+        "history": {
+          "rollup_days": 30
+        }
+      }
+    },
+    {
+      "base": {
+        "max_timeout_ms": 1000,
+        "targets": [
+          {
+            "target": "1.1.1.1"
+          },
+          {
+            "target": "9.9.9.9"
+          }
+        ]
+      },
+      "expected": {
+        "max_timeout_ms": 500,
+        "targets": [
+          {
+            "target": "1.1.1.1"
+          }
+        ]
+      },
+      "name": "arrays and scalars replace whole",
+      "override": {
+        "max_timeout_ms": 500,
+        "targets": [
+          {
+            "target": "1.1.1.1"
+          }
+        ]
+      }
+    },
+    {
+      "base": {
+        "dns_query_name": "cloudflare.com",
+        "system_interval_ms": 1000
+      },
+      "expected": {
+        "battery_saver": true,
+        "dns_query_name": "cloudflare.com"
+      },
+      "name": "null removes a key; new keys are added",
+      "override": {
+        "battery_saver": true,
+        "system_interval_ms": null
+      }
+    },
+    {
+      "base": {
+        "probe_group": {
+          "latency_ms": 1000,
+          "name": "Default"
+        }
+      },
+      "expected": {
+        "probe_group": {
+          "latency_ms": 1000,
+          "name": "Default"
+        }
+      },
+      "name": "an empty override changes nothing",
+      "override": {}
+    }
+  ],
+  "description": "Merging a platform's defaults.override.json over the spec's defaults.json (rules/defaults.md)."
+}
