@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.0](https://github.com/reconbot/blinkengraphs/compare/v1.4.0...v1.5.0) (2026-11-22)
+
+
+### Features
+
+* run a Hop Trace only over an IP version the path carries natively ([509884e](https://github.com/reconbot/blinkengraphs/commit/509884e4ef9a67293a569f1587cd60e4ebac0a69))
+* VPN Fault Domain; through a VPN the Verdict names the tunnel instead of the ISP or a ping filter ([74d1622](https://github.com/reconbot/blinkengraphs/commit/74d16226958ae99921a1d87c2dff115c4bdefd8e))
+
 ## [1.4.0](https://github.com/reconbot/blinkengraphs/compare/v1.3.0...v1.4.0) (2026-11-22)
 
 
