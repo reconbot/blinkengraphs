@@ -18,7 +18,7 @@ Reviewed at iOS `066eb9c`, Windows `2bbb58a` and macOS `2ed53ba`. iOS and Window
 - **Pause.** Time not measured is a Pause, whatever the reason: suspended, asleep, killed, not yet started, or resting while idle. A Pause lasts until `settle_s` after measuring resumes. It is not loss and not Offline. Whether to rest while idle stays each platform's choice.
 - **Cut Rounds.** A Round whose timeout ends after a Pause began records nothing. Only a Round that ran its full timeout while measuring records a loss.
 - **Now, not newest.** Stats windows and Raw retention are measured back from now. Right after a Pause a Probe has no stats; readouts show "–" and the Verdict says measurements are resuming.
-- **Raw.** Every result and Sample, with its Link, kept on disk for 2 hours. Pauses and Link changes are kept beside them. How often Raw reaches disk is each platform's choice, within a bound the spec sets; on the next launch the unwritten stretch is a Pause.
+- **Raw.** Every result and Sample, with its Link, kept on disk for 2 hours. Pauses and Link changes are kept beside them. How often Raw reaches disk is each platform's choice, at most 10 s apart and always when a Pause begins; on the next launch the unwritten stretch is a Pause.
 - **Archives.** Each Row is one step of one key, aligned to the Unix epoch, so days start at UTC midnight: `n`, `lost`, `sum`, `min`, `max`, the BG-LL5 histogram (`graph-aggregate.md`) and `paused_s`. It is written once its step has ended and every result for it has arrived, and never changes.
 
   | Source | Step | Kept | Built from | Serves |
@@ -32,7 +32,7 @@ Reviewed at iOS `066eb9c`, Windows `2bbb58a` and macOS `2ed53ba`. iOS and Window
 - **Paused Rows.** A Row or graph bucket more than half Paused draws as Paused. Otherwise it draws its data, and its Paused share is still recorded.
 - **One source per range.** A graph draws closed buckets or Rows from its one source, one point per Row: 288 on 24h and 168 on 7d. Ranges drawn from Raw keep today's bucket widths: 1 s, 3 s and 15 s. The stretch after the last closed Row is built the same way from what exists so far, and marked provisional. Closed points never change; only the provisional edge moves.
 - **All.** Draws A3, at most 240 points; when more Rows exist, adjacent Rows merge in fixed, epoch-aligned groups.
-- **Links.** Several Links can be active at once (Ethernet, Wi-Fi, a VPN; on iOS, Wi-Fi and cellular), on every platform. Each active Link runs the Probe Group on its own interface, and its Raw, Archives (through All), stats and baselines are kept per Link. Graphs show one line per Link by default ("1.1.1.1 · Wi-Fi"), with Link changes marked, and the user can pick one Link. The Verdict speaks for the Link carrying the default route; other Links show their state in the Panel only. A Probe is sent on a Link only if that Link routes its Target, so a split-tunnel VPN measures only Targets inside it; the rest record nothing, as for an unreachable IP version.
+- **Links.** Several Links can be active at once (Ethernet, Wi-Fi, a VPN; on iOS, Wi-Fi and cellular), on every platform. Each active Link runs the Probe Group on its own interface, and its Raw, Archives (through All), stats and baselines are kept per Link. Archives key a Link by interface and Gateway, so every Access Point behind one Gateway shares them; Raw records the Access Point too, for Access Point diagnosis. Throughput Metrics are recorded per Link's adapter; the other Metrics belong to the machine. Hop statistics are kept in Raw only, per Link, with no Archives. Graphs show one line per Link by default ("1.1.1.1 · Wi-Fi"), with Link changes marked, and the user can pick one Link. The Verdict speaks for the Link carrying the default route; other Links show their state in the Panel only. A Probe is sent on a Link only if that Link routes its Target, so a split-tunnel VPN measures only Targets inside it; the rest record nothing, as for an unreachable IP version.
 
 ## Rules and data to write
 
@@ -45,7 +45,7 @@ One breaking spec release (`feat!:`), in a single PR:
 5. **`defaults.json`:** replace `history.ram_minutes` and `history.rollup_days` with `raw_minutes` (120), `settle_s` (2), and the Archive table with its retention.
 6. **Vectors:** new `vectors/history/` (Pause and cut Rounds, settle, Row writing and merging, paused share, range to source, provisional edge, Link markers); `probe-stats` vectors gain `now`; `sketch` vectors gain `paused_s`. The vectors replaced are `history/{timing, minutes, ranges, buckets, steady}`.
 
-Hop statistics, Process Snapshots and the Verdict's other rules don't change.
+Process Snapshots and the Verdict's other rules don't change.
 
 ## Plan per platform
 
