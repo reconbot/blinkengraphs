@@ -24,13 +24,13 @@ Reviewed at iOS `066eb9c`, Windows `2bbb58a` and macOS `2ed53ba`. iOS and Window
   | Source | Step | Kept | Built from | Serves |
   |---|---|---|---|---|
   | Raw | the Round | 2 h | measurement | 1m, 15m, 1h |
-  | A1 | 6 min | 24 h (240 Rows) | Raw | 24h |
-  | A2 | 42 min | 7 d (240 Rows) | A1 (7 Rows) | 7d |
-  | A3 | 1 day | 365 d by default; the user can shorten it | A1 (240 Rows) | All |
+  | A1 | 5 min | 24 h (288 Rows) | Raw | 24h |
+  | A2 | 1 h | 7 d (168 Rows) | A1 (12 Rows) | 7d |
+  | A3 | 1 day | 365 d by default; the user can shorten it | A2 (24 Rows) | All |
 
-  A2 and A3 merge A1 Rows, which is exact for every field (`graph-aggregate.md`, Merge), so a Row needs no Raw older than 6 minutes plus the arrival allowance. The 42-minute step doesn't divide a day, which is why A3 merges A1 Rows, not A2's.
+  Each Archive merges Rows of the one before it, which is exact for every field (`graph-aggregate.md`, Merge), so a Row needs no Raw older than 5 minutes plus the arrival allowance. Every step divides the next, so Rows nest.
 - **Paused Rows.** A Row or graph bucket more than half Paused draws as Paused. Otherwise it draws its data, and its Paused share is still recorded.
-- **One source per range.** A graph draws closed buckets or Rows from its one source. The stretch after the last closed Row is built the same way from what exists so far, and marked provisional. Closed points never change; only the provisional edge moves.
+- **One source per range.** A graph draws closed buckets or Rows from its one source, one point per Row: 288 on 24h and 168 on 7d. Ranges drawn from Raw keep today's bucket widths: 1 s, 3 s and 15 s. The stretch after the last closed Row is built the same way from what exists so far, and marked provisional. Closed points never change; only the provisional edge moves.
 - **All.** Draws A3, at most 240 points; when more Rows exist, adjacent Rows merge in fixed, epoch-aligned groups.
 - **Links.** Several Links can be active at once (Ethernet, Wi-Fi, a VPN; on iOS, Wi-Fi and cellular), on every platform. Each active Link runs the Probe Group on its own interface, and its Raw, Archives (through All), stats and baselines are kept per Link. Graphs show one line per Link by default ("1.1.1.1 · Wi-Fi"), with Link changes marked, and the user can pick one Link. The Verdict speaks for the Link carrying the default route; other Links show their state in the Panel only. A Probe is sent on a Link only if that Link routes its Target, so a split-tunnel VPN measures only Targets inside it; the rest record nothing, as for an unreachable IP version.
 
