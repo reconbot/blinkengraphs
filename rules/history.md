@@ -35,12 +35,14 @@ A graph shows `[now − span, now]` in up to 240 points.
 
 ## Graph buckets
 
-Let `w = max(⌊span / 240⌋, 1)` seconds, and let `c` be where storage hands over to RAM: every minute before `c` has had its Minute written (see Minutes), and none from `c` on. Before any Minute is written, `c` is 0 and RAM serves everything.
+Let `w = max(⌊span / 240⌋, 1)` seconds, and let `c` be where storage hands over to RAM: `c = min(written_through, ⌈first / 60⌉ × 60)`, where `written_through` is the boundary before which every Minute has been written (see Minutes; 0 before any is) and *first* is the key's oldest RAM result. RAM serves every whole minute it holds, at full resolution, and storage serves only what RAM no longer holds. With no RAM results, `c` is `written_through`.
 
 - **From storage:** Minutes with `now − span ≤ m + 59` and `m < c`, grouped into buckets of `W = ⌈w / 60⌉ × 60` seconds starting at `⌊m / W⌋ × W`, merged as in `graph-aggregate.md`.
 - **From RAM:** results with `max(now − span, c) ≤ at ≤ now`, grouped into buckets of `w` seconds starting at `⌊at / w⌋ × w`, ranked as raw samples.
 
-Buckets align to the Unix epoch, not to `now`. RAM results before `c` are left out because their minutes come from storage, and results from `c` on are not yet in storage, so nothing is counted twice or missed. A point's time is its bucket's start.
+Buckets align to the Unix epoch, not to `now`. Every minute before `c` is written, and RAM holds every result from `c` on, so nothing is counted twice or missed. RAM results before `c` are left out: their minute comes from storage. A point's time is its bucket's start.
+
+Handing over at `written_through` alone would put storage's whole-minute buckets in the 1m and 15m graphs, which RAM covers: `written_through` trails `now` by about a minute. `vectors/history/steady.json` covers that case.
 
 ## Drawing
 

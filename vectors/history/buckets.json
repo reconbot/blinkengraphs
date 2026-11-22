@@ -2263,7 +2263,7 @@
       "span_s": 3600
     }
   ],
-  "description": "Graph points (bucket start, max, loss) from storage Minutes and RAM results (history.md, Graph buckets). Every minute before written_through (c) is stored, none after; stored Minutes have max 99 so a point's source is visible; v null is a loss. RAM results before c are left out.",
+  "description": "Graph points (bucket start, max, loss) from storage Minutes and RAM results (history.md, Graph buckets). Every minute before written_through is stored, none after; stored Minutes have max 99 so a point's source is visible; v null is a loss. RAM results before c are left out.",
   "ram": [
     {
       "at": 1799999108,
