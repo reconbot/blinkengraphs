@@ -1,0 +1,14 @@
+{
+  "expected": {
+    "address": "203.0.113.7",
+    "state": "nat64"
+  },
+  "input": {
+    "dns_txt": [
+      "remote_ip: 203.0.113.7"
+    ],
+    "family": "ipv6",
+    "https_body": "203.0.113.7\n"
+  },
+  "name": "nat64"
+}

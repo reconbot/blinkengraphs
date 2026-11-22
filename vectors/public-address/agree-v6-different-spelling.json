@@ -1,0 +1,16 @@
+{
+  "expected": {
+    "address": "2001:db8::1",
+    "asn": "64500",
+    "state": "agree"
+  },
+  "input": {
+    "dns_txt": [
+      "remote_ip: 2001:0db8:0:0:0:0:0:1",
+      "asn: 64500"
+    ],
+    "family": "ipv6",
+    "https_body": "2001:db8::1\n"
+  },
+  "name": "agree-v6-different-spelling"
+}

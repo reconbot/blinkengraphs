@@ -1,0 +1,13 @@
+{
+  "expected": {
+    "address": "203.0.113.7",
+    "source": "https",
+    "state": "single"
+  },
+  "input": {
+    "dns_txt": null,
+    "family": "ipv4",
+    "https_body": " 203.0.113.7 \n"
+  },
+  "name": "single-https"
+}

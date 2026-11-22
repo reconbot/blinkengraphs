@@ -1,0 +1,17 @@
+{
+  "expected": {
+    "address": "203.0.113.7",
+    "asn": "64500",
+    "state": "agree"
+  },
+  "input": {
+    "dns_txt": [
+      "remote_ip: 203.0.113.7",
+      "asn: 64500",
+      "country_code: US"
+    ],
+    "family": "ipv4",
+    "https_body": "203.0.113.7\n"
+  },
+  "name": "agree-v4"
+}

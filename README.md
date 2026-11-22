@@ -32,6 +32,7 @@ The shared spec that keeps every platform consistent. It contains no app code.
 | [`rules/hop-trace.md`](rules/hop-trace.md) | Hop Trace sweeping and the hop table |
 | [`rules/defaults.md`](rules/defaults.md) | How a platform's overrides merge over `defaults.json` |
 | [`rules/graph-aggregate.md`](rules/graph-aggregate.md) | Per-minute histogram and p50/p95/p99/avg/max per graph bucket |
+| [`rules/public-address.md`](rules/public-address.md) | The Public Address per IP version, from a DNS and an HTTPS lookup |
 | [`defaults.json`](defaults.json) | Shared defaults: Probe Group, intervals, timeouts and history lengths. Platforms override it per [`rules/defaults.md`](rules/defaults.md) |
 | [`vectors/verdict/`](vectors/verdict/) | Test vectors: inputs and the Findings each platform must produce |
 | [`vectors/probe-stats/`](vectors/probe-stats/) | Raw results → Probe stats |
@@ -39,11 +40,11 @@ The shared spec that keeps every platform consistent. It contains no app code.
 | [`vectors/defaults/`](vectors/defaults/) | Defaults and overrides → merged defaults |
 | [`vectors/sketch/`](vectors/sketch/) | Histogram index, encoding and merged aggregates |
 | [`vectors/meters/`](vectors/meters/) | Meter normalization vectors (network cube root, latency scale) |
+| [`vectors/public-address/`](vectors/public-address/) | Lookup answers → Public Address reading |
 | [`brand/`](brand/) | The app icon (`icon.svg`) every platform renders its formats from |
 | [`tokens/`](tokens/) | Colors and thresholds in [W3C design-token](https://www.designtokens.org/) format, with a light palette |
 | [`fixtures/scenarios/`](fixtures/scenarios/) | Synthetic histories for screenshots and previews |
 | [`docs/sync.md`](docs/sync.md) | How a change flows through all four repos |
-| [`docs/public-address.md`](docs/public-address.md) | Proposal: showing the Public Address for IPv4 and IPv6 |
 | [`docs/access-points.md`](docs/access-points.md) | Proposal: diagnosing and avoiding failing Access Points |
 | [`docs/cross-platform.md`](docs/cross-platform.md) | Why each platform is native and they share a spec instead of code |
 

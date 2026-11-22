@@ -1,0 +1,17 @@
+{
+  "expected": {
+    "asn": "64501",
+    "dns": "198.51.100.4",
+    "https": "203.0.113.7",
+    "state": "differ"
+  },
+  "input": {
+    "dns_txt": [
+      "remote_ip: 198.51.100.4",
+      "asn: 64501"
+    ],
+    "family": "ipv4",
+    "https_body": "203.0.113.7"
+  },
+  "name": "differ"
+}

@@ -1,0 +1,11 @@
+{
+  "expected": {
+    "state": "none"
+  },
+  "input": {
+    "dns_txt": null,
+    "family": "ipv6",
+    "https_body": null
+  },
+  "name": "no-ipv6"
+}

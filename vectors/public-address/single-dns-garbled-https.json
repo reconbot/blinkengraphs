@@ -1,0 +1,17 @@
+{
+  "expected": {
+    "address": "203.0.113.7",
+    "asn": "64500",
+    "source": "dns",
+    "state": "single"
+  },
+  "input": {
+    "dns_txt": [
+      "remote_ip: 203.0.113.7",
+      "asn: 64500"
+    ],
+    "family": "ipv4",
+    "https_body": "<html>blocked</html>"
+  },
+  "name": "single-dns-garbled-https"
+}
