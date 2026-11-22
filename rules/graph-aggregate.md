@@ -1,6 +1,6 @@
 # Graph aggregate
 
-What each point of a history graph shows when it covers several samples: p50, p95, p99, avg or max, chosen once for all graphs. `vectors/sketch/*.json` is the authority, and f64 results must match their `bits` exactly.
+What each point of a history graph shows when it covers several samples: p50, p95, p99, avg or max, chosen once for all graphs. The user picks it in Settings, starting at `defaults.json` `graph_aggregate` (`p95`: it shows the slow tail a median hides). A graph's legend names the aggregate it shows. `vectors/sketch/*.json` is the authority, and f64 results must match their `bits` exactly.
 
 ## Per-minute storage
 
