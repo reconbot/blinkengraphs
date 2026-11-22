@@ -1,0 +1,26 @@
+name: spec-checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          # The PR's own commits, not GitHub's merge commit, so the commit checks see only them.
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - name: Data and links
+        if: github.event_name == 'push'
+        run: python3 .github/scripts/spec_checks.py
+      - name: Data, links, breaking vectors, private details
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: python3 .github/scripts/spec_checks.py "$BASE_SHA"
