@@ -15,7 +15,7 @@ Reviewed at iOS `066eb9c`, Windows `2bbb58a` and macOS `2ed53ba`. iOS and Window
 
 ## Agreed behaviour
 
-- **Pause.** Time not measured is a Pause, whatever the reason: suspended, asleep, killed, not yet started, or resting while idle. A Pause lasts until `settle_s` after measuring resumes. It is not loss and not Offline. Each desktop platform offers a Setting for resting while idle (display off, locked, screen saver); its default is the platform's, recorded in an ADR.
+- **Pause.** Time not measured is a Pause, whatever the reason: suspended, asleep, killed, not yet started, or resting while idle. A Pause lasts until a settle time after measuring resumes. The settle time is each platform's, set from its own device tests and recorded in an ADR; vectors take it as an input. It is not loss and not Offline. Each desktop platform offers a Setting for resting while idle (display off, locked, screen saver); its default is the platform's, recorded in an ADR.
 - **Cut Rounds.** A Round whose timeout ends after a Pause began records nothing. Only a Round that ran its full timeout while measuring records a loss.
 - **Now, not newest.** Stats windows and Raw retention are measured back from now. Right after a Pause a Probe has no stats; readouts show "–" and the Verdict says measurements are resuming.
 - **Raw.** Every result and Sample, with its Link, kept on disk for 2 hours. Pauses and Link changes are kept beside them. How often Raw reaches disk is each platform's choice, at most 10 s apart and always when a Pause begins; on the next launch the unwritten stretch is a Pause.
@@ -42,7 +42,7 @@ One breaking spec release (`feat!:`), in a single PR:
 2. **`rules/probe-stats.md`:** windows from now; a Probe is sent on a Link only if that Link routes its Target; a Probe with an empty window has no stats; Raw replaces "RAM".
 3. **`rules/graph-aggregate.md`:** "Per-minute storage" becomes the Row; add `paused_s` and its merge.
 4. **`rules/verdict.md`:** the Verdict's input is the default-route Link's Probes. While the window is empty after a Pause: Ok `Paused` "Resuming measurements", so a resume never turns the Menu Icon amber or red.
-5. **`defaults.json`:** replace `history.ram_minutes` and `history.rollup_days` with `raw_minutes` (120), `settle_s` (2), and the Archive table with its retention.
+5. **`defaults.json`:** replace `history.ram_minutes` and `history.rollup_days` with `raw_minutes` (120) and the Archive table with its retention.
 6. **Vectors:** new `vectors/history/` (Pause and cut Rounds, settle, Row writing and merging, paused share, range to source, provisional edge, Link markers); `probe-stats` vectors gain `now`; `sketch` vectors gain `paused_s`. The vectors replaced are `history/{timing, minutes, ranges, buckets, steady}`.
 
 Process Snapshots and the Verdict's other rules don't change.
@@ -59,7 +59,7 @@ Each platform implements the release above and passes its vectors. Each plan is 
   - **A range reader:** picks the one source for a range and returns closed points plus the provisional edge.
   - Keep it Foundation-only (ADR 0001) so the vectors run on Linux, and so macOS can use it.
 - **Lifecycle (`Monitor`, `BlinkengraphsApp`):**
-  - `.background` begins a Pause and `.active` ends it after `settle_s`. This replaces `PathSettle`'s 1 s guess.
+  - `.background` begins a Pause and `.active` ends it after the settle time. Measure first-reply time after resume on Wi-Fi, cellular and VPN to set it, replacing `PathSettle`'s 1 s guess (ADR 0013).
   - Rounds whose timeout ends after the Pause began record nothing.
   - On launch, a Pause covers the time from the last Raw record to now.
   - Wrap the stop path in `beginBackgroundTask`, so the Pause record reaches disk.
@@ -95,7 +95,4 @@ Each platform implements the release above and passes its vectors. Each plan is 
 - **Links:** run the Probe Group on each active Link, as on iOS (`NWParameters.requiredInterface`).
 - **Spec pin:** pin the release that carries this proposal, and run its vectors in CI.
 
-## Open questions
-
-- `settle_s` ships as 2 s. A device test of first-reply time after resume on Wi-Fi, cellular and VPN should confirm or change it.
-- Raw on disk at 1 s Rounds is about 100k results per 2 hours per Link. Each platform measures its write cost, especially iOS flash wear and battery.
+Each platform also chooses how often Raw reaches disk, within the 10 s bound, and measures what that costs (on iOS, flash wear and battery).
