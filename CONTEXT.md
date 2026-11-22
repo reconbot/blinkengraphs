@@ -33,7 +33,7 @@ _Avoid_: interface (overloaded), NIC
 ### Measuring the network
 
 **Target**:
-A host that blinkengraphs measures reachability to, such as the Gateway, 1.1.1.1, or 2606:4700:4700::1111. Each IP address Target has one IP version.
+A host that blinkengraphs measures reachability to, such as the Gateway, 1.1.1.1, 2606:4700:4700::1111 or example.com. Each IP address Target has one IP version. A Target given as a name is resolved, and resolved again at most every 30 seconds; it takes the IP version of the address it resolves to, and its Probes are skipped while it doesn't resolve. Which address a platform picks when a name has both versions is the platform's choice.
 _Avoid_: host, endpoint, server
 
 **Gateway**:
