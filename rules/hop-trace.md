@@ -27,3 +27,11 @@ Per TTL, over that hop's kept results:
 | `loss` | `1 − replies / sent` |
 | `last_ms` | The newest result's RTT, absent if it timed out |
 | `best_ms`, `avg_ms`, `worst_ms` | Minimum, mean and maximum of the replies |
+
+## Names
+
+When `hop_trace.reverse_dns` is true (`defaults.json`), each Hop's address is looked up by reverse DNS (a PTR query) through the system resolver, as mtr does.
+
+- Once per address, cached for the session, including addresses that have no name.
+- Off the probing path: a lookup never delays a sweep or changes a hop's stats.
+- The hop table shows the name, or the address while there is none; the address stays available beside it. Names are for display only and never feed the Verdict.
