@@ -13,7 +13,7 @@ A Hop Trace runs only over an IP version the path carries natively. Through tran
 
 ## Recording
 
-Each result is `(ttl, addr, rtt_ms, reached)`, where `addr` is the router that answered and both it and `rtt_ms` are absent on a timeout.
+Each result is `(ttl, addr, rtt_ms, reached)`, where `addr` is the router that answered and both it and `rtt_ms` are absent on a timeout. `rtt_ms` is whole milliseconds, rounded as in [`probe-stats.md`](probe-stats.md).
 
 - A hop keeps its last non-absent `addr`.
 - A hop keeps its last `hop_window` (60) results.
