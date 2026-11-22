@@ -8,6 +8,8 @@ A Probe result is `(at, rtt_ms)`, where `at` is Unix seconds and `rtt_ms` is abs
 
 A `denied` result, where the OS refused to send the Probe (for example iOS Local Network Privacy blocking the Gateway), is not a loss. It is not recorded, so a denied Probe has no stats and is absent from the Verdict input. The platform says so outside the Verdict.
 
+While the OS reports no network path, platforms send no Probes and record nothing; the Verdict reports Offline instead ([`verdict.md`](verdict.md)).
+
 History keeps results for `ram_s` (15 min) behind the newest result of any kind; older ones are dropped.
 
 ## Stats
