@@ -1,52 +1,71 @@
 # History
 
-How results are timed, kept, rolled up and drawn, so the same measurements give the same graphs and numbers on every platform. `vectors/history/*.json` is the authority. Probe stats over a window are in [`probe-stats.md`](probe-stats.md), and what a graph point holds is in [`graph-aggregate.md`](graph-aggregate.md).
+How results are timed, kept, summarised and drawn, so the same measurements give the same graphs and numbers on every platform. History is Raw plus three Archives ([ADR 0001](../docs/adr/0001-rrd-style-history.md)). `vectors/history/*.json` is the authority. Probe stats over a window are in [`probe-stats.md`](probe-stats.md), and what a Row holds is in [`graph-aggregate.md`](graph-aggregate.md).
 
-## Timing
+A *key* is one Metric or one Probe on one Link. Times are Unix seconds. `g = ⌈max_timeout_ms / 1000⌉ + 1` seconds is how long after its `at` a result can still arrive.
 
-A Probe Group runs in rounds at a fixed rate: round *k* starts at `start + k × interval`, however long earlier rounds took. A round that comes due while the previous one is still running starts when that one ends. Rounds it missed are skipped, not queued.
+## Rounds
 
-Every result of a round carries the round's `at`: whole Unix seconds, rounded down, when the round started. A Sample's `at` is whole Unix seconds when it was taken. So a 30 s window at a 1 s interval holds 30 rounds.
+A Probe Group runs in Rounds at a fixed rate: Round *k* starts at `start + k × interval`, however long earlier Rounds took. A Round that comes due while the previous one is still running starts when that one ends. Rounds it missed are skipped, not queued.
 
-## RAM
+Every result of a Round carries the Round's `at`: whole Unix seconds, rounded down, when the Round started. A Sample's `at` is whole Unix seconds when it was taken.
 
-Per key (each Metric, each Probe), keep the results with `at + ram_s > newest.at`, where *newest* is the newest result of any kind and `ram_s` is `defaults.json` `history.ram_minutes × 60`. A result exactly `ram_s` older than the newest is dropped.
+## Pauses
 
-## Minutes
+A Pause is a stretch `[begin, end)` when blinkengraphs was not measuring, for any reason: the app suspended, the machine asleep, the process killed, or resting while idle.
 
-A minute is `m = ⌊at / 60⌋ × 60`. For each key and minute with at least one result, storage keeps one Minute ([`graph-aggregate.md`](graph-aggregate.md), "Per-minute storage") built from that minute's results.
+- **Begin:** when the platform stops measuring. After a kill, it is the newest `at` in Raw plus one second, found on the next launch.
+- **End:** when measuring resumes, plus the platform's settle time. The settle time covers the network becoming usable again; each platform sets it from its own device tests and records it in an ADR.
+- **Cut Rounds:** a Round records nothing if any part of it, from its start to the end of its last Probe, falls in a Pause. Only a Round that ran its full timeout while measuring records a loss.
 
-- **When a Minute is written:** once a result arrives with `at ≥ m + 60 + g`, where `g = ⌈max_timeout_ms / 1000⌉ + 1` seconds. Results stamped in the minute arrive at most a timeout after their `at`, so none is left out. Shutting down writes every minute not yet written.
-- **Retention:** delete Minutes with `m < newest.at − rollup_days × 86400` (`defaults.json` `history.rollup_days`, or the user's choice).
-- A Minute is written once and never merged with a later write of the same key and minute.
+Each platform offers a Setting for resting while idle on desktops (display off, locked, screen saver); its default is the platform's, in an ADR.
+
+## Raw
+
+Raw holds every result and Sample, Pause and Link change, each with its Link. It keeps those with `at > now − raw_s`, where `raw_s` is `defaults.json` `history.raw_minutes × 60`. Raw reaches disk at most 10 seconds after each result, and when a Pause begins; on the next launch, anything newer than the last write is part of the Pause.
+
+## Archives
+
+An Archive holds one Row per key and step, for steps that had at least one result, and the Paused seconds of every step. Steps are `[m, m + step)` with `m` a multiple of `step`, so days start at UTC midnight.
+
+| Archive | Step | Rows kept | Built from |
+|---|---|---|---|
+| A1 | 300 s | 288 (24 h) | Raw results in the step |
+| A2 | 3600 s | 168 (7 d) | the 12 A1 Rows of the step |
+| A3 | 86 400 s | 365 (1 year), or fewer if the user chooses | the 24 A2 Rows of the step |
+
+`defaults.json` `history.archives` holds the steps and Rows kept.
+
+- **Written:** a step's Row is written once `now ≥ m + step + g`, and never changed. A2 and A3 merge the Rows of the Archive above, in ascending order ([`graph-aggregate.md`](graph-aggregate.md), "Merge").
+- **Paused seconds:** the length of the step that falls in Pauses. A2 and A3 add their Rows' Paused seconds.
+- **Retention:** an Archive drops Rows and Paused seconds older than its Rows kept: `m + step ≤ now − rows × step`.
+- **Links:** Archive keys name a Link by its interface and Gateway, so the Access Points behind one Gateway share them.
 
 ## Graph ranges
 
-| Range | Span |
-|---|---|
-| 1m | 60 s |
-| 15m | 900 s |
-| 1h | 3600 s |
-| 24h | 86 400 s |
-| 7d | 604 800 s |
-| All | From the oldest Minute or RAM result to now, at least 60 s |
+| Range | Span | Source | Point width |
+|---|---|---|---|
+| 1m | 60 s | Raw | 1 s |
+| 15m | 900 s | Raw | 3 s |
+| 1h | 3600 s | Raw | 15 s |
+| 24h | 86 400 s | A1 | 300 s |
+| 7d | 604 800 s | A2 | 3600 s |
+| All | from the oldest A3 Row to now | A3 | 86 400 s × `k` |
 
-A graph shows `[now − span, now]` in up to 240 points.
+A graph draws exactly one source. Its points are buckets `[b, b + w)` with `b` a multiple of the point width `w`, for every bucket with `b + w > now − span` and `b ≤ now`. For All, `k = ⌈rows / 240⌉`, where *rows* is the number of steps from the oldest A3 Row to now, so All draws at most 240 points.
 
-## Graph buckets
+- **From Raw:** a bucket holds the key's results with `b ≤ at < b + w`, ranked as raw values ([`graph-aggregate.md`](graph-aggregate.md), "Raw values").
+- **From an Archive:** a bucket is the merge of the key's Rows in it.
+- **Paused:** a bucket whose Paused seconds exceed `w / 2` is Paused, whatever results it holds. From Raw, its Paused seconds are its overlap with Pauses; from an Archive, the sum over its steps.
+- **Provisional:** a bucket that isn't finished yet, `now < b + w + g`, is provisional. From an Archive, its unwritten steps are built the same way their Rows will be, from the Rows and Raw that exist now. Only provisional points can change.
 
-Let `w = max(⌊span / 240⌋, 1)` seconds, and let `c` be where storage hands over to RAM: `c = min(written_through, ⌈first / 60⌉ × 60)`, where `written_through` is the boundary before which every Minute has been written (see Minutes; 0 before any is) and *first* is the key's oldest RAM result. RAM serves every whole minute it holds, at full resolution, and storage serves only what RAM no longer holds. With no RAM results, `c` is `written_through`.
-
-- **From storage:** Minutes with `now − span ≤ m + 59` and `m < c`, grouped into buckets of `W = ⌈w / 60⌉ × 60` seconds starting at `⌊m / W⌋ × W`, merged as in `graph-aggregate.md`.
-- **From RAM:** results with `max(now − span, c) ≤ at ≤ now`, grouped into buckets of `w` seconds starting at `⌊at / w⌋ × w`, ranked as raw samples.
-
-Buckets align to the Unix epoch, not to `now`. Every minute before `c` is written, and RAM holds every result from `c` on, so nothing is counted twice or missed. RAM results before `c` are left out: their minute comes from storage. A point's time is its bucket's start.
-
-Handing over at `written_through` alone would put storage's whole-minute buckets in the 1m and 15m graphs, which RAM covers: `written_through` trails `now` by about a minute. `vectors/history/steady.json` covers that case.
+A graph draws one line per Link of the key ("1.1.1.1 · Wi-Fi"); the user can pick one Link. On ranges drawn from Raw, a marker shows where the default-route Link changed.
 
 ## Drawing
 
-- A bucket with no results has no point, and the line breaks there rather than joining its neighbours.
+- A bucket with no results and not Paused has no point, and the line breaks there rather than joining its neighbours.
+- A Paused bucket draws as Paused: shaded "not measuring", never as loss.
 - A bucket whose results are all lost has no value: it draws as a loss mark, not as a line point.
 - A bucket with some losses draws its value, plus its loss (`graph-aggregate.md`, "Loss").
+- A provisional point is marked as such.
 - The part of the span before the first point is shaded as having no data.

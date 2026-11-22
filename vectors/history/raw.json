@@ -1,0 +1,33 @@
+{
+  "description": "What Raw keeps, and the Pause a kill leaves (history.md, Raw and Pauses)",
+  "kill": [
+    {
+      "expected": {
+        "begin": 1800000038.0,
+        "end": 1800000402.5
+      },
+      "launch": 1800000400.5,
+      "name": "after a kill, the Pause runs from the second after the newest Raw at to the end of the settle time after launch",
+      "newest_at": 1800000037,
+      "settle_s": 2.0
+    }
+  ],
+  "retention": [
+    {
+      "ats": [
+        1799992800,
+        1799992801,
+        1799999990,
+        1800000000
+      ],
+      "expected": [
+        1799992801,
+        1799999990,
+        1800000000
+      ],
+      "name": "Raw keeps at > now − raw_s",
+      "now": 1800000000,
+      "raw_s": 7200
+    }
+  ]
+}

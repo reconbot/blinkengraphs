@@ -1,6 +1,6 @@
 # Proposal: Raw, Archives and Pauses
 
-Graphs show gaps, false loss after a resume, and points that change value as they age. The cause is in the spec, not in one app. This proposal replaces the History model with an RRDtool-style one ([ADR 0001](adr/0001-rrd-style-history.md)) and plans each platform's move to it. No rule here is normative until it lands in `rules/` with vectors (`docs/sync.md`). Terms are in `CONTEXT.md`: Round, Pause, Raw, Archive, Row.
+Graphs show gaps, false loss after a resume, and points that change value as they age. The cause is in the spec, not in one app. This proposal replaces the History model with an RRDtool-style one ([ADR 0001](adr/0001-rrd-style-history.md)) and plans each platform's move to it. The rules are normative in `rules/`, with vectors; this doc keeps the review and the plan per platform. Terms are in `CONTEXT.md`: Round, Pause, Raw, Archive, Row.
 
 ## What goes wrong today
 
@@ -19,7 +19,7 @@ Reviewed at iOS `066eb9c`, Windows `2bbb58a` and macOS `2ed53ba`. iOS and Window
 - **Cut Rounds.** A Round whose timeout ends after a Pause began records nothing. Only a Round that ran its full timeout while measuring records a loss.
 - **Now, not newest.** Stats windows and Raw retention are measured back from now. Right after a Pause a Probe has no stats; readouts show "–" and the Verdict says measurements are resuming.
 - **Raw.** Every result and Sample, with its Link, kept on disk for 2 hours. Pauses and Link changes are kept beside them. How often Raw reaches disk is each platform's choice, at most 10 s apart and always when a Pause begins; on the next launch the unwritten stretch is a Pause.
-- **Archives.** Each Row is one step of one key, aligned to the Unix epoch, so days start at UTC midnight: `n`, `lost`, `sum`, `min`, `max`, the BG-LL5 histogram (`graph-aggregate.md`) and `paused_s`. It is written once its step has ended and every result for it has arrived, and never changes.
+- **Archives.** Each Row is one step of one key, aligned to the Unix epoch, so days start at UTC midnight: `n`, `lost`, `sum`, `min`, `max` and the BG-LL5 histogram (`graph-aggregate.md`). It is written once its step has ended and every result for it has arrived, and never changes. Each Archive also keeps every step's Paused seconds, since a Pause is machine-wide.
 
   | Source | Step | Kept | Built from | Serves |
   |---|---|---|---|---|
@@ -34,16 +34,16 @@ Reviewed at iOS `066eb9c`, Windows `2bbb58a` and macOS `2ed53ba`. iOS and Window
 - **All.** Draws A3, at most 240 points; when more Rows exist, adjacent Rows merge in fixed, epoch-aligned groups.
 - **Links.** Several Links can be active at once (Ethernet, Wi-Fi, a VPN; on iOS, Wi-Fi and cellular), on every platform. Each active Link runs the Probe Group on its own interface, and its Raw, Archives (through All), stats and baselines are kept per Link. Archives key a Link by interface and Gateway, so every Access Point behind one Gateway shares them; Raw records the Access Point too, for Access Point diagnosis. Throughput Metrics are recorded per Link's adapter; the other Metrics belong to the machine. Hop statistics are kept in Raw only, per Link, with no Archives. On iOS, a cellular Link that isn't the default route is measured only when the user turns it on in Settings, since it spends their data plan (about 5–10 MB an hour). Graphs show one line per Link by default ("1.1.1.1 · Wi-Fi"), with Link changes marked, and the user can pick one Link. The Verdict speaks for the Link carrying the default route; other Links show their state in the Panel only. A Probe is sent on a Link only if that Link routes its Target, so a split-tunnel VPN measures only Targets inside it; the rest record nothing, as for an unreachable IP version.
 
-## Rules and data to write
+## Rules and data
 
-One breaking spec release (`feat!:`), in a single PR:
+Landed together in one breaking spec release:
 
 1. **`rules/history.md`, rewritten:** Round timing kept; Pause, settle and cut Rounds; Raw; Archives and when a Row is written; range to source; Paused buckets; provisional edge; Link markers.
 2. **`rules/probe-stats.md`:** windows from now; a Probe is sent on a Link only if that Link routes its Target; a Probe with an empty window has no stats; Raw replaces "RAM".
-3. **`rules/graph-aggregate.md`:** "Per-minute storage" becomes the Row; add `paused_s` and its merge.
+3. **`rules/graph-aggregate.md`:** "Per-minute storage" becomes the Row. Paused seconds are kept per step beside the Rows, since a Pause is machine-wide.
 4. **`rules/verdict.md`:** the Verdict's input is the default-route Link's Probes. While the window is empty after a Pause: Ok `Paused` "Resuming measurements", so a resume never turns the Menu Icon amber or red.
 5. **`defaults.json`:** replace `history.ram_minutes` and `history.rollup_days` with `raw_minutes` (120) and the Archive table with its retention.
-6. **Vectors:** new `vectors/history/` (Pause and cut Rounds, settle, Row writing and merging, paused share, range to source, provisional edge, Link markers); `probe-stats` vectors gain `now`; `sketch` vectors gain `paused_s`. The vectors replaced are `history/{timing, minutes, ranges, buckets, steady}`.
+6. **Vectors:** `vectors/history/` gains `rounds`, `raw`, `rows`, `archives`, `graph-raw`, `graph-archive` and `graph-all`; `ranges` is rewritten; `minutes`, `buckets` and `steady` are gone. `probe-stats` vectors take `now` and `raw_s`; `ram-edge` becomes `raw-edge`, `empty` now has no stats, and `after-pause` and `resumed` are new. `verdict` gains `resuming`, `resuming-local-load` and `resumed-with-stats`.
 
 Process Snapshots and the Verdict's other rules don't change.
 

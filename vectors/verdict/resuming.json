@@ -1,0 +1,15 @@
+{
+  "expected": [
+    {
+      "domain": "Paused",
+      "headline": "Resuming measurements",
+      "severity": "Ok"
+    }
+  ],
+  "input": {
+    "probes": [],
+    "since_pause_s": 4,
+    "upload_peak_bps": 0.0
+  },
+  "name": "resuming"
+}

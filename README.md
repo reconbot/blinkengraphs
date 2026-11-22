@@ -47,7 +47,7 @@ The shared spec that keeps every platform consistent. It contains no app code.
 | [`rules/hop-trace.md`](rules/hop-trace.md) | Hop Trace sweeping and the hop table |
 | [`rules/defaults.md`](rules/defaults.md) | How a platform's overrides merge over `defaults.json` |
 | [`rules/history.md`](rules/history.md) | Probe timing, RAM retention, minute Rollups, graph ranges and buckets |
-| [`rules/graph-aggregate.md`](rules/graph-aggregate.md) | Per-minute histogram and p50/p95/p99/avg/max per graph bucket |
+| [`rules/graph-aggregate.md`](rules/graph-aggregate.md) | What a Row holds, and p50/p95/p99/avg/max per graph bucket |
 | [`rules/public-address.md`](rules/public-address.md) | The Public Address per IP version, from a DNS and an HTTPS lookup |
 | [`defaults.json`](defaults.json) | Shared defaults: Probe Group, intervals, timeouts and history lengths. Platforms override it per [`rules/defaults.md`](rules/defaults.md) |
 | [`vectors/verdict/`](vectors/verdict/) | Test vectors: inputs and the Findings each platform must produce |

@@ -141,11 +141,11 @@ The results and Samples exactly as measured, kept for the last two hours. Short 
 _Avoid_: RAM, recent buffer, live data
 
 **Archive**:
-History at one fixed step: one Row per step, for a fixed span. Each long graph range draws from exactly one Archive.
+History at one fixed step: one Row per step for each Metric and Probe, and how much of each step was Paused, for a fixed span. Each long graph range draws from exactly one Archive.
 _Avoid_: rollup, RRA, tier
 
 **Row**:
-The summary of one step of one Metric or Probe in an Archive: its count, losses, sum, min, max, a histogram for percentiles, and how much of the step was Paused. Written once, when its step ends, and never changed.
+The summary of one step of one Metric or Probe in an Archive: its count, losses, sum, min, max and a histogram for percentiles. Written once, when its step ends, and never changed.
 _Avoid_: rollup, bucket, minute, consolidated data point
 
 **Elevated Extras**:

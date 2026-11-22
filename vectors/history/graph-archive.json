@@ -1,0 +1,348 @@
+{
+  "aggregate": "p95",
+  "cases": [
+    {
+      "a1": [
+        {
+          "m": 1799913300,
+          "values": [
+            10.0,
+            31.0,
+            45.0
+          ]
+        },
+        {
+          "m": 1799913600,
+          "values": [
+            17.0,
+            38.0,
+            12.0
+          ]
+        },
+        {
+          "m": 1799913900,
+          "values": [
+            24.0,
+            45.0,
+            null
+          ]
+        },
+        {
+          "m": 1799999400,
+          "values": [
+            31.0,
+            12.0,
+            26.0
+          ]
+        },
+        {
+          "m": 1799999700,
+          "values": [
+            38.0,
+            19.0,
+            33.0
+          ]
+        }
+      ],
+      "a1_paused": [
+        {
+          "m": 1799956800,
+          "paused_s": 300.0
+        },
+        {
+          "m": 1799999100,
+          "paused_s": 100.0
+        }
+      ],
+      "expected": [
+        {
+          "at": 1799913600,
+          "loss": 0.0,
+          "provisional": false,
+          "state": "value",
+          "value": {
+            "bits": "40313f128cfc4a34",
+            "value": 17.246376811594203
+          }
+        },
+        {
+          "at": 1799913900,
+          "loss": 0.3333333333333333,
+          "provisional": false,
+          "state": "value",
+          "value": {
+            "bits": "40383f5717c0a8e8",
+            "value": 24.24742268041237
+          }
+        },
+        {
+          "at": 1799956800,
+          "loss": null,
+          "provisional": false,
+          "state": "paused",
+          "value": null
+        },
+        {
+          "at": 1799999400,
+          "loss": 0.0,
+          "provisional": false,
+          "state": "value",
+          "value": {
+            "bits": "403a3f63f63f63f6",
+            "value": 26.247619047619047
+          }
+        },
+        {
+          "at": 1799999700,
+          "loss": 0.0,
+          "provisional": false,
+          "state": "value",
+          "value": {
+            "bits": "4040bf0b7672a07a",
+            "value": 33.492537313432834
+          }
+        },
+        {
+          "at": 1800000000,
+          "loss": 0.0,
+          "provisional": true,
+          "state": "value",
+          "value": {
+            "bits": "4044000000000000",
+            "value": 40.0
+          }
+        }
+      ],
+      "name": "24h from A1: closed Rows, a Paused step, the oldest Row just outside the span, and the current step built from Raw",
+      "now": 1800000130,
+      "pauses": [],
+      "range": "24h",
+      "raw": [
+        {
+          "at": 1800000000,
+          "rtt_ms": 10.0
+        },
+        {
+          "at": 1800000010,
+          "rtt_ms": 40.0
+        },
+        {
+          "at": 1800000020,
+          "rtt_ms": 30.0
+        },
+        {
+          "at": 1800000030,
+          "rtt_ms": 20.0
+        },
+        {
+          "at": 1800000040,
+          "rtt_ms": 10.0
+        },
+        {
+          "at": 1800000050,
+          "rtt_ms": 40.0
+        },
+        {
+          "at": 1800000060,
+          "rtt_ms": 30.0
+        },
+        {
+          "at": 1800000070,
+          "rtt_ms": 20.0
+        },
+        {
+          "at": 1800000080,
+          "rtt_ms": 10.0
+        },
+        {
+          "at": 1800000090,
+          "rtt_ms": 40.0
+        },
+        {
+          "at": 1800000100,
+          "rtt_ms": 30.0
+        },
+        {
+          "at": 1800000110,
+          "rtt_ms": 20.0
+        },
+        {
+          "at": 1800000120,
+          "rtt_ms": 10.0
+        },
+        {
+          "at": 1800000130,
+          "rtt_ms": 40.0
+        }
+      ]
+    },
+    {
+      "a1": [
+        {
+          "m": 1800000000,
+          "values": [
+            40.0,
+            47.0
+          ]
+        },
+        {
+          "m": 1800000300,
+          "values": [
+            47.0,
+            14.0
+          ]
+        },
+        {
+          "m": 1800000600,
+          "values": [
+            14.0,
+            21.0
+          ]
+        }
+      ],
+      "a1_paused": [],
+      "a2": [
+        {
+          "m": 1799996400,
+          "values": [
+            17.0,
+            24.0,
+            31.0,
+            null
+          ]
+        },
+        {
+          "m": 1799992800,
+          "values": [
+            24.0,
+            31.0,
+            38.0,
+            null
+          ]
+        },
+        {
+          "m": 1799892000,
+          "values": [
+            20.0,
+            27.0,
+            34.0,
+            null
+          ]
+        },
+        {
+          "m": 1799398800,
+          "values": [
+            19.0,
+            26.0,
+            33.0,
+            null
+          ]
+        },
+        {
+          "m": 1799395200,
+          "values": [
+            26.0,
+            33.0,
+            40.0,
+            null
+          ]
+        }
+      ],
+      "a2_paused": [],
+      "expected": [
+        {
+          "at": 1799395200,
+          "loss": 0.25,
+          "provisional": false,
+          "state": "value",
+          "value": {
+            "bits": "4040bf0b7672a07a",
+            "value": 33.492537313432834
+          }
+        },
+        {
+          "at": 1799398800,
+          "loss": 0.25,
+          "provisional": false,
+          "state": "value",
+          "value": {
+            "bits": "403a3f63f63f63f6",
+            "value": 26.247619047619047
+          }
+        },
+        {
+          "at": 1799892000,
+          "loss": 0.25,
+          "provisional": false,
+          "state": "value",
+          "value": {
+            "bits": "403b3f69b02593f7",
+            "value": 27.24770642201835
+          }
+        },
+        {
+          "at": 1799992800,
+          "loss": 0.25,
+          "provisional": false,
+          "state": "value",
+          "value": {
+            "bits": "403f3f7ced916873",
+            "value": 31.248
+          }
+        },
+        {
+          "at": 1799996400,
+          "loss": 0.25,
+          "provisional": false,
+          "state": "value",
+          "value": {
+            "bits": "40383f5717c0a8e8",
+            "value": 24.24742268041237
+          }
+        },
+        {
+          "at": 1800000000,
+          "loss": 0.0,
+          "provisional": true,
+          "state": "value",
+          "value": {
+            "bits": "4047800000000000",
+            "value": 47.0
+          }
+        }
+      ],
+      "name": "7d from A2: the current hour merges its written A1 Rows and its unwritten step from Raw",
+      "now": 1800001000,
+      "pauses": [],
+      "range": "7d",
+      "raw": [
+        {
+          "at": 1800000900,
+          "rtt_ms": 30.0
+        },
+        {
+          "at": 1800000920,
+          "rtt_ms": 10.0
+        },
+        {
+          "at": 1800000940,
+          "rtt_ms": 30.0
+        },
+        {
+          "at": 1800000960,
+          "rtt_ms": 10.0
+        },
+        {
+          "at": 1800000980,
+          "rtt_ms": 30.0
+        },
+        {
+          "at": 1800001000,
+          "rtt_ms": 10.0
+        }
+      ]
+    }
+  ],
+  "description": "Graph points drawn from an Archive (history.md, Graph ranges and Drawing). Each Row is built from its values; the unfinished bucket is built from the Rows and Raw that exist, and is provisional. max_timeout_ms is 1000, so g = 2.",
+  "max_timeout_ms": 1000
+}

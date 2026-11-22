@@ -2,9 +2,9 @@
 
 What each point of a history graph shows when it covers several samples: p50, p95, p99, avg or max, chosen once for all graphs. The user picks it in Settings, starting at `defaults.json` `graph_aggregate` (`p95`: it shows the slow tail a median hides). A graph's legend names the aggregate it shows. `vectors/sketch/*.json` is the authority, and f64 results must match their `bits` exactly.
 
-## Per-minute storage
+## A Row
 
-For each key and minute, keep:
+A Row ([`history.md`](history.md), "Archives") summarises one key over one step:
 
 | Field | Definition |
 |---|---|
@@ -28,9 +28,9 @@ For each key and minute, keep:
 
 ## A graph bucket
 
-A bucket spans whole minutes from storage, or raw samples from the recent RAM history ([`history.md`](history.md), "Graph buckets").
+A bucket is the merge of Rows from one Archive, or the raw values from Raw ([`history.md`](history.md), "Graph ranges"). Its Paused state is in `history.md`; a Paused bucket shows no value or loss.
 
-- **Merge:** add `n`, `lost` and the histogram counts as integers; any order gives the same result. Add `sum` in ascending minute order. Take the min of `min` and the max of `max`.
+- **Merge:** add `n`, `lost` and the histogram counts as integers; any order gives the same result. Add `sum` in ascending step order. Take the min of `min` and the max of `max`.
 - **Loss:** `lost / (n + lost)`.
 - **avg:** `sum / n`.
 - **max:** `max`.
@@ -38,6 +38,6 @@ A bucket spans whole minutes from storage, or raw samples from the recent RAM hi
   1. `r = ⌊X · (n − 1) / 1000⌋` in integer arithmetic.
   2. If `r` is below the zero count, the value is 0.
   3. Otherwise walk the buckets upward. At the first bucket whose cumulative count exceeds `r`, the value is its representative, clamped to `[min, max]`.
-- **Raw samples:** use the same rank on the sorted values, with no histogram.
+- **Raw values:** `n`, `lost`, `min`, `max` and `sum` (in ascending `at` order, then arrival order) as above; pX uses the same rank on the sorted values, with no histogram.
 
 The Verdict and the per-Probe readouts do not use this. They follow `probe-stats.md` and each Probe's own window; readouts have their own choice of aggregate (`probe-stats.md`, "Readouts").

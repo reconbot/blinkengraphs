@@ -1,13 +1,9 @@
 {
-  "description": "No results",
-  "expected": {
-    "baseline_ms": null,
-    "jitter_ms": null,
-    "loss": 0.0,
-    "rtt_ms": null
-  },
+  "description": "No results in the window: the Probe has no stats",
+  "expected": null,
   "name": "empty",
-  "ram_s": 900,
+  "now": 1800000000,
+  "raw_s": 900,
   "results": [],
   "window_s": 30
 }
