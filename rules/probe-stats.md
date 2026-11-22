@@ -8,6 +8,8 @@ A Probe result is `(at, rtt_ms)`, where `at` is Unix seconds and `rtt_ms` is abs
 
 A `denied` result, where the OS refused to send the Probe (for example iOS Local Network Privacy blocking the Gateway), is not a loss. It is not recorded, so a denied Probe has no stats and is absent from the Verdict input. The platform says so outside the Verdict.
 
+A Probe whose Target's IP version the path can't reach is not sent and records nothing, like a denied one. IPv6 Targets need IPv6 on the path. IPv4 Targets need IPv4, native or translated (464XLAT, NAT64): on an IPv6-only path, an IPv4 send that fails at once for lack of a route marks IPv4 unreachable.
+
 While the OS reports no network path, platforms send no Probes and record nothing; the Verdict reports Offline instead ([`verdict.md`](verdict.md)).
 
 History keeps results for `ram_s` (15 min) behind the newest result of any kind; older ones are dropped.

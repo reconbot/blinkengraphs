@@ -33,7 +33,7 @@ _Avoid_: interface (overloaded), NIC
 ### Measuring the network
 
 **Target**:
-A host that blinkengraphs measures reachability to, such as the Gateway, 1.1.1.1, or 9.9.9.9.
+A host that blinkengraphs measures reachability to, such as the Gateway, 1.1.1.1, or 2606:4700:4700::1111. Each IP address Target has one IP version.
 _Avoid_: host, endpoint, server
 
 **Gateway**:

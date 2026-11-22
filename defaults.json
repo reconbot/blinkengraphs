@@ -47,6 +47,22 @@
       },
       {
         "dns": true,
+        "icmp": true,
+        "target": "2606:4700:4700::1111",
+        "tcp": 443,
+        "trace": true,
+        "udp": null
+      },
+      {
+        "dns": false,
+        "icmp": true,
+        "target": "2620:fe::fe",
+        "tcp": 443,
+        "trace": false,
+        "udp": null
+      },
+      {
+        "dns": true,
         "icmp": false,
         "target": "system-dns",
         "tcp": null,
