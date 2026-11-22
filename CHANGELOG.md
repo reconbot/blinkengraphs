@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.4.0](https://github.com/reconbot/blinkengraphs/compare/v1.3.0...v1.4.0) (2026-11-22)
+
+
+### Features
+
+* Hop names by reverse DNS, like mtr; hop_trace.reverse_dns default ([82291ff](https://github.com/reconbot/blinkengraphs/commit/82291ff99b443c5466b75c9e82375e6d0bd699ad))
+* IPv6 Targets in the shared defaults; per-family Verdict rule; skip a family the path can't reach ([f886dfb](https://github.com/reconbot/blinkengraphs/commit/f886dfb72f621a110ea750ea3793af744e760bad))
+* Offline Fault Domain; the Verdict reports it when no network path exists, and Probes pause ([d43be7e](https://github.com/reconbot/blinkengraphs/commit/d43be7e9f719968bc35aaa17a2e9dc4e11dfffd6))
+
 ## [1.3.0](https://github.com/reconbot/blinkengraphs/compare/v1.2.0...v1.3.0) (2026-11-22)
 
 
