@@ -27,7 +27,7 @@ How close the machine is to running out of committable memory, together with how
 _Avoid_: memory usage, RAM %
 
 **Followed Adapter**:
-The network adapter whose traffic the Network Section shows: either the one that currently carries the default route, or one the user pinned.
+The network adapter whose traffic the Network Section shows and whose Link the Verdict judges: either the one that currently carries the default route, or one the user pinned.
 _Avoid_: interface (overloaded), NIC
 
 ### Measuring the network

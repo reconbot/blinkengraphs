@@ -4,7 +4,7 @@ The Verdict is an ordered list of Findings, most severe first, and is never empt
 
 ## Input
 
-- **Probe stats** of the Link carrying the default route, per Probe, as defined in [`probe-stats.md`](probe-stats.md): `loss` (0–1), `rtt_ms`, `baseline_ms`, `jitter_ms`. Denied Probes, and Probes with an empty window, are absent. Other active Links show their state in the Panel, not in the Verdict.
+- **Probe stats** of the Followed Adapter's Link (`CONTEXT.md`): the Link carrying the default route, or the pinned adapter's when the user pinned one. Per Probe, as defined in [`probe-stats.md`](probe-stats.md): `loss` (0–1), `rtt_ms`, `baseline_ms`, `jitter_ms`. Denied Probes, and Probes with an empty window, are absent. Other active Links show their state in the Panel, not in the Verdict.
 - **The last Sample**, optional, holding the Metric values.
 - **`upload_peak_bps`**: the highest upload rate seen recently. It stands in for the link capacity, which is unknown.
 - **`path_up`**, optional, default `true`: whether the OS reports any usable network path. It is `false` in airplane mode, with every radio off, or with the cable out.
