@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0](https://github.com/reconbot/blinkengraphs/compare/v4.0.0...v5.0.0) (2026-11-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* every History vector is replaced, probe-stats vectors take now and raw_s, empty.json now expects no stats, and defaults.json history keys change.
+
+### Features
+
+* History is Raw plus fixed-step Archives; Pauses; stats from now; several Links ([14ba222](https://github.com/reconbot/blinkengraphs/commit/14ba22287e35c695a3b7821aa4fbba5725a6a158))
+
 ## [4.0.0](https://github.com/reconbot/blinkengraphs/compare/v3.0.0...v4.0.0) (2026-11-22)
 
 
