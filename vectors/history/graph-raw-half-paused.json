@@ -1,0 +1,65 @@
+{
+  "aggregate": "p95",
+  "cases": [
+    {
+      "expected": [
+        {
+          "at": 1799999990,
+          "loss": 0.0,
+          "provisional": false,
+          "state": "value",
+          "value": {
+            "bits": "4024000000000000",
+            "value": 10.0
+          }
+        },
+        {
+          "at": 1799999991,
+          "loss": 0.0,
+          "provisional": false,
+          "state": "value",
+          "value": {
+            "bits": "4034000000000000",
+            "value": 20.0
+          }
+        },
+        {
+          "at": 1799999993,
+          "loss": null,
+          "provisional": false,
+          "state": "paused",
+          "value": null
+        }
+      ],
+      "name": "1m from Raw: a bucket exactly half Paused draws its data; one over half is Paused despite its result",
+      "now": 1800000000,
+      "pauses": [
+        {
+          "begin": 1799999991.5,
+          "end": 1799999992.0
+        },
+        {
+          "begin": 1799999993.25,
+          "end": 1799999993.875
+        }
+      ],
+      "range": "1m",
+      "results": [
+        {
+          "at": 1799999990,
+          "rtt_ms": 10.0
+        },
+        {
+          "at": 1799999991,
+          "rtt_ms": 20.0
+        },
+        {
+          "at": 1799999993,
+          "rtt_ms": 30.0
+        }
+      ]
+    }
+  ],
+  "description": "A Raw bucket is Paused only when its Paused seconds exceed half its width (history.md, Graph ranges). graph-raw.json covers buckets mostly Paused; this covers one exactly half Paused, which still draws its data, beside one just over half. max_timeout_ms is 1000, so g = 2.",
+  "max_timeout_ms": 1000
+}
