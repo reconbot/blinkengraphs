@@ -1,6 +1,7 @@
 {
   "description": "Shared defaults for every platform. Each platform deep-merges its own defaults.override.json over this file (rules/defaults.md). Probe intervals are in ms; a Probe's timeout is min(interval, max_timeout_ms).",
   "appearance": "system",
+  "captive_portal_url": "http://cp.cloudflare.com/generate_204",
   "dns_query_name": "cloudflare.com",
   "graph_aggregate": "p95",
   "history": {
@@ -74,6 +75,12 @@
       }
     ],
     "trace_ms": 1000
+  },
+  "public_address": {
+    "dns_name": "whoami.cloudflare.com",
+    "dns_server": "ns3.cloudflare.com",
+    "https_url": "https://checkip.amazonaws.com",
+    "refresh_s": 300
   },
   "readout_aggregate": "p50",
   "system_interval_ms": 1000

@@ -9,6 +9,7 @@ The Verdict is an ordered list of Findings, most severe first, and is never empt
 - **`upload_peak_bps`**: the highest upload rate seen recently. It stands in for the link capacity, which is unknown.
 - **`path_up`**, optional, default `true`: whether the OS reports any usable network path. It is `false` in airplane mode, with every radio off, or with the cable out.
 - **`via_vpn`**, optional, default `false`: whether the traffic goes through a VPN tunnel, such as a VPN app or a Tailscale exit node.
+- **`captive_portal`**, optional, default `false`: whether a sign-in page holds back the internet. It is `true` when the OS reports a captive network, or when a plain-HTTP GET of `captive_portal_url` (`defaults.json`) answers with anything but status 204 and an empty body. Plain HTTP because a portal can intercept it but cannot answer HTTPS without a certificate error.
 
 ## Probe classes
 
@@ -35,6 +36,12 @@ When `path_up` is `false`, the only network Finding is Crit `Offline` "No networ
 | 5 | The worst Internet Probe has loss ≥ 5%, and every Internet Probe has loss ≥ 5% | `Isp` "Gateway OK, {target} losing {loss}: ISP problem", without "Gateway OK, " when there is no Gateway Probe. Crit when loss ≥ 20%, otherwise Warn. |
 | 6 | The worst Internet Probe has loss ≥ 5%, and another one has loss < 5% | Warn `Remote` "{bad} losing {loss}, {good} fine: problem is on their side" |
 | 7 | Otherwise: some Internet RTT > 3 × its baseline and more than 30 ms above it, while upload > 1 MB/s and ≥ 80% of `upload_peak_bps` | Warn `SelfSaturation` "Upload saturated ({upload}/s): {rtt} ms vs {baseline} ms normal" |
+
+## Captive Portal
+
+When `captive_portal` is `true`, after rules 1 and 2: Warn `CaptivePortal` "Sign-in page is blocking the internet". The family rules, rules 3–7 and the DNS rule don't run: a portal explains Internet loss and hijacked DNS. Rule 1 still stops evaluation first, because an unreachable Gateway can't serve a sign-in page.
+
+## IPv4 and IPv6
 
 Between rules 2 and 3, when Internet Probes of both families count:
 
