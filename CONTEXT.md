@@ -40,6 +40,18 @@ _Avoid_: host, endpoint, server
 The first-hop router on the Followed Adapter's default route.
 _Avoid_: router, default gateway IP
 
+**Wi-Fi Network**:
+Every Access Point that shares one network name and its credentials. A station's Wi-Fi is one Wi-Fi Network of many Access Points.
+_Avoid_: SSID (that is its name), hotspot
+
+**Access Point**:
+One radio of a Wi-Fi Network, identified by its BSSID. The Followed Adapter is joined to one Access Point at a time; several can sit behind one Gateway.
+_Avoid_: AP, BSSID (that is its identifier), router, base station
+
+**Avoided Access Point**:
+An Access Point the user chose to skip. Where the OS allows choosing, blinkengraphs joins another Access Point of the same Wi-Fi Network instead. It stays avoided until the user undoes it.
+_Avoid_: blocklist, banned AP
+
 **Probe**:
 One kind of reachability measurement against one Target, over one protocol: ICMP echo, TCP handshake to a port, UDP datagram to a port (a reply or port-unreachable counts as alive), or DNS query. A Probe yields a round-trip time, a loss, or `denied` when the OS refuses to send it (iOS and macOS Local Network Privacy). Denied is not a loss.
 _Avoid_: ping (only ICMP is a ping), check, test
@@ -67,7 +79,7 @@ The current Findings, most severe first; the top one is the headline, such as "G
 _Avoid_: diagnosis, alert, insight
 
 **Fault Domain**:
-Where the trouble is: Local Load, LAN, ISP, DNS, Remote, ICMP Filtering, or Self-Saturation (your own traffic filling the link).
+Where the trouble is: Local Load, LAN, Captive Portal (a sign-in page holding back the internet), ISP, DNS, Remote, ICMP Filtering, or Self-Saturation (your own traffic filling the link).
 _Avoid_: root cause, failure type
 
 **Process Snapshot**:
