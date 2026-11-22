@@ -35,12 +35,12 @@ A graph shows `[now − span, now]` in up to 240 points.
 
 ## Graph buckets
 
-Let `w = max(⌊span / 240⌋, 1)` seconds, and `c = ⌈first / 60⌉ × 60`, where *first* is the oldest RAM result of the key; with no RAM results, `c` is `now + 1`.
+Let `w = max(⌊span / 240⌋, 1)` seconds, and let `c` be where storage hands over to RAM: every minute before `c` has had its Minute written (see Minutes), and none from `c` on. Before any Minute is written, `c` is 0 and RAM serves everything.
 
 - **From storage:** Minutes with `now − span ≤ m + 59` and `m < c`, grouped into buckets of `W = ⌈w / 60⌉ × 60` seconds starting at `⌊m / W⌋ × W`, merged as in `graph-aggregate.md`.
 - **From RAM:** results with `max(now − span, c) ≤ at ≤ now`, grouped into buckets of `w` seconds starting at `⌊at / w⌋ × w`, ranked as raw samples.
 
-Buckets align to the Unix epoch, not to `now`. RAM results before `c` are left out: their minute comes from storage, so nothing is counted twice. A point's time is its bucket's start.
+Buckets align to the Unix epoch, not to `now`. RAM results before `c` are left out because their minutes come from storage, and results from `c` on are not yet in storage, so nothing is counted twice or missed. A point's time is its bucket's start.
 
 ## Drawing
 
