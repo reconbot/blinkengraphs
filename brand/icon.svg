@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <title>blinkengraphs</title>
+  <!-- Tile: tokens color.surface.background. Bars: color.section.cpu, memory, network. -->
+  <rect width="1024" height="1024" rx="224" fill="#12151c"/>
+  <rect x="144" y="475" width="192" height="405" rx="48" fill="#4fc3f7"/>
+  <rect x="416" y="144" width="192" height="736" rx="48" fill="#9ccc65"/>
+  <rect x="688" y="328" width="192" height="552" rx="48" fill="#7ab8ff"/>
+</svg>

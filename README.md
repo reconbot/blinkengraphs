@@ -39,6 +39,7 @@ The shared spec that keeps every platform consistent. It contains no app code.
 | [`vectors/defaults/`](vectors/defaults/) | Defaults and overrides → merged defaults |
 | [`vectors/sketch/`](vectors/sketch/) | Histogram index, encoding and merged aggregates |
 | [`vectors/meters/`](vectors/meters/) | Meter normalization vectors (network cube root, latency scale) |
+| [`brand/`](brand/) | The app icon (`icon.svg`) every platform renders its formats from |
 | [`tokens/`](tokens/) | Colors and thresholds in [W3C design-token](https://www.designtokens.org/) format |
 | [`fixtures/scenarios/`](fixtures/scenarios/) | Synthetic histories for screenshots and previews |
 | [`docs/sync.md`](docs/sync.md) | How a change flows through all four repos |
