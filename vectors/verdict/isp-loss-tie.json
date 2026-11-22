@@ -1,0 +1,50 @@
+{
+  "expected": [
+    {
+      "domain": "Isp",
+      "headline": "Gateway OK, 1.1.1.1 losing 23%: ISP problem",
+      "severity": "Crit"
+    }
+  ],
+  "input": {
+    "probes": [
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "gateway"
+        },
+        "stat": {
+          "baseline_ms": 2.0,
+          "jitter_ms": null,
+          "loss": 0.0,
+          "rtt_ms": 2.0
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 12.0,
+          "jitter_ms": null,
+          "loss": 0.231,
+          "rtt_ms": 90.0
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "9.9.9.9"
+        },
+        "stat": {
+          "baseline_ms": 14.0,
+          "jitter_ms": null,
+          "loss": 0.234,
+          "rtt_ms": 92.0
+        }
+      }
+    ]
+  },
+  "name": "isp-loss-tie"
+}
