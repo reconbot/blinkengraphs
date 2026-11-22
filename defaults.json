@@ -79,7 +79,8 @@
   "public_address": {
     "dns_name": "whoami.cloudflare.com",
     "dns_server": "ns3.cloudflare.com",
-    "https_url": "https://checkip.amazonaws.com",
+    "https_url_ipv4": "https://ipv4.icanhazip.com",
+    "https_url_ipv6": "https://ipv6.icanhazip.com",
     "refresh_s": 300
   },
   "readout_aggregate": "p95",
