@@ -1,0 +1,63 @@
+{
+  "cases": [
+    {
+      "durations_s": [
+        0.2,
+        0.3,
+        0.1,
+        0.4
+      ],
+      "expected": [
+        {
+          "at": 1800000000,
+          "start": 1800000000.4
+        },
+        {
+          "at": 1800000001,
+          "start": 1800000001.4
+        },
+        {
+          "at": 1800000002,
+          "start": 1800000002.4
+        },
+        {
+          "at": 1800000003,
+          "start": 1800000003.4
+        }
+      ],
+      "interval_s": 1.0,
+      "name": "rounds faster than the interval keep the beat",
+      "start": 1800000000.4
+    },
+    {
+      "durations_s": [
+        0.2,
+        2.5,
+        0.2,
+        0.2
+      ],
+      "expected": [
+        {
+          "at": 1800000000,
+          "start": 1800000000.4
+        },
+        {
+          "at": 1800000001,
+          "start": 1800000001.4
+        },
+        {
+          "at": 1800000003,
+          "start": 1800000003.9
+        },
+        {
+          "at": 1800000004,
+          "start": 1800000004.4
+        }
+      ],
+      "interval_s": 1.0,
+      "name": "a slow round delays only the next start; missed rounds are skipped",
+      "start": 1800000000.4
+    }
+  ],
+  "description": "Round start times at a fixed rate, and each round's at (history.md, Timing)"
+}

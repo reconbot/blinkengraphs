@@ -1,0 +1,30 @@
+{
+  "description": "With an even number of replies the median is the lower middle: index floor((n - 1) / 2)",
+  "expected": {
+    "baseline_ms": 10.0,
+    "jitter_ms": 20.0,
+    "loss": 0.0,
+    "rtt_ms": 20.0
+  },
+  "name": "even-count",
+  "ram_s": 900,
+  "results": [
+    {
+      "at": 1799999997,
+      "rtt_ms": 10.0
+    },
+    {
+      "at": 1799999998,
+      "rtt_ms": 40.0
+    },
+    {
+      "at": 1799999999,
+      "rtt_ms": 20.0
+    },
+    {
+      "at": 1800000000,
+      "rtt_ms": 30.0
+    }
+  ],
+  "window_s": 30
+}
