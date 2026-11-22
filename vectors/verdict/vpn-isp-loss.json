@@ -2,7 +2,7 @@
   "expected": [
     {
       "domain": "Vpn",
-      "headline": "8.8.8.8 losing 25% through VPN: VPN or its exit problem",
+      "headline": "1.1.1.1 losing 25% through VPN: VPN or its exit problem",
       "severity": "Crit"
     }
   ],

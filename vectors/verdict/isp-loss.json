@@ -2,7 +2,7 @@
   "expected": [
     {
       "domain": "Isp",
-      "headline": "Gateway OK, 8.8.8.8 losing 23%: ISP problem",
+      "headline": "Gateway OK, 1.1.1.1 losing 23%: ISP problem",
       "severity": "Crit"
     }
   ],

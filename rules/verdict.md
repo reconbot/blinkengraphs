@@ -54,6 +54,8 @@ When one fires, rules 3–7 consider only the working family's Probes, so a brok
 
 Rules 3–7 are exclusive: the first that matches wins.
 
+**Choosing the Probe a headline names.** "Worst" and "best" compare loss rounded to a whole percent, as it is shown. Among equals, the Probe that comes first in the input wins; platforms pass Probes in Probe Group order, so a tie names the Target listed first. Rule 6's `{good}` is the first Internet Probe with loss < 5%. Without this, two Probes losing the same shown amount name whichever is a fraction higher at that moment, and the headline flips between refreshes. `vectors/verdict/isp-loss-tie.json` covers the rounding.
+
 ## Through a VPN
 
 When `via_vpn` is `true`, the trouble the rules would place at the ISP or a ping filter sits in the tunnel or its exit, so these Findings change:
