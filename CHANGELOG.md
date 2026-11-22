@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.2.0](https://github.com/reconbot/blinkengraphs/compare/v5.1.0...v5.2.0) (2026-11-22)
+
+
+### Features
+
+* a platform may depart from the spec for its normal use (ADR 0002) ([#48](https://github.com/reconbot/blinkengraphs/issues/48)) ([aca3c9f](https://github.com/reconbot/blinkengraphs/commit/aca3c9f5fcfbbd9c93a2bcc95afa1d1228085ab9))
+
 ## [5.1.0](https://github.com/reconbot/blinkengraphs/compare/v5.0.0...v5.1.0) (2026-11-22)
 
 
