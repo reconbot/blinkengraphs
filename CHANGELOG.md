@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/reconbot/blinkengraphs/compare/v1.7.0...v2.0.0) (2026-11-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* history rules shared by every platform; one percentile rank; readouts default to p95
+
+### Features
+
+* history rules shared by every platform; one percentile rank; readouts default to p95 ([44758ff](https://github.com/reconbot/blinkengraphs/commit/44758ff5767d36a65ec32bcd21a00590c6823172))
+
+
+### Bug Fixes
+
+* a graph's seam is where written Minutes end, not the oldest RAM result ([6f7958e](https://github.com/reconbot/blinkengraphs/commit/6f7958e9f45d0b20be4bb0b33a3456ac23f8d8d9))
+
 ## [1.7.0](https://github.com/reconbot/blinkengraphs/compare/v1.6.0...v1.7.0) (2026-11-22)
 
 
