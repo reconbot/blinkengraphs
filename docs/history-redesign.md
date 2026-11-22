@@ -32,7 +32,7 @@ Reviewed at iOS `066eb9c`, Windows `2bbb58a` and macOS `2ed53ba`. iOS and Window
 - **Paused Rows.** A Row or graph bucket more than half Paused draws as Paused. Otherwise it draws its data, and its Paused share is still recorded.
 - **One source per range.** A graph draws closed buckets or Rows from its one source. The stretch after the last closed Row is built the same way from what exists so far, and marked provisional. Closed points never change; only the provisional edge moves.
 - **All.** Draws A3, at most 240 points; when more Rows exist, adjacent Rows merge in fixed, epoch-aligned groups.
-- **Links.** Graphs show every Link on one timeline, with a marker where the Link changed. Stats, baselines and the Verdict stay per Link. Rows are not split by Link.
+- **Links.** Several Links can be active at once (Ethernet, Wi-Fi, a VPN; on iOS, Wi-Fi and cellular), on every platform. Each active Link runs the Probe Group on its own interface, and its Raw, Archives (through All), stats and baselines are kept per Link. Graphs show the Links together by default, with Link changes marked, and the user can pick one Link.
 
 ## Rules and data to write
 
@@ -64,7 +64,8 @@ Each platform implements the release above and passes its vectors. Each plan is 
   - On launch, a Pause covers the time from the last Raw record to now.
   - Wrap the stop path in `beginBackgroundTask`, so the Pause record reaches disk.
 - **Stats:** windows from now; "–" and the resuming Finding after a Pause.
-- **Graphs:** one timeline across Links with markers; draw Paused buckets and the provisional edge; drop the per-minute line cache.
+- **Links:** run the Probe Group on each active Link, Wi-Fi and cellular included, by pinning each Probe's interface (`NWParameters.requiredInterface`). History, stats and baselines per Link.
+- **Graphs:** Links together by default with a Link picker; Link changes marked; Paused buckets and the provisional edge drawn; drop the per-minute line cache.
 - **ADRs:** supersede 0005 (graphs per Link), 0007 (daily JSON-lines Rollups), 0012 (backgrounding) and 0013 (path settle), each pointing to this proposal.
 
 ### Windows
@@ -76,6 +77,7 @@ Each platform implements the release above and passes its vectors. Each plan is 
   - In-flight Rounds that a Pause cut record nothing.
   - Hibernate and abrupt exits need nothing more, because Raw is already on disk.
 - **Stats:** windows from now (`history/src/lib.rs:330-333`).
+- **Links:** enumerate active adapters and run the Probe Group on each, sending from that interface (`IP_UNICAST_IF` for TCP/UDP/DNS, a source address with `IcmpSendEcho2Ex`/`Icmp6SendEcho2`). History, stats and baselines per Link; Panel graphs get a Link picker.
 - **Meters:** the tray meter draws by time, so a Pause shows as a Pause, not as old and new results side by side (`meters/src/lib.rs:27`).
 - **Conformance:** replace the `buckets` and `minutes` vectors in `tools/conformance` with the new set.
 - **ADR:** supersede the Minute and seam parts of ADR 0017.
@@ -88,6 +90,7 @@ Each platform implements the release above and passes its vectors. Each plan is 
   - NSWorkspace `willSleep`/`didWake` begin and end a Pause.
   - A dark wake (Power Nap) stays Paused.
   - `ProcessInfo.beginActivity` keeps App Nap from throttling Rounds while measuring.
+- **Links:** run the Probe Group on each active Link, as on iOS (`NWParameters.requiredInterface`).
 - **Spec pin:** pin the release that carries this proposal, and run its vectors in CI.
 
 ## Open questions
@@ -95,4 +98,7 @@ Each platform implements the release above and passes its vectors. Each plan is 
 - The resuming Finding's domain and severity.
 - `settle_s` default: 2 s is a guess, like iOS's 1 s. A device test of first-reply time after resume on Wi-Fi, cellular and VPN should set it.
 - Whether A3's day starts at UTC midnight (epoch-aligned, as written) or the user's local midnight.
-- Raw on disk at 1 s Rounds is about 100k results per 2 hours. Each platform should check write cost, especially iOS flash wear and battery.
+- How the default graph shows several Links together: one line per Link, or something else. Probe loss and latency from different Links don't combine into one meaningful number.
+- Which Link the Verdict speaks for when several are active: one Verdict per Link, or the default-route Link with others summarised.
+- A Link that routes only some destinations, such as a split-tunnel VPN: is a Probe sent on it only for Targets it routes, with the rest not sent rather than counted as loss?
+- Raw on disk at 1 s Rounds is about 100k results per 2 hours per Link. Each platform should check write cost, especially iOS flash wear and battery.
