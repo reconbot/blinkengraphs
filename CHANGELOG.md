@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/reconbot/blinkengraphs/compare/v1.2.0...v1.3.0) (2026-11-22)
+
+
+### Features
+
+* shared app icon in brand/icon.svg that every platform renders from ([4fd7a02](https://github.com/reconbot/blinkengraphs/commit/4fd7a02513f2806bb1ea3f6286d1f2dba43c3c78))
+
 ## [1.2.0](https://github.com/reconbot/blinkengraphs/compare/v1.1.0...v1.2.0) (2026-11-22)
 
 
