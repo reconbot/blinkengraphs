@@ -129,7 +129,7 @@ Every Sample, Probe result and Hop statistic kept for later viewing: recent Samp
 _Avoid_: log, timeline
 
 **Rollup**:
-A one-minute summary (min, mean, max, loss) of a Metric or Probe.
+A one-minute summary of a Metric or Probe: count, losses, sum, min, max and a histogram for percentiles ([`rules/graph-aggregate.md`](rules/graph-aggregate.md)). Written once its minute can get no more results ([`rules/history.md`](rules/history.md)).
 _Avoid_: aggregate, bucket
 
 **Elevated Extras**:

@@ -4,7 +4,7 @@
     "baseline_ms": 10.0,
     "jitter_ms": 1.0,
     "loss": 0.0,
-    "rtt_ms": 95.0
+    "rtt_ms": 94.0
   },
   "name": "congested",
   "ram_s": 900,

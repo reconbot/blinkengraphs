@@ -1,0 +1,35 @@
+{
+  "description": "Bucket widths per range (history.md, Graph buckets)",
+  "ranges": [
+    {
+      "ram_bucket_s": 1,
+      "range": "1m",
+      "span_s": 60,
+      "storage_bucket_s": 60
+    },
+    {
+      "ram_bucket_s": 3,
+      "range": "15m",
+      "span_s": 900,
+      "storage_bucket_s": 60
+    },
+    {
+      "ram_bucket_s": 15,
+      "range": "1h",
+      "span_s": 3600,
+      "storage_bucket_s": 60
+    },
+    {
+      "ram_bucket_s": 360,
+      "range": "24h",
+      "span_s": 86400,
+      "storage_bucket_s": 360
+    },
+    {
+      "ram_bucket_s": 2520,
+      "range": "7d",
+      "span_s": 604800,
+      "storage_bucket_s": 2520
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "cases": [
+    {
+      "arrivals": [
+        1800000058,
+        1800000059,
+        1800000060,
+        1800000061,
+        1800000062
+      ],
+      "expected": [
+        [],
+        [],
+        [],
+        [],
+        [
+          1800000000
+        ]
+      ],
+      "max_timeout_ms": 1000,
+      "name": "a minute is written once a result arrives g seconds after its end"
+    },
+    {
+      "arrivals": [
+        1800000059,
+        1800000061,
+        1800000059,
+        1800000062
+      ],
+      "expected": [
+        [],
+        [],
+        [],
+        [
+          1800000000
+        ]
+      ],
+      "max_timeout_ms": 1000,
+      "name": "a result stamped in a minute but arriving after the next minute began still counts"
+    }
+  ],
+  "description": "Which Minutes are written after each arriving result's at (history.md, Minutes); g = ceil(max_timeout_ms / 1000) + 1"
+}

@@ -28,7 +28,7 @@ For each key and minute, keep:
 
 ## A graph bucket
 
-A bucket spans whole minutes from storage, or raw samples from the recent RAM history.
+A bucket spans whole minutes from storage, or raw samples from the recent RAM history ([`history.md`](history.md), "Graph buckets").
 
 - **Merge:** add `n`, `lost` and the histogram counts as integers; any order gives the same result. Add `sum` in ascending minute order. Take the min of `min` and the max of `max`.
 - **Loss:** `lost / (n + lost)`.
