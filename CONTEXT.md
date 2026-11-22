@@ -40,6 +40,10 @@ _Avoid_: host, endpoint, server
 The first-hop router on the Followed Adapter's default route.
 _Avoid_: router, default gateway IP
 
+**Link**:
+The Followed Adapter's current attachment to a network: its interface, its Gateway, and its Access Point when known. Probe results and Hop statistics belong to the Link they were measured on.
+_Avoid_: connection (overloaded), network
+
 **Public Address**:
 The address the internet sees this machine as, one per IP version. Behind NAT it belongs to the router or the carrier, not the Followed Adapter.
 _Avoid_: external IP, WAN IP, my IP
