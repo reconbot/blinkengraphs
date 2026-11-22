@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.0](https://github.com/reconbot/blinkengraphs/compare/v5.0.0...v5.1.0) (2026-11-22)
+
+
+### Features
+
+* name a Link by its IPv4 Gateway, else its IPv6 one, else its interface alone ([e5b8cec](https://github.com/reconbot/blinkengraphs/commit/e5b8cecd86c9a501125d1b675b1f6e0f56f0af71))
+
 ## [5.0.0](https://github.com/reconbot/blinkengraphs/compare/v4.0.0...v5.0.0) (2026-11-22)
 
 
