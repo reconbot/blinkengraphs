@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/reconbot/blinkengraphs/compare/v1.5.0...v1.6.0) (2026-11-22)
+
+
+### Features
+
+* light palette in tokens; the spec authors all its files, no platform generates them ([8900e73](https://github.com/reconbot/blinkengraphs/commit/8900e735841db92cf8880f563eb0eefb71f80924))
+
 ## [1.5.0](https://github.com/reconbot/blinkengraphs/compare/v1.4.0...v1.5.0) (2026-11-22)
 
 
