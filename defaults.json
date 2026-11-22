@@ -75,5 +75,6 @@
     ],
     "trace_ms": 1000
   },
+  "readout_aggregate": "p50",
   "system_interval_ms": 1000
 }
