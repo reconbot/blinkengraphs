@@ -1,5 +1,6 @@
 {
   "description": "Shared defaults for every platform. Each platform deep-merges its own defaults.override.json over this file (rules/defaults.md). Probe intervals are in ms; a Probe's timeout is min(interval, max_timeout_ms).",
+  "appearance": "system",
   "dns_query_name": "cloudflare.com",
   "history": {
     "ram_minutes": 15,

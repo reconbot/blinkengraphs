@@ -120,6 +120,10 @@ _Avoid_: tray button
 The detail window that opens from any Meter or the hotkey. It shows the Verdict, history graphs, Hop Traces, and the Process Snapshot.
 _Avoid_: popup, dashboard, flyout
 
+**Appearance**:
+The light or dark color set every Surface and the Panel draw with. The user picks System (the default: follow the OS), Light or Dark in Settings. Labeled "Theme" in Settings.
+_Avoid_: theme (except as the Settings label), mode, skin
+
 **History**:
 Every Sample, Probe result and Hop statistic kept for later viewing: recent Samples at full resolution in memory, older ones as Rollups on disk.
 _Avoid_: log, timeline
