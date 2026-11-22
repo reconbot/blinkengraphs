@@ -15,7 +15,7 @@ Reviewed at iOS `066eb9c`, Windows `2bbb58a` and macOS `2ed53ba`. iOS and Window
 
 ## Agreed behaviour
 
-- **Pause.** Time not measured is a Pause, whatever the reason: suspended, asleep, killed, not yet started, or resting while idle. A Pause lasts until `settle_s` after measuring resumes. It is not loss and not Offline. Whether to rest while idle stays each platform's choice.
+- **Pause.** Time not measured is a Pause, whatever the reason: suspended, asleep, killed, not yet started, or resting while idle. A Pause lasts until `settle_s` after measuring resumes. It is not loss and not Offline. Each desktop platform offers a Setting for resting while idle (display off, locked, screen saver); its default is the platform's, recorded in an ADR.
 - **Cut Rounds.** A Round whose timeout ends after a Pause began records nothing. Only a Round that ran its full timeout while measuring records a loss.
 - **Now, not newest.** Stats windows and Raw retention are measured back from now. Right after a Pause a Probe has no stats; readouts show "–" and the Verdict says measurements are resuming.
 - **Raw.** Every result and Sample, with its Link, kept on disk for 2 hours. Pauses and Link changes are kept beside them. How often Raw reaches disk is each platform's choice, at most 10 s apart and always when a Pause begins; on the next launch the unwritten stretch is a Pause.
@@ -32,7 +32,7 @@ Reviewed at iOS `066eb9c`, Windows `2bbb58a` and macOS `2ed53ba`. iOS and Window
 - **Paused Rows.** A Row or graph bucket more than half Paused draws as Paused. Otherwise it draws its data, and its Paused share is still recorded.
 - **One source per range.** A graph draws closed buckets or Rows from its one source, one point per Row: 288 on 24h and 168 on 7d. Ranges drawn from Raw keep today's bucket widths: 1 s, 3 s and 15 s. The stretch after the last closed Row is built the same way from what exists so far, and marked provisional. Closed points never change; only the provisional edge moves.
 - **All.** Draws A3, at most 240 points; when more Rows exist, adjacent Rows merge in fixed, epoch-aligned groups.
-- **Links.** Several Links can be active at once (Ethernet, Wi-Fi, a VPN; on iOS, Wi-Fi and cellular), on every platform. Each active Link runs the Probe Group on its own interface, and its Raw, Archives (through All), stats and baselines are kept per Link. Archives key a Link by interface and Gateway, so every Access Point behind one Gateway shares them; Raw records the Access Point too, for Access Point diagnosis. Throughput Metrics are recorded per Link's adapter; the other Metrics belong to the machine. Hop statistics are kept in Raw only, per Link, with no Archives. Graphs show one line per Link by default ("1.1.1.1 · Wi-Fi"), with Link changes marked, and the user can pick one Link. The Verdict speaks for the Link carrying the default route; other Links show their state in the Panel only. A Probe is sent on a Link only if that Link routes its Target, so a split-tunnel VPN measures only Targets inside it; the rest record nothing, as for an unreachable IP version.
+- **Links.** Several Links can be active at once (Ethernet, Wi-Fi, a VPN; on iOS, Wi-Fi and cellular), on every platform. Each active Link runs the Probe Group on its own interface, and its Raw, Archives (through All), stats and baselines are kept per Link. Archives key a Link by interface and Gateway, so every Access Point behind one Gateway shares them; Raw records the Access Point too, for Access Point diagnosis. Throughput Metrics are recorded per Link's adapter; the other Metrics belong to the machine. Hop statistics are kept in Raw only, per Link, with no Archives. On iOS, a cellular Link that isn't the default route is measured only when the user turns it on in Settings, since it spends their data plan (about 5–10 MB an hour). Graphs show one line per Link by default ("1.1.1.1 · Wi-Fi"), with Link changes marked, and the user can pick one Link. The Verdict speaks for the Link carrying the default route; other Links show their state in the Panel only. A Probe is sent on a Link only if that Link routes its Target, so a split-tunnel VPN measures only Targets inside it; the rest record nothing, as for an unreachable IP version.
 
 ## Rules and data to write
 
@@ -64,7 +64,7 @@ Each platform implements the release above and passes its vectors. Each plan is 
   - On launch, a Pause covers the time from the last Raw record to now.
   - Wrap the stop path in `beginBackgroundTask`, so the Pause record reaches disk.
 - **Stats:** windows from now; "–" and the resuming Finding after a Pause.
-- **Links:** run the Probe Group on each active Link, Wi-Fi and cellular included, by pinning each Probe's interface (`NWParameters.requiredInterface`). History, stats and baselines per Link.
+- **Links:** run the Probe Group on each active Link; cellular, when Wi-Fi carries the default route, only with the user's opt-in in Settings, by pinning each Probe's interface (`NWParameters.requiredInterface`). History, stats and baselines per Link.
 - **Graphs:** Links together by default with a Link picker; Link changes marked; Paused buckets and the provisional edge drawn; drop the per-minute line cache.
 - **ADRs:** supersede 0005 (graphs per Link), 0007 (daily JSON-lines Rollups), 0012 (backgrounding) and 0013 (path settle), each pointing to this proposal.
 
@@ -72,6 +72,7 @@ Each platform implements the release above and passes its vectors. Each plan is 
 
 - **`history` crate:** split the 1111-line `lib.rs` into Raw (SQLite tables for results, Pauses and Link changes), the Archive writer and the range reader. Keep the `History::series` and `record_*` surface, which `panel`, `meters`, `config` and the app use.
 - **Lifecycle:**
+  - A Setting for resting while idle, defaulting to today's behaviour.
   - `RegisterSuspendResumeNotification` (or `WM_POWERBROADCAST`) begins and ends a Pause.
   - The existing display-off, lock and screen-saver rest (`win.rs:657-680`) also records a Pause.
   - In-flight Rounds that a Pause cut record nothing.
@@ -89,6 +90,7 @@ Each platform implements the release above and passes its vectors. Each plan is 
 - **Lifecycle:**
   - NSWorkspace `willSleep`/`didWake` begin and end a Pause.
   - A dark wake (Power Nap) stays Paused.
+  - A Setting for resting while idle; its default in an ADR.
   - `ProcessInfo.beginActivity` keeps App Nap from throttling Rounds while measuring.
 - **Links:** run the Probe Group on each active Link, as on iOS (`NWParameters.requiredInterface`).
 - **Spec pin:** pin the release that carries this proposal, and run its vectors in CI.
