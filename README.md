@@ -30,11 +30,13 @@ The shared spec that keeps every platform consistent. It contains no app code.
 | [`rules/verdict.md`](rules/verdict.md) | The Verdict rules |
 | [`rules/probe-stats.md`](rules/probe-stats.md) | Loss, RTT, baseline and jitter from raw Probe results |
 | [`rules/hop-trace.md`](rules/hop-trace.md) | Hop Trace sweeping and the hop table |
+| [`rules/defaults.md`](rules/defaults.md) | How a platform's overrides merge over `defaults.json` |
 | [`rules/graph-aggregate.md`](rules/graph-aggregate.md) | Per-minute histogram and p50/p95/p99/avg/max per graph bucket |
-| [`defaults.json`](defaults.json) | Default Probe Group, intervals, timeouts and history lengths |
+| [`defaults.json`](defaults.json) | Shared defaults: Probe Group, intervals, timeouts and history lengths. Platforms override it per [`rules/defaults.md`](rules/defaults.md) |
 | [`vectors/verdict/`](vectors/verdict/) | Test vectors: inputs and the Findings each platform must produce |
 | [`vectors/probe-stats/`](vectors/probe-stats/) | Raw results → Probe stats |
 | [`vectors/hop-trace/`](vectors/hop-trace/) | Hop results → hop table |
+| [`vectors/defaults/`](vectors/defaults/) | Defaults and overrides → merged defaults |
 | [`vectors/sketch/`](vectors/sketch/) | Histogram index, encoding and merged aggregates |
 | [`vectors/meters/`](vectors/meters/) | Meter normalization vectors (network cube root, latency scale) |
 | [`tokens/`](tokens/) | Colors and thresholds in [W3C design-token](https://www.designtokens.org/) format |
@@ -46,7 +48,7 @@ The shared spec that keeps every platform consistent. It contains no app code.
 
 Platform repos pin a tagged version of this spec and run its vectors in CI. Versions are cut by release-please from Conventional Commits: a breaking rule change is a major version. A rule change is a PR here plus one PR per platform.
 
-The vectors are generated from the Windows reference implementation: `cargo run -p vectors -- <path to this repo>` in blinkengraphs-win.
+The vectors, fixtures and tokens are generated from the Windows reference implementation: `cargo run -p vectors -- <path to this repo>` in blinkengraphs-win.
 
 ## License
 
