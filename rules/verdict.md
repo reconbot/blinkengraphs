@@ -17,6 +17,8 @@ The Verdict is an ordered list of Findings, most severe first, and is never empt
 
 A Gateway or Internet Probe only counts once it has a baseline or has recorded loss.
 
+An Internet Probe's **family** is its Target's IP version: IPv4 or IPv6.
+
 ## Offline
 
 When `path_up` is `false`, the only network Finding is Crit `Offline` "No network connection". No network rule and no DNS rule runs; the Local rules still do.
@@ -32,6 +34,15 @@ When `path_up` is `false`, the only network Finding is Crit `Offline` "No networ
 | 5 | The worst Internet Probe has loss ≥ 5%, and every Internet Probe has loss ≥ 5% | `Isp` "Gateway OK, {target} losing {loss}: ISP problem", without "Gateway OK, " when there is no Gateway Probe. Crit when loss ≥ 20%, otherwise Warn. |
 | 6 | The worst Internet Probe has loss ≥ 5%, and another one has loss < 5% | Warn `Remote` "{bad} losing {loss}, {good} fine: problem is on their side" |
 | 7 | Otherwise: some Internet RTT > 3 × its baseline and more than 30 ms above it, while upload > 1 MB/s and ≥ 80% of `upload_peak_bps` | Warn `SelfSaturation` "Upload saturated ({upload}/s): {rtt} ms vs {baseline} ms normal" |
+
+Between rules 2 and 3, when Internet Probes of both families count:
+
+| Condition | Finding |
+|---|---|
+| Best IPv6 loss ≥ 50% and some IPv4 loss < 5% | Warn `Isp` "IPv6 broken; IPv4 works: ISP or router IPv6 problem" |
+| Otherwise, best IPv4 loss ≥ 50% and some IPv6 loss < 5% | Crit `Isp` "IPv4 broken; IPv6 works: ISP or router IPv4 problem" |
+
+When one fires, rules 3–7 consider only the working family's Probes, so a broken family never reads as a remote host's problem.
 
 Rules 3–7 are exclusive: the first that matches wins.
 
