@@ -68,6 +68,10 @@ _Avoid_: ping (only ICMP is a ping), check, test
 A named table of Targets and what to measure on each: ICMP, a TCP port, a UDP port, DNS, Hop Trace. Latency, DNS and Hop Traces each run on their own interval. Every config starts with one group, "Default".
 _Avoid_: schedule, batch
 
+**Round**:
+One firing of a Probe Group's Probes, all stamped with the instant it started. A Round cut short by a Pause records nothing: only a Round that ran its full timeout while measuring can record a loss.
+_Avoid_: tick, cycle, poll
+
 **Hop Trace**:
 A continuous traceroute towards a Target that keeps latency and loss for every Hop, in the style of mtr.
 _Avoid_: traceroute (implies one-shot), mtr (name of a tool)
@@ -123,6 +127,10 @@ _Avoid_: popup, dashboard, flyout
 **Appearance**:
 The light or dark color set every Surface and the Panel draw with. The user picks System (the default: follow the OS), Light or Dark in Settings. Labeled "Theme" in Settings.
 _Avoid_: theme (except as the Settings label), mode, skin
+
+**Pause**:
+A stretch of time when blinkengraphs was not measuring: the app suspended, the machine asleep, the process killed or not yet started. A Pause is not loss and not Offline (Offline is measured: no network path); History shows it as its own state.
+_Avoid_: gap, sleep, downtime, outage
 
 **History**:
 Every Sample, Probe result and Hop statistic kept for later viewing: recent Samples at full resolution in memory, older ones as Rollups on disk.
