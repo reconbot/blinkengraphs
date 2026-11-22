@@ -129,16 +129,24 @@ The light or dark color set every Surface and the Panel draw with. The user pick
 _Avoid_: theme (except as the Settings label), mode, skin
 
 **Pause**:
-A stretch of time when blinkengraphs was not measuring: the app suspended, the machine asleep, the process killed or not yet started. A Pause is not loss and not Offline (Offline is measured: no network path); History shows it as its own state.
+A stretch of time when blinkengraphs was not measuring: the app suspended or choosing to rest while the machine is idle, the machine asleep, the process killed or not yet started. It lasts until a settle time after measuring resumes, so Probes sent before the network is usable again are not counted. A Pause is not loss and not Offline (Offline is measured: no network path); History shows it as its own state.
 _Avoid_: gap, sleep, downtime, outage
 
 **History**:
-Every Sample, Probe result and Hop statistic kept for later viewing: recent Samples at full resolution in memory, older ones as Rollups on disk.
+Every Sample, Probe result and Hop statistic kept for later viewing: Raw for the recent past, Archives beyond it.
 _Avoid_: log, timeline
 
-**Rollup**:
-A one-minute summary of a Metric or Probe: count, losses, sum, min, max and a histogram for percentiles ([`rules/graph-aggregate.md`](rules/graph-aggregate.md)). Written once its minute can get no more results ([`rules/history.md`](rules/history.md)).
-_Avoid_: aggregate, bucket
+**Raw**:
+The results and Samples exactly as measured, kept for the last two hours. Short graph ranges draw from Raw.
+_Avoid_: RAM, recent buffer, live data
+
+**Archive**:
+History at one fixed step: one Row per step, for a fixed span. Each long graph range draws from exactly one Archive.
+_Avoid_: rollup, RRA, tier
+
+**Row**:
+The summary of one step of one Metric or Probe in an Archive: its count, losses, sum, min, max, a histogram for percentiles, and how much of the step was Paused. Written once, when its step ends, and never changed.
+_Avoid_: rollup, bucket, minute, consolidated data point
 
 **Elevated Extras**:
 Measurements that need privileges the app itself never has: bytes per process on the network, and UDP Hop Traces. Both come from an optional LocalSystem companion service.
