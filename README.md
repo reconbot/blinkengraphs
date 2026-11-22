@@ -40,6 +40,7 @@ The shared spec that keeps every platform consistent. It contains no app code.
 | [`tokens/`](tokens/) | Colors and thresholds in [W3C design-token](https://www.designtokens.org/) format |
 | [`fixtures/scenarios/`](fixtures/scenarios/) | Synthetic histories for screenshots and previews |
 | [`docs/sync.md`](docs/sync.md) | How a change flows through all four repos |
+| [`docs/public-address.md`](docs/public-address.md) | Proposal: showing the Public Address for IPv4 and IPv6 |
 | [`docs/access-points.md`](docs/access-points.md) | Proposal: diagnosing and avoiding failing Access Points |
 | [`docs/cross-platform.md`](docs/cross-platform.md) | Why each platform is native and they share a spec instead of code |
 
