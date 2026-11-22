@@ -5,7 +5,7 @@ The Verdict is an ordered list of Findings, most severe first, and is never empt
 ## Input
 
 - **Probe stats** of the Followed Adapter's Link (`CONTEXT.md`): the Link carrying the default route, or the pinned adapter's when the user pinned one. Per Probe, as defined in [`probe-stats.md`](probe-stats.md): `loss` (0–1), `rtt_ms`, `baseline_ms`, `jitter_ms`. Denied Probes, and Probes with an empty window, are absent. Other active Links show their state in the Panel, not in the Verdict.
-- **The last Sample**, optional, holding the Metric values.
+- **The last Sample**, optional: the Metrics the Local rules read, and `NetUp` and `NetDown` in bytes/s. A vector's Sample holds only these.
 - **`upload_peak_bps`**: the highest upload rate seen recently. It stands in for the link capacity, which is unknown.
 - **`path_up`**, optional, default `true`: whether the OS reports any usable network path. It is `false` in airplane mode, with every radio off, or with the cable out.
 - **`via_vpn`**, optional, default `false`: whether the traffic goes through a VPN tunnel, such as a VPN app or a Tailscale exit node.
@@ -79,14 +79,21 @@ The other rules are unchanged.
 
 ## Local rules
 
+They read the last Sample's Metrics (`CONTEXT.md`), which have the same meaning on every platform:
+
+- **`CpuBusy`**: the non-idle share of all logical CPUs, in %.
+- **`MemPressure`**: the Memory Pressure level, `normal`, `warn` or `critical`, as the OS judges it. A platform whose OS reports no level derives it: on Windows, commit charge ≥ 90% of the commit limit is `critical`, otherwise `normal`.
+- **`MemPageIns`**: bytes read from disk into memory per second, swap and mapped files included. Decompressing in-memory pages is not a page-in.
+- **`Disks`**: per physical disk, **`DiskBusy`**, the share of time with at least one request in flight, in %, and **`DiskResponse`**, the mean time per completed request, in ms. A platform that can only measure the mean number of requests in flight uses that, capped at 100%.
+
 | Condition | Finding |
 |---|---|
-| CPU total ≥ 90% | Crit `LocalLoad` "CPU pinned at {cpu}%" |
-| Commit ≥ 90% | Crit `LocalLoad` "Memory nearly exhausted: commit {commit}%" |
-| Otherwise, hard faults ≥ 1000/s | Warn `LocalLoad` "Paging heavily: {faults} hard faults/s" |
-| Disk active ≥ 90% and response ≥ 50 ms | Warn `LocalLoad` "Disk saturated: {active}% busy, {ms} ms response" |
+| `CpuBusy` ≥ 90% | Crit `LocalLoad` "CPU pinned at {cpu}%" |
+| `MemPressure` is `critical` | Crit `LocalLoad` "Memory nearly exhausted" |
+| Otherwise, `MemPageIns` ≥ 4 096 000 B/s | Warn `LocalLoad` "Paging heavily: {rate}/s from disk" |
+| Some disk has `DiskBusy` ≥ 90% and `DiskResponse` ≥ 50 ms | Warn `LocalLoad` "Disk saturated: {busy}% busy, {ms} ms response", for the busiest such disk; on a tie, the first listed |
 
-Local Metric names follow Windows (commit charge, hard faults). Other platforms map them to their nearest equivalent. Pending: platform-neutral Metric names ([cross-platform proposal](../docs/cross-platform.md#spec-changes-needed-before-a-second-platform)).
+`MemPressure` `warn` raises no Finding. The paging threshold is 1000 pages/s of 4 KiB.
 
 ## Formatting
 

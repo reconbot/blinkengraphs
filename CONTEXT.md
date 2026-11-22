@@ -11,7 +11,7 @@ One of the five things blinkengraphs watches: CPU, Memory, Network, Disk, Latenc
 _Avoid_: category, widget, module
 
 **Metric**:
-One named series of numbers within a Section, such as CPU total, commit charge, or download throughput.
+One named series of numbers within a Section, such as CPU busy, page-ins, or download throughput. A Metric means the same on every platform; each platform maps its own counters to it.
 _Avoid_: counter, stat, sensor
 
 **Readout**:
@@ -23,7 +23,7 @@ The values of every enabled Metric at one instant.
 _Avoid_: reading, tick, datapoint
 
 **Memory Pressure**:
-How close the machine is to running out of committable memory, together with how hard it is paging. It is not "% of RAM used."
+How close the machine is to running out of memory, as a level the OS judges: normal, warn or critical. It is not "% of RAM used", and not paging, which is its own Metric.
 _Avoid_: memory usage, RAM %
 
 **Followed Adapter**:

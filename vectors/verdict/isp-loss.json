@@ -94,19 +94,16 @@
       }
     ],
     "sample": {
-      "CpuKernel": 2.93,
-      "CpuQueue": 0.0,
-      "CpuTotal": 16.27,
-      "DiskActive": 3.0,
-      "DiskQueue": 0.12,
-      "DiskRead": 2399999.95,
-      "DiskResponse": 1.8,
-      "DiskWrite": 899999.98,
-      "MemCommit": 45.0,
-      "MemHardFaults": 20.0,
-      "MemPhysical": 40.5,
+      "CpuBusy": 16.27,
+      "Disks": [
+        {
+          "DiskBusy": 3.0,
+          "DiskResponse": 1.8
+        }
+      ],
+      "MemPageIns": 81920.0,
+      "MemPressure": "normal",
       "NetDown": 1562.5,
-      "NetErrors": 0.0,
       "NetUp": 98.84
     },
     "upload_peak_bps": 1521.0

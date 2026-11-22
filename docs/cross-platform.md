@@ -54,7 +54,7 @@ Precedent for test vectors shared across languages: the JSON Schema Test Suite, 
 
 ## Spec changes needed before a second platform
 
-1. **Platform-neutral Metrics in the spec.** Name the concept ("memory pressure", "disk busy"). Map each platform's counters to it in that platform's repo. Open; macOS needs it, iOS doesn't (no local Metrics).
+1. ~~**Platform-neutral Metrics in the spec.**~~ Done: [`rules/verdict.md`](../rules/verdict.md#local-rules), evidence in [`local-metrics.md`](local-metrics.md).
 2. ~~**A `denied` Probe outcome**, distinct from loss.~~ Done: [`rules/probe-stats.md`](../rules/probe-stats.md).
 3. ~~**Verdict input as data.**~~ Done: the vectors' `input`, built from [`rules/probe-stats.md`](../rules/probe-stats.md).
 
