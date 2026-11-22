@@ -2,7 +2,7 @@
 
 Vocabulary `CONTEXT.md`, rules `rules/`, conformance data `vectors/`, defaults `defaults.json`, design tokens `tokens/`, app icon `brand/icon.svg` (hand-edited; platforms render their formats from it), preview data `fixtures/`, decisions `docs/`. No app code lives here.
 
-Every file here is authored here; no platform repo owns or generates any of it. A rule change lands here first, prose in `rules/` and its vectors together; each platform then implements it and passes the vectors.
+Every file here is authored here; no platform repo owns or generates any of it. A rule change lands here first, prose in `rules/` and its vectors together; each platform then implements it and passes the vectors. A platform may depart from a rule where its normal use calls for it, recorded in its own ADR ([ADR 0002](docs/adr/0002-platforms-may-depart-for-their-normal-use.md)).
 
 `defaults.json` is hand-edited here and is the source every platform embeds; each platform deep-merges its own `defaults.override.json` over it (`rules/defaults.md`).
 
