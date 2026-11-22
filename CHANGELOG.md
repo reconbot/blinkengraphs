@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.7.0](https://github.com/reconbot/blinkengraphs/compare/v1.6.0...v1.7.0) (2026-11-22)
+
+
+### Features
+
+* Appearance (System, Light or Dark) chosen in Settings; defaults.json appearance ([6636510](https://github.com/reconbot/blinkengraphs/commit/66365108a222282b46d8f925fac0d0b226ec053a))
+* Captive Portal Finding and Public Address reading, with vectors; their hosts in defaults.json ([783e3be](https://github.com/reconbot/blinkengraphs/commit/783e3be399514e968bc2e95b800bbcd8b0c3e29a))
+* graph aggregate defaults to p95 and is chosen in Settings ([d90e03d](https://github.com/reconbot/blinkengraphs/commit/d90e03d50f7443d07d4b8f49d48df502699663a7))
+* Probe readouts show a chosen aggregate of their window, default p50; the Verdict keeps rtt_ms ([53b59f0](https://github.com/reconbot/blinkengraphs/commit/53b59f00178757520e63df15a73c7a6c4b77039c))
+
 ## [1.6.0](https://github.com/reconbot/blinkengraphs/compare/v1.5.0...v1.6.0) (2026-11-22)
 
 
