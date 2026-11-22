@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.0.0](https://github.com/reconbot/blinkengraphs/compare/v3.0.0...v4.0.0) (2026-11-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* isp-loss and vpn-isp-loss now expect 1.1.1.1 instead of 8.8.8.8. New vector isp-loss-tie covers the rounding.
+
+### Features
+
+* a tie for worst Internet Probe goes to the first in Probe Group order ([7b7fcfb](https://github.com/reconbot/blinkengraphs/commit/7b7fcfbda45cda58217637ed0f5f48e88704a570))
+
+
+### Bug Fixes
+
+* RAM serves every whole minute it holds; storage hands over where RAM ends ([872ba15](https://github.com/reconbot/blinkengraphs/commit/872ba15093b51ac051a752f29a06b89151779315))
+
 ## [3.0.0](https://github.com/reconbot/blinkengraphs/compare/v2.0.0...v3.0.0) (2026-11-22)
 
 
