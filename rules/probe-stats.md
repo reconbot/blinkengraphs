@@ -6,6 +6,8 @@ How each platform turns a Probe's results into the stats the Verdict and the Pan
 
 A Probe result is `(at, rtt_ms)`, where `at` is its round's whole Unix second ([`history.md`](history.md), "Timing") and `rtt_ms` is absent when the Probe got no reply before its timeout. The timeout is `min(interval, max_timeout_ms)` from `defaults.json`.
 
+`rtt_ms` is a whole number of milliseconds: the measured round trip `d`, in milliseconds, recorded as `⌊d + 0.5⌋`. A reply faster than 0.5 ms records 0 and displays as "< 1 ms". Finer resolution tells a user nothing, and whole numbers keep every platform's stored values, ranks and Minutes identical. Stats and aggregates computed from them, such as `jitter_ms` or avg, can still have fractions; displays show whole milliseconds. `vectors/rtt/whole-ms.json` covers the rounding.
+
 A `denied` result, where the OS refused to send the Probe (for example iOS Local Network Privacy blocking the Gateway), is not a loss. It is not recorded, so a denied Probe has no stats and is absent from the Verdict input. The platform says so outside the Verdict.
 
 A Probe whose Target's IP version the path can't reach is not sent and records nothing, like a denied one. IPv6 Targets need IPv6 on the path. IPv4 Targets need IPv4, native or translated (464XLAT, NAT64): on an IPv6-only path, an IPv4 send that fails at once for lack of a route marks IPv4 unreachable.
