@@ -7,9 +7,9 @@ Every platform shows the Public Address for IPv4 and IPv6, found two independent
 | Lookup | How | Answer |
 |---|---|---|
 | DNS | TXT query for `whoami.cloudflare.com` sent straight to `ns3.cloudflare.com` over UDP | TXT records `remote_ip: <address>`, `asn: <number>`, `country_code: <code>` ([1.1.1.1 troubleshooting](https://developers.cloudflare.com/1.1.1.1/troubleshooting/)) |
-| HTTPS | GET `https://checkip.amazonaws.com` | The address alone, then a newline |
+| HTTPS | GET `https_url_ipv4` (`https://ipv4.icanhazip.com`) or `https_url_ipv6` (`https://ipv6.icanhazip.com`) | The address alone, then a newline |
 
-Each runs twice, once per IP version, by sending to that version's address of the host.
+Each runs twice, once per IP version. The DNS lookup sends to that version's address of `dns_server`. The HTTPS lookup fetches that version's URL; each URL's host has addresses of one version only (A for `ipv4`, AAAA for `ipv6`), so DNS picks the version and no platform pins the address family.
 
 ## Parsing
 
@@ -48,11 +48,13 @@ Refresh on start, when the Link changes, and every `refresh_s`.
 
 A hosted macOS runner (`reconbot/blinkengraphs-ios`, Network diagnostics run 44975922516, 2026-11-22):
 
-- Over IPv4, both lookups answered, in the formats above.
-- Forced to IPv6, both answered with an IPv4 address. An earlier run could not reach Cloudflare's native IPv6 resolver, so the runner is likely an IPv6-only network with NAT64 (moderate confidence). Native IPv6 is untested.
+- Over IPv4, both lookups answered, in the formats above. The HTTPS lookup was then `checkip.amazonaws.com`, whose body format icanhazip shares.
+- Forced to IPv6, both answered with an IPv4 address. An earlier run could not reach Cloudflare's native IPv6 resolver, so the runner is likely an IPv6-only network with NAT64 (moderate confidence). Native IPv6 is untested, including the icanhazip IPv6 body.
 
 `https://1.1.1.1/cdn-cgi/trace` also returns an `ip` line, but Cloudflare documents only its `colo` key, so it was dropped.
 
 ## Risk
 
-Cloudflare documents `whoami.cloudflare.com` as a troubleshooting command, and AWS publishes `checkip.amazonaws.com` without a stated contract (unconfirmed). Either can change, which the second lookup covers: a response that doesn't parse is "unknown", never a Verdict input.
+Cloudflare documents `whoami.cloudflare.com` as a troubleshooting command, and runs icanhazip ([since 2021](https://major.io/p/a-new-future-for-icanhazip/)) without published terms or rate limits. Either can change, which the second lookup covers: a response that doesn't parse is "unknown", never a Verdict input. Both lookups are now Cloudflare: independent in path (UDP to an authoritative server, TLS to an edge), not in operator.
+
+`checkip.amazonaws.com` was the HTTPS lookup until it proved to have no AAAA record, so it never answered over native IPv6. Candidates and DNS checks: `docs/public-address-ipv6.md`.
