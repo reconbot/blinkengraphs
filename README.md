@@ -17,7 +17,7 @@ Live CPU, memory, disk, network and latency graphs where you can always see them
 - **Meters:** small always-visible graphs, as tray icons or a strip in the taskbar.
   ![Taskbar Strip](https://raw.githubusercontent.com/reconbot/blinkengraphs-win/ci-screenshots/main/strip-upload-saturation.png)
 - **Verdict:** names the fault: your LAN or Wi-Fi, your ISP, DNS, ping filtering, a remote host, your own upload filling the link, or local CPU, memory or disk load.
-- **Probes:** ICMP, TCP and DNS latency to the gateway, 1.1.1.1 and 8.8.8.8, graphed like gping, plus an mtr-style hop trace.
+- **Probes:** ICMP, TCP and DNS latency to the gateway, 1.1.1.1 (Cloudflare) and 9.9.9.9 (Quad9), graphed like gping, plus an mtr-style hop trace.
 - **Footprint:** a feature in its own right. The Windows version uses under 1% of one core, about 16 MB of RAM and a 6.5 MB exe.
 
 ## This repository
