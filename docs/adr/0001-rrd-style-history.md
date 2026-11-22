@@ -18,6 +18,6 @@ History used to keep 15 minutes of results in memory and write one-minute summar
 - Every History vector changes, and the spec release is breaking.
 - `defaults.json` `history.ram_minutes` and `history.rollup_days` are replaced.
 - Stats windows are measured back from now, not from the newest result. Right after a Pause a Probe has no stats and the Verdict says measurements are resuming.
-- History is kept per Link, and several Links can be active and measured at once. Graphs show them together by default, and the user can pick one.
+- History is kept per Link, and several Links can be active and measured at once. Graphs draw one line per Link and the user can pick one; the Verdict speaks for the default-route Link.
 
 Proposal and per-platform plan: [`docs/history-redesign.md`](../history-redesign.md).
