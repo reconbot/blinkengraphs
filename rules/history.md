@@ -39,7 +39,7 @@ An Archive holds one Row per key and step, for steps that had at least one resul
 - **Written:** a step's Row is written once `now ≥ m + step + g`, and never changed. A2 and A3 merge the Rows of the Archive above, in ascending order ([`graph-aggregate.md`](graph-aggregate.md), "Merge").
 - **Paused seconds:** the length of the step that falls in Pauses. A2 and A3 add their Rows' Paused seconds.
 - **Retention:** an Archive drops Rows and Paused seconds older than its Rows kept: `m + step ≤ now − rows × step`.
-- **Links:** Archive keys name a Link by its interface and Gateway, so the Access Points behind one Gateway share them.
+- **Links:** Archive keys name a Link by its interface and Gateway, so the Access Points behind one Gateway share them. The interface is the OS's identity for the adapter that survives a restart. The Gateway is the Link's IPv4 Gateway, or its IPv6 Gateway when it has no IPv4 one. A Link with neither, such as a VPN whose default route is on-link, is named by its interface alone.
 
 ## Graph ranges
 
