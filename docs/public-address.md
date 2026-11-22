@@ -1,6 +1,6 @@
 # Proposal: Public Address
 
-Show the Public Address for IPv4 and IPv6 on every platform, found two independent ways. This is a proposal: the lookup hosts and refresh interval land in `defaults.json` through blinkengraphs-win (`docs/sync.md`).
+Show the Public Address for IPv4 and IPv6 on every platform, found two independent ways. This is a proposal: the lookup hosts and refresh interval land in `defaults.json` (`docs/sync.md`).
 
 ## Two lookups
 

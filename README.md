@@ -40,7 +40,7 @@ The shared spec that keeps every platform consistent. It contains no app code.
 | [`vectors/sketch/`](vectors/sketch/) | Histogram index, encoding and merged aggregates |
 | [`vectors/meters/`](vectors/meters/) | Meter normalization vectors (network cube root, latency scale) |
 | [`brand/`](brand/) | The app icon (`icon.svg`) every platform renders its formats from |
-| [`tokens/`](tokens/) | Colors and thresholds in [W3C design-token](https://www.designtokens.org/) format |
+| [`tokens/`](tokens/) | Colors and thresholds in [W3C design-token](https://www.designtokens.org/) format, with a light palette |
 | [`fixtures/scenarios/`](fixtures/scenarios/) | Synthetic histories for screenshots and previews |
 | [`docs/sync.md`](docs/sync.md) | How a change flows through all four repos |
 | [`docs/public-address.md`](docs/public-address.md) | Proposal: showing the Public Address for IPv4 and IPv6 |
@@ -49,7 +49,7 @@ The shared spec that keeps every platform consistent. It contains no app code.
 
 Platform repos pin a tagged version of this spec and run its vectors in CI. Versions are cut by release-please from Conventional Commits: a breaking rule change is a major version. A rule change is a PR here plus one PR per platform.
 
-The vectors, fixtures and tokens are generated from the Windows reference implementation: `cargo run -p vectors -- <path to this repo>` in blinkengraphs-win.
+Everything here, vectors, fixtures and tokens included, is authored in this repo. Platforms implement it; none generates it.
 
 ## License
 

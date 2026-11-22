@@ -1,6 +1,6 @@
 # Proposal: Access Point diagnosis
 
-A station's Wi-Fi Network can have many Access Points, some of them dead. blinkengraphs should say which Access Point is failing and, where the OS allows, let the user skip it. This is a proposal: no rule here is normative until it lands in `rules/` with vectors from blinkengraphs-win.
+A station's Wi-Fi Network can have many Access Points, some of them dead. blinkengraphs should say which Access Point is failing and, where the OS allows, let the user skip it. This is a proposal: no rule here is normative until it lands in `rules/` with vectors.
 
 ## Agreed behaviour
 
@@ -11,7 +11,7 @@ A station's Wi-Fi Network can have many Access Points, some of them dead. blinke
 
 ## Rules to write
 
-Each goes to blinkengraphs-win first, then `rules/verdict.md` with vectors (`docs/sync.md`).
+Each lands in `rules/verdict.md` with vectors (`docs/sync.md`).
 
 1. **History per Link.** Probe History and Hop Traces are kept per Link; the Verdict and Probe stats read only the current Link, and a result belongs to the Link it was sent on. Returning to a Link within the RAM History restores its History. So roaming doesn't blend a dead Access Point into a good one, and moving between Wi-Fi and cellular doesn't carry one link's loss onto the other. blinkengraphs-ios ships this ahead of the spec (its ADR 0005), after device testing showed cellular loss reported as Wi-Fi gateway loss. Where the Access Point is unknown, a Link is the interface plus its Gateway. Open: the minimum results before a Finding.
 2. **Failing Access Point.** On Wi-Fi, when rule 1 or rule 3 of the Verdict would fire and another Access Point of the same Wi-Fi Network is in range or was measured fine: Crit `Lan` "Access Point {bssid} passes no traffic; {n} others on {network} in range". Open: whether this replaces rule 1/3 or precedes them.
