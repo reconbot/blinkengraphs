@@ -1,0 +1,15 @@
+# Proposal: gaps found implementing History on iOS
+
+Building spec 5 on iOS (blinkengraphs-ios `docs/plan-spec-5.md`, ADRs 0015–0017) found cases the rules don't settle. iOS decided each one to keep moving; this proposes them as rules. Nothing here is normative until it lands in `rules/` with vectors.
+
+| # | Gap | iOS decided | Proposed rule |
+|---|---|---|---|
+| 1 | Under a VPN the default-route Link is the tunnel, which has no Gateway, so `verdict.md` rules 1 and 2 can never fire. Yet `vpn-isp-loss`, `vpn-icmp-filtered` and `vpn-ipv6-broken` all feed a `gateway/icmp` Probe | The tunnel's Verdict takes the Gateway Probes of the Link carrying it: the first active non-tunnel Link | `verdict.md` Input: "When `via_vpn`, the Gateway Probes are those of the Link carrying the tunnel." Matches the existing vectors |
+| 2 | A Link appearing mid-session (Wi-Fi drops, cellular takes over) has no settle; a Pause is machine-wide and would blank every Link | Not a Pause: the new or changed Link waits its own settle before its first Round; other Links go on | `history.md` Pauses: a per-Link settle after a Link appears or its Gateway or IP versions change |
+| 3 | Offline, then killed: no Probes are sent while Offline, so the kill Pause starts at the last result and swallows the Offline stretch | Raw records a mark at each save with nothing else in it, and route changes; the kill Pause begins after the newest record of any kind | `history.md` Raw: "Raw also records that measuring continued when nothing else is recorded"; the kill Pause counts every record kind |
+| 4 | First launch has no Raw, so no Pause and no `since_pause_s`: the Verdict reads "All clear" before any Probe has stats | A launch with nothing measured before is a Pause from launch to launch plus settle | `history.md` Pauses: "Measuring that starts with no Raw begins after a Pause ending a settle time later." A `verdict` vector with no Probes and `since_pause_s: 0` already covers the Finding |
+| 5 | Archives key a Link by interface and Gateway for a year; two networks behind `192.168.1.1` share one history. iOS can't read the network name without a paid entitlement | Accepted as is | Open: a discriminator that needs no entitlement, such as the IPv6 /64 prefix |
+| 6 | "A Probe is sent on a Link only if that Link routes its Target" has no supported routing-table API on iOS | An unbound UDP `connect` and `getsockname` name the interface the OS would use | None: how a platform asks is its own. The research is in blinkengraphs-ios `docs/research/multi-link-probing.md` |
+| 8 | `history-redesign.md` says a cellular Link costs about 5–10 MB an hour. Counting packets for the default Probe Group gives about 20–55 MB, most of it Hop Trace sweeps | The setting quotes 20–55 MB until a device reading replaces it | Correct the figure once iOS measures it |
+
+Gap 7 (one line per Link by default) is an iOS departure under ADR 0002, not a gap: iOS charts one Link at a time with Compare (blinkengraphs-ios ADR 0014).
