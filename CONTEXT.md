@@ -41,7 +41,7 @@ The first-hop router on the Followed Adapter's default route.
 _Avoid_: router, default gateway IP
 
 **Link**:
-The Followed Adapter's current attachment to a network: its interface, its Gateway, and its Access Point when known. Probe results and Hop statistics belong to the Link they were measured on.
+One adapter's current attachment to a network: its interface, its Gateway, and its Access Point when known. Several Links can be active at once, such as Ethernet, Wi-Fi and a VPN; each is measured on its own, and its Probe results and Hop statistics belong to it. The Followed Adapter's Link is the one the Network Section shows.
 _Avoid_: connection (overloaded), network
 
 **Public Address**:
