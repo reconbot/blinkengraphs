@@ -18,8 +18,8 @@ Reviewed at iOS `066eb9c`, Windows `2bbb58a` and macOS `2ed53ba`. iOS and Window
 - **Pause.** Time not measured is a Pause, whatever the reason: suspended, asleep, killed, not yet started, or resting while idle. A Pause lasts until `settle_s` after measuring resumes. It is not loss and not Offline. Whether to rest while idle stays each platform's choice.
 - **Cut Rounds.** A Round whose timeout ends after a Pause began records nothing. Only a Round that ran its full timeout while measuring records a loss.
 - **Now, not newest.** Stats windows and Raw retention are measured back from now. Right after a Pause a Probe has no stats; readouts show "–" and the Verdict says measurements are resuming.
-- **Raw.** Every result and Sample, with its Link, kept on disk for 2 hours. Pauses and Link changes are kept beside them. A kill loses at most the Round in flight.
-- **Archives.** Each Row is one step of one key, aligned to the Unix epoch: `n`, `lost`, `sum`, `min`, `max`, the BG-LL5 histogram (`graph-aggregate.md`) and `paused_s`. It is written once its step has ended and every result for it has arrived, and never changes.
+- **Raw.** Every result and Sample, with its Link, kept on disk for 2 hours. Pauses and Link changes are kept beside them. How often Raw reaches disk is each platform's choice, within a bound the spec sets; on the next launch the unwritten stretch is a Pause.
+- **Archives.** Each Row is one step of one key, aligned to the Unix epoch, so days start at UTC midnight: `n`, `lost`, `sum`, `min`, `max`, the BG-LL5 histogram (`graph-aggregate.md`) and `paused_s`. It is written once its step has ended and every result for it has arrived, and never changes.
 
   | Source | Step | Kept | Built from | Serves |
   |---|---|---|---|---|
@@ -41,8 +41,8 @@ One breaking spec release (`feat!:`), in a single PR:
 1. **`rules/history.md`, rewritten:** Round timing kept; Pause, settle and cut Rounds; Raw; Archives and when a Row is written; range to source; Paused buckets; provisional edge; Link markers.
 2. **`rules/probe-stats.md`:** windows from now; a Probe is sent on a Link only if that Link routes its Target; a Probe with an empty window has no stats; Raw replaces "RAM".
 3. **`rules/graph-aggregate.md`:** "Per-minute storage" becomes the Row; add `paused_s` and its merge.
-4. **`rules/verdict.md`:** the Verdict's input is the default-route Link's Probes; a Finding for resuming. Open: its domain and severity (today's severities are Ok, Warn and Crit).
-5. **`defaults.json`:** replace `history.ram_minutes` and `history.rollup_days` with `raw_minutes` (120), `settle_s`, and the Archive table with its retention.
+4. **`rules/verdict.md`:** the Verdict's input is the default-route Link's Probes. While the window is empty after a Pause: Ok `Paused` "Resuming measurements", so a resume never turns the Menu Icon amber or red.
+5. **`defaults.json`:** replace `history.ram_minutes` and `history.rollup_days` with `raw_minutes` (120), `settle_s` (2), and the Archive table with its retention.
 6. **Vectors:** new `vectors/history/` (Pause and cut Rounds, settle, Row writing and merging, paused share, range to source, provisional edge, Link markers); `probe-stats` vectors gain `now`; `sketch` vectors gain `paused_s`. The vectors replaced are `history/{timing, minutes, ranges, buckets, steady}`.
 
 Hop statistics, Process Snapshots and the Verdict's other rules don't change.
@@ -95,7 +95,5 @@ Each platform implements the release above and passes its vectors. Each plan is 
 
 ## Open questions
 
-- The resuming Finding's domain and severity.
-- `settle_s` default: 2 s is a guess, like iOS's 1 s. A device test of first-reply time after resume on Wi-Fi, cellular and VPN should set it.
-- Whether A3's day starts at UTC midnight (epoch-aligned, as written) or the user's local midnight.
-- Raw on disk at 1 s Rounds is about 100k results per 2 hours per Link. Each platform should check write cost, especially iOS flash wear and battery.
+- `settle_s` ships as 2 s. A device test of first-reply time after resume on Wi-Fi, cellular and VPN should confirm or change it.
+- Raw on disk at 1 s Rounds is about 100k results per 2 hours per Link. Each platform measures its write cost, especially iOS flash wear and battery.
