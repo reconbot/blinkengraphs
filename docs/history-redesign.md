@@ -32,16 +32,16 @@ Reviewed at iOS `066eb9c`, Windows `2bbb58a` and macOS `2ed53ba`. iOS and Window
 - **Paused Rows.** A Row or graph bucket more than half Paused draws as Paused. Otherwise it draws its data, and its Paused share is still recorded.
 - **One source per range.** A graph draws closed buckets or Rows from its one source. The stretch after the last closed Row is built the same way from what exists so far, and marked provisional. Closed points never change; only the provisional edge moves.
 - **All.** Draws A3, at most 240 points; when more Rows exist, adjacent Rows merge in fixed, epoch-aligned groups.
-- **Links.** Several Links can be active at once (Ethernet, Wi-Fi, a VPN; on iOS, Wi-Fi and cellular), on every platform. Each active Link runs the Probe Group on its own interface, and its Raw, Archives (through All), stats and baselines are kept per Link. Graphs show the Links together by default, with Link changes marked, and the user can pick one Link.
+- **Links.** Several Links can be active at once (Ethernet, Wi-Fi, a VPN; on iOS, Wi-Fi and cellular), on every platform. Each active Link runs the Probe Group on its own interface, and its Raw, Archives (through All), stats and baselines are kept per Link. Graphs show one line per Link by default ("1.1.1.1 · Wi-Fi"), with Link changes marked, and the user can pick one Link. The Verdict speaks for the Link carrying the default route; other Links show their state in the Panel only. A Probe is sent on a Link only if that Link routes its Target, so a split-tunnel VPN measures only Targets inside it; the rest record nothing, as for an unreachable IP version.
 
 ## Rules and data to write
 
 One breaking spec release (`feat!:`), in a single PR:
 
 1. **`rules/history.md`, rewritten:** Round timing kept; Pause, settle and cut Rounds; Raw; Archives and when a Row is written; range to source; Paused buckets; provisional edge; Link markers.
-2. **`rules/probe-stats.md`:** windows from now; a Probe with an empty window has no stats; Raw replaces "RAM".
+2. **`rules/probe-stats.md`:** windows from now; a Probe is sent on a Link only if that Link routes its Target; a Probe with an empty window has no stats; Raw replaces "RAM".
 3. **`rules/graph-aggregate.md`:** "Per-minute storage" becomes the Row; add `paused_s` and its merge.
-4. **`rules/verdict.md`:** a Finding for resuming. Open: its domain and severity (today's severities are Ok, Warn and Crit).
+4. **`rules/verdict.md`:** the Verdict's input is the default-route Link's Probes; a Finding for resuming. Open: its domain and severity (today's severities are Ok, Warn and Crit).
 5. **`defaults.json`:** replace `history.ram_minutes` and `history.rollup_days` with `raw_minutes` (120), `settle_s`, and the Archive table with its retention.
 6. **Vectors:** new `vectors/history/` (Pause and cut Rounds, settle, Row writing and merging, paused share, range to source, provisional edge, Link markers); `probe-stats` vectors gain `now`; `sketch` vectors gain `paused_s`. The vectors replaced are `history/{timing, minutes, ranges, buckets, steady}`.
 
@@ -98,7 +98,4 @@ Each platform implements the release above and passes its vectors. Each plan is 
 - The resuming Finding's domain and severity.
 - `settle_s` default: 2 s is a guess, like iOS's 1 s. A device test of first-reply time after resume on Wi-Fi, cellular and VPN should set it.
 - Whether A3's day starts at UTC midnight (epoch-aligned, as written) or the user's local midnight.
-- How the default graph shows several Links together: one line per Link, or something else. Probe loss and latency from different Links don't combine into one meaningful number.
-- Which Link the Verdict speaks for when several are active: one Verdict per Link, or the default-route Link with others summarised.
-- A Link that routes only some destinations, such as a split-tunnel VPN: is a Probe sent on it only for Targets it routes, with the rest not sent rather than counted as loss?
 - Raw on disk at 1 s Rounds is about 100k results per 2 hours per Link. Each platform should check write cost, especially iOS flash wear and battery.
