@@ -9,6 +9,8 @@ A Hop Trace sends one Probe per TTL towards its Target every trace interval, in 
 - Once the path length is known, later sweeps stop at it. Every `full_sweep_every_s` (30) one sweep goes back to `max_ttl` in case the path grew.
 - ICMP needs no privilege on any platform. TCP uses a TTL-limited connect and reads the ICMP error the OS reports. UDP needs raw sockets and is an Elevated Extra.
 
+A Hop Trace runs only over an IP version the path carries natively. Through translation (464XLAT, NAT64) the routers before the translator can't answer: on an IPv6-only path the IPv4 trace shows nothing but its Target, so it is not run, and the IPv6 trace shows that path instead.
+
 ## Recording
 
 Each result is `(ttl, addr, rtt_ms, reached)`, where `addr` is the router that answered and both it and `rtt_ms` are absent on a timeout.
