@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.0](https://github.com/reconbot/blinkengraphs/compare/v2.0.0...v3.0.0) (2026-11-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* defaults.json public_address.https_url is replaced by https_url_ipv4 and https_url_ipv6. Platforms that read or override https_url must switch to the new keys.
+* RTTs are recorded in whole milliseconds
+
+### Features
+
+* Public Address HTTPS lookup uses one icanhazip URL per IP version ([0809e05](https://github.com/reconbot/blinkengraphs/commit/0809e05ff13ca403376faaa939fe8d5fa83c268d)), closes [#34](https://github.com/reconbot/blinkengraphs/issues/34)
+* RTTs are recorded in whole milliseconds ([cc20632](https://github.com/reconbot/blinkengraphs/commit/cc2063255cc5e0564a46dc1790faccb9190368df))
+
 ## [2.0.0](https://github.com/reconbot/blinkengraphs/compare/v1.7.0...v2.0.0) (2026-11-22)
 
 
