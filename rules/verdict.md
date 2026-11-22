@@ -8,6 +8,7 @@ The Verdict is an ordered list of Findings, most severe first, and is never empt
 - **The last Sample**, optional, holding the Metric values.
 - **`upload_peak_bps`**: the highest upload rate seen recently. It stands in for the link capacity, which is unknown.
 - **`path_up`**, optional, default `true`: whether the OS reports any usable network path. It is `false` in airplane mode, with every radio off, or with the cable out.
+- **`via_vpn`**, optional, default `false`: whether the traffic goes through a VPN tunnel, such as a VPN app or a Tailscale exit node.
 
 ## Probe classes
 
@@ -45,6 +46,20 @@ Between rules 2 and 3, when Internet Probes of both families count:
 When one fires, rules 3–7 consider only the working family's Probes, so a broken family never reads as a remote host's problem.
 
 Rules 3–7 are exclusive: the first that matches wins.
+
+## Through a VPN
+
+When `via_vpn` is `true`, the trouble the rules would place at the ISP or a ping filter sits in the tunnel or its exit, so these Findings change:
+
+| Rule | Finding |
+|---|---|
+| IPv6 broken | Warn `Vpn` "IPv6 broken; IPv4 works: VPN has no IPv6 route" |
+| IPv4 broken | Crit `Vpn` "IPv4 broken; IPv6 works: VPN has no IPv4 route" |
+| 3 | Crit `Vpn` "Internet unreachable through VPN: VPN or its exit problem" |
+| 4 | Warn `Vpn` "ICMP blocked; TCP gets through: VPN filters ping" |
+| 5 | `Vpn` "{target} losing {loss} through VPN: VPN or its exit problem", Crit when loss ≥ 20%, otherwise Warn |
+
+The other rules are unchanged.
 
 **DNS rule.** A DNS Probe is bad when its loss ≥ 30% or its RTT > 250 ms. If the `system-dns` Probe is bad, the Finding is Warn `Dns` "Your DNS server is {slow ({rtt} ms) | losing {loss}}". When another DNS Probe is fine, the headline ends with "; 1.1.1.1 answers fine".
 

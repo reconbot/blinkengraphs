@@ -1,0 +1,125 @@
+{
+  "expected": [
+    {
+      "domain": "Vpn",
+      "headline": "IPv6 broken; IPv4 works: VPN has no IPv6 route",
+      "severity": "Warn"
+    }
+  ],
+  "input": {
+    "probes": [
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "gateway"
+        },
+        "stat": {
+          "baseline_ms": 2.0,
+          "jitter_ms": null,
+          "loss": 0.0,
+          "rtt_ms": 2.0
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 12.0,
+          "jitter_ms": null,
+          "loss": 0.0,
+          "rtt_ms": 12.0
+        }
+      },
+      {
+        "probe": {
+          "protocol": "tcp:443",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 13.0,
+          "jitter_ms": null,
+          "loss": 0.0,
+          "rtt_ms": 13.0
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "8.8.8.8"
+        },
+        "stat": {
+          "baseline_ms": 14.0,
+          "jitter_ms": null,
+          "loss": 0.0,
+          "rtt_ms": 14.0
+        }
+      },
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 12.0,
+          "jitter_ms": null,
+          "loss": 0.0,
+          "rtt_ms": 12.0
+        }
+      },
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "system-dns"
+        },
+        "stat": {
+          "baseline_ms": 20.0,
+          "jitter_ms": null,
+          "loss": 0.0,
+          "rtt_ms": 20.0
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "2606:4700:4700::1111"
+        },
+        "stat": {
+          "baseline_ms": 13.0,
+          "jitter_ms": null,
+          "loss": 1.0,
+          "rtt_ms": null
+        }
+      },
+      {
+        "probe": {
+          "protocol": "tcp:443",
+          "target": "2606:4700:4700::1111"
+        },
+        "stat": {
+          "baseline_ms": 14.0,
+          "jitter_ms": null,
+          "loss": 1.0,
+          "rtt_ms": null
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "2620:fe::fe"
+        },
+        "stat": {
+          "baseline_ms": 15.0,
+          "jitter_ms": null,
+          "loss": 1.0,
+          "rtt_ms": null
+        }
+      }
+    ],
+    "sample": null,
+    "upload_peak_bps": 5000000.0,
+    "via_vpn": true
+  },
+  "name": "vpn-ipv6-broken"
+}
