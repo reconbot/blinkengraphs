@@ -40,4 +40,4 @@ A bucket spans whole minutes from storage, or raw samples from the recent RAM hi
   3. Otherwise walk the buckets upward. At the first bucket whose cumulative count exceeds `r`, the value is its representative, clamped to `[min, max]`.
 - **Raw samples:** use the same rank on the sorted values, with no histogram.
 
-The Verdict and the per-Probe readouts do not use this. They follow `probe-stats.md` and each Probe's own window.
+The Verdict and the per-Probe readouts do not use this. They follow `probe-stats.md` and each Probe's own window; readouts have their own choice of aggregate (`probe-stats.md`, "Readouts").

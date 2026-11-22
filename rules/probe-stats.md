@@ -26,3 +26,9 @@ Let *window* be the results with `at + window_s > newest.at`, where `window_s` i
 | `jitter_ms` | Mean absolute difference between consecutive replies. Absent with fewer than two |
 
 The baseline spans the whole history so that congestion lasting most of the window still reads as a rise above normal.
+
+## Readouts
+
+A Probe's latency readout shows one number for its window: p50, p95, p99, avg or max, picked by the user in Settings and starting at `defaults.json` `readout_aggregate` (`p50`). With `p50` it is `rtt_ms`. Otherwise it is that aggregate of the window's replies, ranked as for raw samples in `graph-aggregate.md`. The readout names its aggregate unless it is `p50`.
+
+The Verdict always uses `rtt_ms`, whatever the readout shows.
