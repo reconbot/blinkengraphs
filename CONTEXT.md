@@ -40,6 +40,10 @@ _Avoid_: host, endpoint, server
 The first-hop router on the Followed Adapter's default route.
 _Avoid_: router, default gateway IP
 
+**Public Address**:
+The address the internet sees this machine as, one per IP version. Behind NAT it belongs to the router or the carrier, not the Followed Adapter.
+_Avoid_: external IP, WAN IP, my IP
+
 **Wi-Fi Network**:
 Every Access Point that shares one network name and its credentials. A station's Wi-Fi is one Wi-Fi Network of many Access Points.
 _Avoid_: SSID (that is its name), hotspot
