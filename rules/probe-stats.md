@@ -1,10 +1,10 @@
 # Probe stats
 
-How each platform turns a Probe's results into the stats the Verdict and the Panel read. `vectors/probe-stats/*.json` is the authority: for each vector's `results`, an implementation conforms when it produces `expected` to within 0.01.
+How each platform turns a Probe's results into the stats the Verdict and the Panel read. `vectors/probe-stats/*.json` is the authority: for each vector's `results` and `now`, an implementation conforms when it produces `expected` to within 0.01.
 
 ## Results
 
-A Probe result is `(at, rtt_ms)`, where `at` is its round's whole Unix second ([`history.md`](history.md), "Timing") and `rtt_ms` is absent when the Probe got no reply before its timeout. The timeout is `min(interval, max_timeout_ms)` from `defaults.json`.
+A Probe result is `(at, rtt_ms)`, where `at` is its Round's whole Unix second ([`history.md`](history.md), "Rounds") and `rtt_ms` is absent when the Probe got no reply before its timeout. The timeout is `min(interval, max_timeout_ms)` from `defaults.json`.
 
 `rtt_ms` is a whole number of milliseconds: the measured round trip `d`, in milliseconds, recorded as `⌊d + 0.5⌋`. A reply faster than 0.5 ms records 0 and displays as "< 1 ms". Finer resolution tells a user nothing, and whole numbers keep every platform's stored values, ranks and Minutes identical. Stats and aggregates computed from them, such as `jitter_ms` or avg, can still have fractions; displays show whole milliseconds. `vectors/rtt/whole-ms.json` covers the rounding.
 
@@ -14,20 +14,26 @@ A Probe whose Target's IP version the path can't reach is not sent and records n
 
 While the OS reports no network path, platforms send no Probes and record nothing; the Verdict reports Offline instead ([`verdict.md`](verdict.md)).
 
-History keeps results for `ram_s` (15 min) behind the newest result of any kind ([`history.md`](history.md), "RAM").
+A Probe is sent on a Link only if that Link routes its Target. A Target the Link doesn't route, such as 1.1.1.1 on a split-tunnel VPN that carries only 10.0.0.0/8, is not sent on it and records nothing.
+
+A Round cut by a Pause records nothing ([`history.md`](history.md), "Pauses").
+
+Stats are per Link: a Probe on each active Link has its own. Raw keeps results for `raw_s` (2 h) ([`history.md`](history.md), "Raw").
 
 ## Stats
 
-Let *window* be the results with `at + window_s > newest.at`, where `window_s` is 30 and *newest* is this Probe's newest result. *Replies* are the window's results that have an RTT, in arrival order.
+Let *window* be the results with `at > now − window_s`, where `window_s` is `defaults.json` `history.recent_window_s` (30). The window is measured back from now, not from the newest result, so results from before a Pause age out of it. *Replies* are the window's results that have an RTT, in arrival order.
 
 | Stat | Definition |
 |---|---|
-| `loss` | `1 − replies / window`, or 0 when the window is empty |
+| `loss` | `1 − replies / window` |
 | `rtt_ms` | Median of replies: sorted ascending, the element at index `⌊(n − 1) / 2⌋`. Absent when there are no replies |
-| `baseline_ms` | 10th percentile of every RTT in history, not only the window: sorted ascending, the element at index `⌊(n − 1) × 10 / 100⌋`. Absent when there are none |
+| `baseline_ms` | 10th percentile of every RTT in Raw (`at > now − raw_s`), not only the window: sorted ascending, the element at index `⌊(n − 1) × 10 / 100⌋`. Absent when there are none |
 | `jitter_ms` | Mean absolute difference between consecutive replies. Absent with fewer than two |
 
-The baseline spans the whole history so that congestion lasting most of the window still reads as a rise above normal.
+A Probe whose window is empty has no stats: it is absent from the Verdict input, and its readout shows "–".
+
+The baseline spans all of Raw so that congestion lasting most of the window still reads as a rise above normal.
 
 Every percentile here and in [`graph-aggregate.md`](graph-aggregate.md) uses one rank: pX of *n* sorted values is the element at index `⌊(n − 1) × X / 100⌋`, in integer arithmetic. `rtt_ms` is p50 and `baseline_ms` is p10.
 

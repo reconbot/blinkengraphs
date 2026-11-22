@@ -1,35 +1,41 @@
 {
-  "description": "Bucket widths per range (history.md, Graph buckets)",
+  "description": "Each graph range's span, source and point width (history.md, Graph ranges). All has no fixed span; its width is 86400 × k.",
   "ranges": [
     {
-      "ram_bucket_s": 1,
       "range": "1m",
+      "source": "raw",
       "span_s": 60,
-      "storage_bucket_s": 60
+      "width_s": 1
     },
     {
-      "ram_bucket_s": 3,
       "range": "15m",
+      "source": "raw",
       "span_s": 900,
-      "storage_bucket_s": 60
+      "width_s": 3
     },
     {
-      "ram_bucket_s": 15,
       "range": "1h",
+      "source": "raw",
       "span_s": 3600,
-      "storage_bucket_s": 60
+      "width_s": 15
     },
     {
-      "ram_bucket_s": 360,
       "range": "24h",
+      "source": "a1",
       "span_s": 86400,
-      "storage_bucket_s": 360
+      "width_s": 300
     },
     {
-      "ram_bucket_s": 2520,
       "range": "7d",
+      "source": "a2",
       "span_s": 604800,
-      "storage_bucket_s": 2520
+      "width_s": 3600
+    },
+    {
+      "range": "all",
+      "source": "a3",
+      "span_s": null,
+      "width_s": 86400
     }
   ]
 }

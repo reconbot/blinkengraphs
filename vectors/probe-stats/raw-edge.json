@@ -1,13 +1,14 @@
 {
-  "description": "A result exactly ram_s older than the newest has left RAM, so it no longer sets the baseline",
+  "description": "A result exactly raw_s older than now has left Raw, so it no longer sets the baseline",
   "expected": {
     "baseline_ms": 20.0,
     "jitter_ms": 0.0,
     "loss": 0.0,
     "rtt_ms": 20.0
   },
-  "name": "ram-edge",
-  "ram_s": 900,
+  "name": "raw-edge",
+  "now": 1800000000,
+  "raw_s": 900,
   "results": [
     {
       "at": 1799999100,

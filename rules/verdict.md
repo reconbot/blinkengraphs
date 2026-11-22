@@ -4,12 +4,17 @@ The Verdict is an ordered list of Findings, most severe first, and is never empt
 
 ## Input
 
-- **Probe stats**, per Probe, as defined in [`probe-stats.md`](probe-stats.md): `loss` (0–1), `rtt_ms`, `baseline_ms`, `jitter_ms`. Denied Probes are absent.
+- **Probe stats** of the Link carrying the default route, per Probe, as defined in [`probe-stats.md`](probe-stats.md): `loss` (0–1), `rtt_ms`, `baseline_ms`, `jitter_ms`. Denied Probes, and Probes with an empty window, are absent. Other active Links show their state in the Panel, not in the Verdict.
 - **The last Sample**, optional, holding the Metric values.
 - **`upload_peak_bps`**: the highest upload rate seen recently. It stands in for the link capacity, which is unknown.
 - **`path_up`**, optional, default `true`: whether the OS reports any usable network path. It is `false` in airplane mode, with every radio off, or with the cable out.
 - **`via_vpn`**, optional, default `false`: whether the traffic goes through a VPN tunnel, such as a VPN app or a Tailscale exit node.
+- **`since_pause_s`**, optional: seconds since the last Pause ended ([`history.md`](history.md), "Pauses"). Absent when there has been none since launch.
 - **`captive_portal`**, optional, default `false`: whether a sign-in page holds back the internet. It is `true` when the OS reports a captive network, or when a plain-HTTP GET of `captive_portal_url` (`defaults.json`) answers with anything but status 204 and an empty body. Plain HTTP because a portal can intercept it but cannot answer HTTPS without a certificate error.
+
+## Resuming
+
+When `path_up` is not `false`, no Gateway or Internet Probe has stats, and `since_pause_s < window_s` (`probe-stats.md`), the only network Finding is Ok `Paused` "Resuming measurements". No network rule and no DNS rule runs; the Local rules still do. A resume never reads as a fault.
 
 ## Probe classes
 
