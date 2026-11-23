@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.2.0](https://github.com/reconbot/blinkengraphs/compare/v6.1.0...v6.2.0) (2026-11-23)
+
+
+### Features
+
+* a Probe Group has one row per Target, and system-dns asks a random name under microsoft.com ([37cd642](https://github.com/reconbot/blinkengraphs/commit/37cd642f5fb98a889e73a516f854cc5b0bb52f0a))
+
 ## [6.1.0](https://github.com/reconbot/blinkengraphs/compare/v6.0.0...v6.1.0) (2026-11-23)
 
 
