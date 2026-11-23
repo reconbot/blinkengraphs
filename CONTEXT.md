@@ -65,7 +65,7 @@ One kind of reachability measurement against one Target, over one protocol: ICMP
 _Avoid_: ping (only ICMP is a ping), check, test
 
 **Probe Group**:
-A named table of Targets and what to measure on each: ICMP, a TCP port, a UDP port, DNS, Hop Trace. Latency, DNS and Hop Traces each run on their own interval. Every config starts with one group, "Default".
+A named table of Targets, each in one row, and what to measure on each: ICMP, a TCP port, a UDP port, DNS, Hop Trace. Latency, DNS and Hop Traces each run on their own interval. Every config starts with one group, "Default".
 _Avoid_: schedule, batch
 
 **Round**:

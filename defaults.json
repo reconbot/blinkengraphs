@@ -97,5 +97,6 @@
     "refresh_s": 300
   },
   "readout_aggregate": "p95",
+  "system_dns_domain": "microsoft.com",
   "system_interval_ms": 1000
 }

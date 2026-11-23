@@ -1,0 +1,247 @@
+{
+  "description": "rules/probe-group.md, Normalizing. Each case's targets, normalized, equal expected.",
+  "name": "normalize",
+  "cases": [
+    {
+      "name": "a normalized group is unchanged",
+      "targets": [
+        {
+          "dns": false,
+          "icmp": true,
+          "target": "gateway",
+          "tcp": null,
+          "trace": false,
+          "udp": null
+        },
+        {
+          "dns": true,
+          "icmp": true,
+          "target": "1.1.1.1",
+          "tcp": 443,
+          "trace": true,
+          "udp": null
+        },
+        {
+          "dns": true,
+          "icmp": false,
+          "target": "system-dns",
+          "tcp": null,
+          "trace": false,
+          "udp": null
+        }
+      ],
+      "expected": [
+        {
+          "dns": false,
+          "icmp": true,
+          "target": "gateway",
+          "tcp": null,
+          "trace": false,
+          "udp": null
+        },
+        {
+          "dns": true,
+          "icmp": true,
+          "target": "1.1.1.1",
+          "tcp": 443,
+          "trace": true,
+          "udp": null
+        },
+        {
+          "dns": true,
+          "icmp": false,
+          "target": "system-dns",
+          "tcp": null,
+          "trace": false,
+          "udp": null
+        }
+      ]
+    },
+    {
+      "name": "duplicate rows merge into the first, in its place",
+      "targets": [
+        {
+          "dns": false,
+          "icmp": true,
+          "target": "gateway",
+          "tcp": null,
+          "trace": false,
+          "udp": null
+        },
+        {
+          "dns": false,
+          "icmp": true,
+          "target": "1.1.1.1",
+          "tcp": null,
+          "trace": false,
+          "udp": null
+        },
+        {
+          "dns": true,
+          "icmp": false,
+          "target": "gateway",
+          "tcp": null,
+          "trace": false,
+          "udp": null
+        }
+      ],
+      "expected": [
+        {
+          "dns": true,
+          "icmp": true,
+          "target": "gateway",
+          "tcp": null,
+          "trace": false,
+          "udp": null
+        },
+        {
+          "dns": false,
+          "icmp": true,
+          "target": "1.1.1.1",
+          "tcp": null,
+          "trace": false,
+          "udp": null
+        }
+      ]
+    },
+    {
+      "name": "targets compare trimmed and lowercased",
+      "targets": [
+        {
+          "dns": false,
+          "icmp": true,
+          "target": " Example.COM ",
+          "tcp": null,
+          "trace": false,
+          "udp": null
+        },
+        {
+          "dns": false,
+          "icmp": false,
+          "target": "example.com",
+          "tcp": null,
+          "trace": true,
+          "udp": null
+        }
+      ],
+      "expected": [
+        {
+          "dns": false,
+          "icmp": true,
+          "target": "example.com",
+          "tcp": null,
+          "trace": true,
+          "udp": null
+        }
+      ]
+    },
+    {
+      "name": "ipv6 literals compare in canonical form",
+      "targets": [
+        {
+          "dns": false,
+          "icmp": true,
+          "target": "2606:4700:4700:0:0:0:0:1111",
+          "tcp": null,
+          "trace": false,
+          "udp": null
+        },
+        {
+          "dns": false,
+          "icmp": false,
+          "target": "2606:4700:4700::1111",
+          "tcp": 443,
+          "trace": false,
+          "udp": null
+        }
+      ],
+      "expected": [
+        {
+          "dns": false,
+          "icmp": true,
+          "target": "2606:4700:4700::1111",
+          "tcp": 443,
+          "trace": false,
+          "udp": null
+        }
+      ]
+    },
+    {
+      "name": "ports take the first non-null",
+      "targets": [
+        {
+          "dns": false,
+          "icmp": false,
+          "target": "example.com",
+          "tcp": 443,
+          "trace": false,
+          "udp": null
+        },
+        {
+          "dns": false,
+          "icmp": false,
+          "target": "example.com",
+          "tcp": 80,
+          "trace": false,
+          "udp": 53
+        }
+      ],
+      "expected": [
+        {
+          "dns": false,
+          "icmp": false,
+          "target": "example.com",
+          "tcp": 443,
+          "trace": false,
+          "udp": 53
+        }
+      ]
+    },
+    {
+      "name": "system-dns measures dns only",
+      "targets": [
+        {
+          "dns": true,
+          "icmp": true,
+          "target": "System-DNS",
+          "tcp": 443,
+          "trace": true,
+          "udp": 53
+        }
+      ],
+      "expected": [
+        {
+          "dns": true,
+          "icmp": false,
+          "target": "system-dns",
+          "tcp": null,
+          "trace": false,
+          "udp": null
+        }
+      ]
+    },
+    {
+      "name": "system-dns without dns measures nothing",
+      "targets": [
+        {
+          "dns": false,
+          "icmp": true,
+          "target": "system-dns",
+          "tcp": null,
+          "trace": false,
+          "udp": null
+        }
+      ],
+      "expected": [
+        {
+          "dns": false,
+          "icmp": false,
+          "target": "system-dns",
+          "tcp": null,
+          "trace": false,
+          "udp": null
+        }
+      ]
+    }
+  ]
+}

@@ -45,6 +45,7 @@ The shared spec that keeps every platform consistent. It contains no app code.
 | [`rules/verdict.md`](rules/verdict.md) | The Verdict rules |
 | [`rules/probe-stats.md`](rules/probe-stats.md) | Loss, RTT, baseline and jitter from raw Probe results |
 | [`rules/hop-trace.md`](rules/hop-trace.md) | Hop Trace sweeping and the hop table |
+| [`rules/probe-group.md`](rules/probe-group.md) | One row per Target, `system-dns` measuring DNS only, and what its lookup asks |
 | [`rules/defaults.md`](rules/defaults.md) | How a platform's overrides merge over `defaults.json` |
 | [`rules/history.md`](rules/history.md) | Probe timing, RAM retention, minute Rollups, graph ranges and buckets |
 | [`rules/graph-aggregate.md`](rules/graph-aggregate.md) | What a Row holds, and p50/p95/p99/avg/max per graph bucket |
