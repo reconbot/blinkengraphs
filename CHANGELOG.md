@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.1.0](https://github.com/reconbot/blinkengraphs/compare/v6.0.0...v6.1.0) (2026-11-23)
+
+
+### Features
+
+* a Link's Gateway includes its MAC address where the platform can read it ([75260c2](https://github.com/reconbot/blinkengraphs/commit/75260c2e2a28b9f54396d4ea5d96cce18e0b8382))
+
 ## [6.0.0](https://github.com/reconbot/blinkengraphs/compare/v5.3.0...v6.0.0) (2026-11-23)
 
 
