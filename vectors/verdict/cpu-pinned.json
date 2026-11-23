@@ -7,7 +7,7 @@
     },
     {
       "domain": "LocalLoad",
-      "headline": "Paging heavily: 1400 hard faults/s",
+      "headline": "Paging heavily: 5.7 MB/s from disk",
       "severity": "Warn"
     }
   ],
@@ -99,19 +99,16 @@
       }
     ],
     "sample": {
-      "CpuKernel": 17.32,
-      "CpuQueue": 5.0,
-      "CpuTotal": 96.22,
-      "DiskActive": 68.89,
-      "DiskQueue": 2.76,
-      "DiskRead": 55113353.73,
-      "DiskResponse": 41.34,
-      "DiskWrite": 20667507.65,
-      "MemCommit": 89.67,
-      "MemHardFaults": 1400.0,
-      "MemPhysical": 80.7,
+      "CpuBusy": 96.22,
+      "Disks": [
+        {
+          "DiskBusy": 68.89,
+          "DiskResponse": 41.34
+        }
+      ],
+      "MemPageIns": 5734400.0,
+      "MemPressure": "warn",
       "NetDown": 819.12,
-      "NetErrors": 0.0,
       "NetUp": 1014.01
     },
     "upload_peak_bps": 1495.0

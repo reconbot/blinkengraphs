@@ -17,7 +17,7 @@ Live CPU, memory, disk, network and latency graphs where you can always see them
 
 ## The apps
 
-Each platform is native and implements this spec; none shares code with another ([`docs/cross-platform.md`](docs/cross-platform.md)).
+Each platform is native and implements this spec ([`docs/cross-platform.md`](docs/cross-platform.md)). The iOS and macOS apps share their Swift rules code through [blinkengraphs-kit](https://github.com/reconbot/blinkengraphs-kit).
 
 | Windows 11 | iOS |
 |---|---|
@@ -60,7 +60,7 @@ The shared spec that keeps every platform consistent. It contains no app code.
 | [`brand/`](brand/) | The app icon (`icon.svg`) every platform renders its formats from |
 | [`tokens/`](tokens/) | Colors and thresholds in [W3C design-token](https://www.designtokens.org/) format, with a light palette |
 | [`fixtures/scenarios/`](fixtures/scenarios/) | Synthetic histories for screenshots and previews |
-| [`docs/sync.md`](docs/sync.md) | How a change flows through all four repos |
+| [`docs/sync.md`](docs/sync.md) | How a change flows through every repo |
 | [`docs/access-points.md`](docs/access-points.md) | Proposal: diagnosing and avoiding failing Access Points |
 | [`docs/cross-platform.md`](docs/cross-platform.md) | Why each platform is native and they share a spec instead of code |
 

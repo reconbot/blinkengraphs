@@ -1,0 +1,112 @@
+{
+  "expected": [
+    {
+      "domain": "LocalLoad",
+      "headline": "Memory nearly exhausted",
+      "severity": "Crit"
+    }
+  ],
+  "input": {
+    "probes": [
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 13.12,
+          "jitter_ms": 1.2,
+          "loss": 0.0,
+          "rtt_ms": 14.71
+        }
+      },
+      {
+        "probe": {
+          "protocol": "dns",
+          "target": "system-dns"
+        },
+        "stat": {
+          "baseline_ms": 18.32,
+          "jitter_ms": 1.2,
+          "loss": 0.0,
+          "rtt_ms": 19.91
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 12.32,
+          "jitter_ms": 1.2,
+          "loss": 0.0,
+          "rtt_ms": 13.91
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "8.8.8.8"
+        },
+        "stat": {
+          "baseline_ms": 14.82,
+          "jitter_ms": 1.2,
+          "loss": 0.0,
+          "rtt_ms": 16.41
+        }
+      },
+      {
+        "probe": {
+          "protocol": "icmp",
+          "target": "gateway"
+        },
+        "stat": {
+          "baseline_ms": 1.72,
+          "jitter_ms": 1.11,
+          "loss": 0.0,
+          "rtt_ms": 2.43
+        }
+      },
+      {
+        "probe": {
+          "protocol": "tcp:443",
+          "target": "1.1.1.1"
+        },
+        "stat": {
+          "baseline_ms": 13.52,
+          "jitter_ms": 1.2,
+          "loss": 0.0,
+          "rtt_ms": 15.11
+        }
+      },
+      {
+        "probe": {
+          "protocol": "tcp:443",
+          "target": "8.8.8.8"
+        },
+        "stat": {
+          "baseline_ms": 15.42,
+          "jitter_ms": 1.2,
+          "loss": 0.0,
+          "rtt_ms": 17.01
+        }
+      }
+    ],
+    "sample": {
+      "CpuBusy": 9.94,
+      "Disks": [
+        {
+          "DiskBusy": 2.0,
+          "DiskResponse": 1.2
+        }
+      ],
+      "MemPageIns": 8192000.0,
+      "MemPressure": "critical",
+      "NetDown": 77367.91,
+      "NetUp": 10923.47
+    },
+    "upload_peak_bps": 12448.0
+  },
+  "name": "memory-critical"
+}
