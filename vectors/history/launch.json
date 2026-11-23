@@ -1,0 +1,53 @@
+{
+  "cases": [
+    {
+      "expected": {
+        "begin": 1800000048.0,
+        "end": 1800000402.5
+      },
+      "launch": 1800000400.5,
+      "name": "after a kill, the Pause begins after the newest record, a mark written while Offline",
+      "records": [
+        {
+          "at": 1800000037,
+          "kind": "result"
+        },
+        {
+          "at": 1800000047,
+          "kind": "mark"
+        }
+      ],
+      "settle_s": 2.0
+    },
+    {
+      "expected": {
+        "begin": 1800000040.0,
+        "end": 1800000402.5
+      },
+      "launch": 1800000400.5,
+      "name": "after a kill, a Link change counts as a record",
+      "records": [
+        {
+          "at": 1800000037,
+          "kind": "sample"
+        },
+        {
+          "at": 1800000039,
+          "kind": "link_change"
+        }
+      ],
+      "settle_s": 2.0
+    },
+    {
+      "expected": {
+        "begin": 1800000400.5,
+        "end": 1800000402.5
+      },
+      "launch": 1800000400.5,
+      "name": "a launch with nothing in Raw is a Pause from the launch to the settle time after it",
+      "records": [],
+      "settle_s": 2.0
+    }
+  ],
+  "description": "The Pause a launch finds (history.md, Pauses and Raw): after a kill it begins one second after the newest record of any kind and ends the settle time after launch; with nothing in Raw it begins at the launch. expected is null where the launch finds no Pause to open."
+}
