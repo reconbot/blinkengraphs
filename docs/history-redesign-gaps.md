@@ -2,7 +2,7 @@
 
 Building spec 5 on iOS ([blinkengraphs-ios plan](https://github.com/reconbot/blinkengraphs-ios/blob/main/docs/plan-spec-5.md), ADRs 0015–0017) found cases the rules don't settle. iOS decided each one to keep moving; this proposes them as rules. Nothing here is normative until it lands in `rules/` with vectors.
 
-Gaps 1–4 have landed as written: 1 in `rules/verdict.md` (Input, `via_vpn`), 2–4 in `rules/history.md` (Link settle, Raw marks, Pauses), with `vectors/history/link-settle.json` and `launch.json`. Gaps 5 and 8 remain open.
+Gaps 1–4 have landed as written: 1 in `rules/verdict.md` (Input, `via_vpn`), 2–4 in `rules/history.md` (Link settle, Raw marks, Pauses), with `vectors/history/link-settle.json` and `launch.json`. Gap 5 landed as "the Gateway's MAC address when the platform can read it" (`rules/history.md`, Archives, Links); iOS can't, so it keeps the Gateway's IP address alone. Gap 8 remains open.
 
 | # | Gap | iOS decided | Proposed rule |
 |---|---|---|---|
