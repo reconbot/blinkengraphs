@@ -1,5 +1,17 @@
 # Changelog
 
+## [6.0.0](https://github.com/reconbot/blinkengraphs/compare/v5.3.0...v6.0.0) (2026-11-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* a vector's Sample holds CpuBusy, MemPressure, MemPageIns, Disks, NetUp and NetDown only; the paging headline is "Paging heavily: {rate}/s from disk"; the disk rule tests each disk.
+
+### Features
+
+* Local Metrics are platform-neutral, so macOS can implement the Local rules ([#55](https://github.com/reconbot/blinkengraphs/issues/55)) ([ddec20d](https://github.com/reconbot/blinkengraphs/commit/ddec20d8d00a23a9642e024bc4e6a2e6325fc6b0))
+* rules for the History gaps iOS found: VPN Gateway, Link settle, Raw marks, a Pause at first launch ([d643fee](https://github.com/reconbot/blinkengraphs/commit/d643fee288c15aea00fc302886e3d3db75351325))
+
 ## [5.3.0](https://github.com/reconbot/blinkengraphs/compare/v5.2.0...v5.3.0) (2026-11-22)
 
 
