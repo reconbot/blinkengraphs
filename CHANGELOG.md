@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.3.0](https://github.com/reconbot/blinkengraphs/compare/v5.2.0...v5.3.0) (2026-11-22)
+
+
+### Features
+
+* the Verdict judges the Followed Adapter's Link, so a pinned adapter is the one it speaks for ([8407df8](https://github.com/reconbot/blinkengraphs/commit/8407df8dace551a50bd95aac04dcb8257faa19db))
+
 ## [5.2.0](https://github.com/reconbot/blinkengraphs/compare/v5.1.0...v5.2.0) (2026-11-22)
 
 
