@@ -2,6 +2,8 @@
 
 Building spec 5 on iOS ([blinkengraphs-ios plan](https://github.com/reconbot/blinkengraphs-ios/blob/main/docs/plan-spec-5.md), ADRs 0015–0017) found cases the rules don't settle. iOS decided each one to keep moving; this proposes them as rules. Nothing here is normative until it lands in `rules/` with vectors.
 
+Gaps 1–4 have landed as written: 1 in `rules/verdict.md` (Input, `via_vpn`), 2–4 in `rules/history.md` (Link settle, Raw marks, Pauses), with `vectors/history/link-settle.json` and `launch.json`. Gaps 5 and 8 remain open.
+
 | # | Gap | iOS decided | Proposed rule |
 |---|---|---|---|
 | 1 | Under a VPN the default-route Link is the tunnel, which has no Gateway, so `verdict.md` rules 1 and 2 can never fire. Yet `vpn-isp-loss`, `vpn-icmp-filtered` and `vpn-ipv6-broken` all feed a `gateway/icmp` Probe | The tunnel's Verdict takes the Gateway Probes of the Link carrying it: the first active non-tunnel Link | `verdict.md` Input: "When `via_vpn`, the Gateway Probes are those of the Link carrying the tunnel." Matches the existing vectors |

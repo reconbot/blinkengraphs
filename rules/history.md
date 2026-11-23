@@ -14,15 +14,23 @@ Every result of a Round carries the Round's `at`: whole Unix seconds, rounded do
 
 A Pause is a stretch `[begin, end)` when blinkengraphs was not measuring, for any reason: the app suspended, the machine asleep, the process killed, or resting while idle.
 
-- **Begin:** when the platform stops measuring. After a kill, it is the newest `at` in Raw plus one second, found on the next launch.
+- **Begin:** when the platform stops measuring. After a kill, it is one second after the newest record of any kind in Raw (a result, a Sample, a mark or a Link change), found on the next launch. A launch with nothing in Raw begins with a Pause from the launch, so the Verdict says measurements are resuming rather than all clear before any Probe has stats.
 - **End:** when measuring resumes, plus the platform's settle time. The settle time covers the network becoming usable again; each platform sets it from its own device tests and records it in an ADR.
 - **Cut Rounds:** a Round records nothing if any part of it, from its start to the end of its last Probe, falls in a Pause. Only a Round that ran its full timeout while measuring records a loss.
 
 Each platform offers a Setting for resting while idle on desktops (display off, locked, screen saver); its default is the platform's, in an ADR.
 
+## Link settle
+
+A Link that appears, or whose Gateway or IP versions change, waits the settle time before it is measured: its Rounds that touch `[change, change + settle)` record nothing, as a Pause cuts Rounds. It is not a Pause, which is machine-wide: every other Link goes on measuring, and nothing is Paused in History. `vectors/history/link-settle.json` covers it.
+
 ## Raw
 
 Raw holds every result and Sample, Pause and Link change, each with its Link. It keeps those with `at > now − raw_s`, where `raw_s` is `defaults.json` `history.raw_minutes × 60`. Raw reaches disk at most 10 seconds after each result, and when a Pause begins; on the next launch, anything newer than the last write is part of the Pause.
+
+A write with nothing else in it, such as while Offline, records a *mark*: measuring went on. Without one, a kill after a long Offline stretch would turn that stretch into a Pause.
+
+`vectors/history/launch.json` covers the Pause a launch finds.
 
 ## Archives
 

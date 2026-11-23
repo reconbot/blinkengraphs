@@ -1,0 +1,59 @@
+{
+  "cases": [
+    {
+      "changes": [
+        1800000010.0
+      ],
+      "expected": [
+        1800000012
+      ],
+      "name": "a Link that appears records from the first Round after its settle",
+      "rounds": [
+        {
+          "end": 1800000010.6,
+          "start": 1800000010.4
+        },
+        {
+          "end": 1800000011.6,
+          "start": 1800000011.4
+        },
+        {
+          "end": 1800000012.6,
+          "start": 1800000012.4
+        }
+      ],
+      "settle_s": 2.0
+    },
+    {
+      "changes": [
+        1800000010.0,
+        1800000030.0
+      ],
+      "expected": [
+        1800000028,
+        1800000032
+      ],
+      "name": "a Gateway change starts another settle; a Round across the change records nothing",
+      "rounds": [
+        {
+          "end": 1800000028.6,
+          "start": 1800000028.4
+        },
+        {
+          "end": 1800000030.4,
+          "start": 1800000029.4
+        },
+        {
+          "end": 1800000031.6,
+          "start": 1800000031.4
+        },
+        {
+          "end": 1800000032.6,
+          "start": 1800000032.4
+        }
+      ],
+      "settle_s": 2.0
+    }
+  ],
+  "description": "A Link that appears or changes waits the settle time: its Rounds that touch [change, change + settle) record nothing, as a Pause cuts Rounds (history.md, Link settle). Each Round runs from start to the end of its last Probe; expected lists the at of each Round on that Link that records."
+}

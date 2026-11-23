@@ -8,7 +8,7 @@ The Verdict is an ordered list of Findings, most severe first, and is never empt
 - **The last Sample**, optional: the Metrics the Local rules read, and `NetUp` and `NetDown` in bytes/s. A vector's Sample holds only these.
 - **`upload_peak_bps`**: the highest upload rate seen recently. It stands in for the link capacity, which is unknown.
 - **`path_up`**, optional, default `true`: whether the OS reports any usable network path. It is `false` in airplane mode, with every radio off, or with the cable out.
-- **`via_vpn`**, optional, default `false`: whether the traffic goes through a VPN tunnel, such as a VPN app or a Tailscale exit node.
+- **`via_vpn`**, optional, default `false`: whether the traffic goes through a VPN tunnel, such as a VPN app or a Tailscale exit node. The tunnel has no Gateway of its own, so when `via_vpn` the Gateway Probes are those of the Link carrying the tunnel: the first active Link that is not a tunnel.
 - **`since_pause_s`**, optional: seconds since the last Pause ended ([`history.md`](history.md), "Pauses"). Absent when there has been none since launch.
 - **`captive_portal`**, optional, default `false`: whether a sign-in page holds back the internet. It is `true` when the OS reports a captive network, or when a plain-HTTP GET of `captive_portal_url` (`defaults.json`) answers with anything but status 204 and an empty body. Plain HTTP because a portal can intercept it but cannot answer HTTPS without a certificate error.
 
